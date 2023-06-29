@@ -1,6 +1,6 @@
 {
   "name": "@xiaoyaoliu/x-arco-design",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a react component library base on arco design",
   "license": "MIT",
   "module": "dist/index.js",
@@ -19,6 +19,8 @@
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
+    "postpublish": "sync-to-mirror",
+    "push": "npm run build && npm publish --registry=https://registry.npmjs.org",
     "start": "npm run dev"
   },
   "commitlint": {
@@ -48,6 +50,7 @@
     "@arco-themes/react-xiaoyao-test": "^0.0.1",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@easyv/sync-to-mirror": "^0.0.2",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@umijs/lint": "^4.0.0",

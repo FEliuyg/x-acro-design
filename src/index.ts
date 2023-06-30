@@ -42,7 +42,6 @@ export {
   Popover,
   Portal,
   Progress,
-  Radio,
   Rate,
   ResizeBox,
   Result,
@@ -67,4 +66,5 @@ export {
   Upload,
 } from '@arco-design/web-react';
 export { default as Button } from './Button';
+export { default as Radio } from './Radio';
 export { default as Space } from './Space';

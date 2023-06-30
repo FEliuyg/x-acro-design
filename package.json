@@ -45,6 +45,11 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "dependencies": {
+    "@arco-themes/react-dtable": "^0.0.1",
+    "@xiaoyaoliu/x-arco-design": "^0.0.3",
+    "classnames": "^2.3.2"
+  },
   "devDependencies": {
     "@arco-design/web-react": "^2.49.2",
     "@arco-themes/react-xiaoyao-test": "^0.0.1",

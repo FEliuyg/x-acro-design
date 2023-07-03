@@ -25,7 +25,6 @@ export {
   Grid,
   Icon,
   Image,
-  Input,
   InputNumber,
   InputTag,
   Layout,
@@ -34,7 +33,6 @@ export {
   Mentions,
   Menu,
   Message,
-  Modal,
   Notification,
   PageHeader,
   Pagination,
@@ -66,5 +64,7 @@ export {
   Upload,
 } from '@arco-design/web-react';
 export { default as Button } from './Button';
+export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';
 export { default as Space } from './Space';
+export { default as Input } from './Input';

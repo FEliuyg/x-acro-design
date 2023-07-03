@@ -6,6 +6,7 @@ specifiers:
   '@arco-themes/react-xiaoyao-test': ^0.0.1
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
+  '@easyv/react-icons': 3.0.0
   '@easyv/sync-to-mirror': ^0.0.2
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
@@ -26,6 +27,7 @@ specifiers:
 
 dependencies:
   '@arco-themes/react-dtable': 0.0.1_tn2fmq2vwpycrgubxzjnyj6txm
+  '@easyv/react-icons': 3.0.0
   '@xiaoyaoliu/x-arco-design': 0.0.3_shf6yauk5xnezf6uzpjo2tbrxi
   classnames: 2.3.2
 
@@ -903,6 +905,13 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.13
     dev: true
+
+  /@easyv/react-icons/3.0.0:
+    resolution: {integrity: sha512-VhW03dESbkRgTupSZMMakER3rNSUszYIx7bVtkEfsEoK9saonx11v+G314bp3qrIpyJQpVVyqW0hxocSZd5IqQ==}
+    dependencies:
+      classnames: 2.3.2
+      prop-types: 15.8.1
+    dev: false
 
   /@easyv/sync-to-mirror/0.0.2:
     resolution: {integrity: sha512-Slt9SKCxzC/DQPr7rgPn/EQxMOCv5k2XtVhuNJLxnm7VKsKPQalQwu7+8Bd2D3JJwnBfj/OSXKLf14LKmKtwlw==}

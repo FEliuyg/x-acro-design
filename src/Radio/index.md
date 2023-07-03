@@ -3,6 +3,7 @@
 ## 单选组
 
 ```tsx
+import React from 'react';
 import { Radio } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
@@ -77,6 +78,7 @@ export default () => {
 ## 单选组类型
 
 ```tsx
+import React from 'react';
 import { Radio, Space } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 

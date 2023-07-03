@@ -3,9 +3,10 @@
 ## 类型
 
 ```tsx
+import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 
-export default () => {
+function App() {
   return (
     <Space>
       <Button type="primary">按钮</Button>
@@ -15,12 +16,15 @@ export default () => {
       <Button type="text">Text</Button>
     </Space>
   );
-};
+}
+
+export default App;
 ```
 
 ## 大小
 
 ```tsx
+import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 
 export default () => {

@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@arco-themes/react-dtable": "^0.0.1",
+    "@easyv/react-icons": "3.0.0",
     "@xiaoyaoliu/x-arco-design": "^0.0.3",
     "classnames": "^2.3.2"
   },

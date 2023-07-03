@@ -32,7 +32,6 @@ export {
   List,
   Mentions,
   Menu,
-  Message,
   Notification,
   PageHeader,
   Pagination,
@@ -68,3 +67,4 @@ export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';
 export { default as Space } from './Space';
 export { default as Input } from './Input';
+export { default as Message, default as message } from './Message';

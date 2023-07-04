@@ -35,6 +35,11 @@ $ pnpm run docs:build
 $ pnpm run doctor
 ```
 
+## Buglist
+
+- radius 没有应用四种尺寸
+- select 下的 tag 颜色没有应用对
+
 ## LICENSE
 
 MIT

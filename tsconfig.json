@@ -4,7 +4,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
@@ -12,5 +12,5 @@
       "@xiaoyaoliu/x-arco-design/*": ["src/*", "*"]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "src/**/*"]
+  "include": [".dumi/**/*", ".dumirc.ts", "src/**/*", "backup/Button"]
 }

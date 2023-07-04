@@ -1,62 +1,46 @@
-# Button 按钮
+# 按钮 Button
 
-## 类型
+按钮是一种命令组件，可发起一个即时操作。
+
+## 基本用法
+
+按钮分为 主要按钮、次要按钮、虚线按钮、线形按钮和文本按钮五种。
+
+`primary`, `secondary`, `dashed`, `outline` and `text` button types.
 
 ```tsx
-import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 
-function App() {
+const App = () => {
   return (
-    <Space>
-      <Button type="primary">按钮</Button>
-      <Button>按钮</Button>
+    <Space size="large">
+      <Button type="primary">Primary</Button>
+      <Button type="secondary">Secondary</Button>
       <Button type="dashed">Dashed</Button>
       <Button type="outline">Outline</Button>
       <Button type="text">Text</Button>
     </Space>
   );
-}
+};
 
 export default App;
 ```
 
-## 大小
-
-```tsx
-import React from 'react';
-import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-
-export default () => {
-  return (
-    <Space>
-      <Button type="primary" size="mini">
-        按钮
-      </Button>
-      <Button type="primary" size="small">
-        按钮
-      </Button>
-      <Button type="primary">按钮</Button>
-      <Button type="primary" size="large">
-        按钮
-      </Button>
-    </Space>
-  );
-};
-```
-
 ## 图标按钮
 
+Button 可以嵌入图标，在只设置图标而没有 children 时，按钮的高宽相等。
+
+`icon` is set and there are no children, the height and width of the button are equal.
+
 ```tsx
-import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { PlusOutlined, DeleteOutlined } from '@easyv/react-icons';
+import { IconPlus, IconDelete } from '@arco-design/web-react/icon';
 
 const App = () => {
   return (
     <Space size="large">
-      <Button type="primary" icon={<PlusOutlined />} />
-      <Button type="primary" icon={<DeleteOutlined />}>
+      <Button type="primary" icon={<IconPlus />} />
+      <Button type="primary" icon={<IconDelete />}>
         Delete
       </Button>
     </Space>
@@ -68,16 +52,19 @@ export default App;
 
 ## 按钮形状
 
+Button 有多种形状，`square` - 长方形 **(默认)**, `circle` - 圆形, `round` - 全圆角。
+
+`square`-rectangle **(default)**, `circle`-round, `round`-full rounded corners.
+
 ```tsx
-import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { PlusOutlined } from '@easyv/react-icons';
+import { IconPlus } from '@arco-design/web-react/icon';
 
 const App = () => {
   return (
     <Space size="large">
-      <Button type="primary" icon={<PlusOutlined />} />
-      <Button shape="circle" type="primary" icon={<PlusOutlined />} />
+      <Button type="primary" icon={<IconPlus />} />
+      <Button shape="circle" type="primary" icon={<IconPlus />} />
       <Button shape="round" type="primary">
         Primary
       </Button>
@@ -89,10 +76,100 @@ const App = () => {
 export default App;
 ```
 
-## 禁用状态
+## 按钮尺寸
+
+按钮分为：迷你、小、中、大，四种尺寸。高度分别为：`24px/28px/32px/36px`。推荐及默认为尺寸「中」。可在不同场景及不同业务需求选择适合尺寸。
+
+`mini`, `small`, `medium` and `large` in size, with corresponding height of `24px/28px/32px/36px`. The recommended and default size is `medium`. The suitable size can be selected in different scenarios and different business needs.
 
 ```tsx
-import React from 'react';
+import { Button, Space } from '@xiaoyaoliu/x-arco-design';
+
+const App = () => {
+  return (
+    <Space size="large">
+      <Button size="mini" type="primary">
+        Mini
+      </Button>
+      <Button size="small" type="primary">
+        Small
+      </Button>
+      <Button size="default" type="primary">
+        Default
+      </Button>
+      <Button size="large" type="primary">
+        Large
+      </Button>
+    </Space>
+  );
+};
+
+export default App;
+```
+
+## 按钮状态
+
+按钮状态分为 警告，危险，成功 三种，可以与按钮类型同时生效，优先级高于按钮类型。
+
+`warning`, `danger`, and `success` status. Status can co-exist with `type` but with higher priority.
+
+```tsx
+import { Button, Switch } from '@xiaoyaoliu/x-arco-design';
+
+const App = () => {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 100px)',
+        gridRowGap: 24,
+        gridColumnGap: 24,
+      }}
+    >
+      <Button type="primary" status="warning">
+        Warning
+      </Button>
+      <Button status="warning">Warning</Button>
+      <Button type="outline" status="warning">
+        Warning
+      </Button>
+      <Button type="text" status="warning">
+        Warning
+      </Button>
+
+      <Button type="primary" status="danger">
+        Danger
+      </Button>
+      <Button status="danger">Danger</Button>
+      <Button type="outline" status="danger">
+        Danger
+      </Button>
+      <Button type="text" status="danger">
+        Danger
+      </Button>
+
+      <Button type="primary" status="success">
+        Success
+      </Button>
+      <Button status="success">Success</Button>
+      <Button type="outline" status="success">
+        Success
+      </Button>
+      <Button type="text" status="success">
+        Success
+      </Button>
+    </div>
+  );
+};
+
+export default App;
+```
+
+## 禁用按钮
+
+按钮的禁用状态。
+
+```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
@@ -173,12 +250,16 @@ const App = () => {
 export default App;
 ```
 
-## 加载中
+## 加载中按钮
+
+通过设置`loading`可以让一个按钮处于加载中状态。处于加载中状态的按钮不会触发点击事件。
+
+`loading`. Click events are not triggered when buttons are on loading state.
 
 ```tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Divider } from '@xiaoyaoliu/x-arco-design';
-import { PlusOutlined } from '@easyv/react-icons';
+import { IconPlus } from '@arco-design/web-react/icon';
 
 function App() {
   const [loading1, setLoading1] = useState(false);
@@ -244,7 +325,7 @@ function App() {
         onClick={onClickBtn2}
         style={{ margin: 24 }}
       >
-        {!loading2 && <PlusOutlined />}Click Me
+        {!loading2 && <IconPlus />}Click Me
       </Button>
       <Divider style={{ width: 440, minWidth: 440 }}>
         loading fixed width
@@ -265,11 +346,84 @@ function App() {
 export default App;
 ```
 
-## 长按钮
+## 组合按钮
+
+可用在同级多项操作，以按钮组合方式出现。
 
 ```tsx
 import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
+import {
+  IconLeft,
+  IconRight,
+  IconMore,
+  IconStar,
+  IconSettings,
+  IconMessage,
+  IconDown,
+} from '@arco-design/web-react/icon';
+const ButtonGroup = Button.Group;
+
+const App = () => {
+  return (
+    <Space size="large" direction="vertical">
+      <Space size="large">
+        <ButtonGroup>
+          <Button>Publish</Button>
+          <Button icon={<IconDown />} />
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button type="secondary">Publish</Button>
+          <Button type="secondary" icon={<IconMore />} />
+        </ButtonGroup>
+      </Space>
+      <ButtonGroup>
+        <Button type="primary">Publish</Button>
+        <Button type="primary" icon={<IconDown />} />
+      </ButtonGroup>
+      <Space size="large">
+        <ButtonGroup>
+          <Button
+            type="primary"
+            icon={<IconLeft />}
+            shape="round"
+            style={{ padding: '0 8px' }}
+          >
+            Prev
+          </Button>
+          <Button type="primary" shape="round" style={{ padding: '0 8px' }}>
+            Next
+            <IconRight />
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button type="primary" icon={<IconStar />} />
+          <Button type="primary" icon={<IconMessage />} />
+          <Button type="primary" icon={<IconSettings />} />
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button type="primary" icon={<IconStar />}>
+            Favorite
+          </Button>
+          <Button type="primary" icon={<IconSettings />}>
+            Setting
+          </Button>
+        </ButtonGroup>
+      </Space>
+    </Space>
+  );
+};
+
+export default App;
+```
+
+## 长按钮
+
+按钮宽度随着容器宽度进行适配。
+
+```tsx
+import { Button, Space } from '@xiaoyaoliu/x-arco-design';
+import { IconUpload } from '@arco-design/web-react/icon';
 
 const App = () => {
   return (
@@ -305,71 +459,26 @@ const App = () => {
 export default App;
 ```
 
-## 组合按钮
+## API
 
-```tsx
-import React from 'react';
-import { Button, Space } from '@arco-design/web-react';
-import {
-  LeftOutlined,
-  RightOutlined,
-  MoreOutlined,
-  StarOutlined,
-  SettingOutlined,
-  MessageOutlined,
-  DownOutlined,
-} from '@easyv/react-icons';
-const ButtonGroup = Button.Group;
+### Button
 
-const App = () => {
-  return (
-    <Space size="large" direction="vertical">
-      <Space size="large">
-        <ButtonGroup>
-          <Button>Publish</Button>
-          <Button icon={<DownOutlined />} />
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button type="secondary">Publish</Button>
-          <Button type="secondary" icon={<MoreOutlined />} />
-        </ButtonGroup>
-      </Space>
-      <ButtonGroup>
-        <Button type="primary">Publish</Button>
-        <Button type="primary" icon={<DownOutlined />} />
-      </ButtonGroup>
-      <Space size="large">
-        <ButtonGroup>
-          <Button
-            type="primary"
-            icon={<LeftOutlined />}
-            shape="round"
-            style={{ padding: '0 8px' }}
-          >
-            Prev
-          </Button>
-          <Button type="primary" shape="round" style={{ padding: '0 8px' }}>
-            Next
-            <RightOutlined />
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button type="primary" icon={<StarOutlined />} />
-          <Button type="primary" icon={<MessageOutlined />} />
-          <Button type="primary" icon={<SettingOutlined />} />
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button type="primary" icon={<StarOutlined />}>
-            Favorite
-          </Button>
-          <Button type="primary" icon={<SettingOutlined />}>
-            Setting
-          </Button>
-        </ButtonGroup>
-      </Space>
-    </Space>
-  );
-};
-
-export default App;
-```
+| 参数名            | 描述                                                                                               | 类型                                                                     | 默认值    |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
+| disabled          | 是否禁用                                                                                           | boolean                                                                  | `-`       |
+| iconOnly          | 只有图标，按钮宽高相等。如果指定 `icon` 且没有 children，`iconOnly` 默认为 true                    | boolean                                                                  | `-`       |
+| loading           | 按钮是否是加载状态                                                                                 | boolean                                                                  | `-`       |
+| loadingFixedWidth | 当 loading 的时候，不改变按钮的宽度。                                                              | boolean                                                                  | `-`       |
+| long              | 按钮宽度随容器自适应。                                                                             | boolean                                                                  | `-`       |
+| href              | 添加跳转链接，设置此属性，button 表现跟 a 标签一致                                                 | string                                                                   | `-`       |
+| target            | a 链接的 target 属性，href 存在时生效                                                              | string                                                                   | `-`       |
+| htmlType          | 按钮原生的 html type 类型                                                                          | 'button' \| 'submit' \| 'reset'                                          | `button`  |
+| shape             | 按钮形状，`circle` - 圆形， `round` - 全圆角， `square` - 长方形                                   | 'circle' \| 'round' \| 'square'                                          | `square`  |
+| size              | 按钮的尺寸                                                                                         | 'mini' \| 'small' \| 'default' \| 'large'                                | `default` |
+| status            | 按钮状态                                                                                           | 'warning' \| 'danger' \| 'success' \| 'default'                          | `default` |
+| type              | 按钮主要分为六种按钮类型：主要按钮、次级按钮、虚框按钮、文字按钮、线性按钮，`default` 为次级按钮。 | 'default' \| 'primary' \| 'secondary' \| 'dashed' \| 'text' \| 'outline' | `default` |
+| icon              | 设置按钮的图标                                                                                     | ReactNode                                                                | `-`       |
+| anchorProps       | a 链接的原生属性，href 存在时生效                                                                  | HTMLProps&lt;HTMLAnchorElement&gt;                                       | `-`       |
+| className         | 节点类名                                                                                           | string \| string[]                                                       | `-`       |
+| style             | 节点样式                                                                                           | CSSProperties                                                            | `-`       |
+| onClick           | 点击按钮的回调                                                                                     | (e: Event) => void                                                       | `-`       |

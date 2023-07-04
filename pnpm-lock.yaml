@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@arco-design/web-react': ^2.49.2
-  '@arco-themes/react-dtable': ^0.0.1
+  '@arco-themes/react-dtable': 0.0.12
   '@arco-themes/react-xiaoyao-test': ^0.0.1
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
@@ -36,7 +36,7 @@ specifiers:
   stylelint: ^14.9.1
 
 dependencies:
-  '@arco-themes/react-dtable': 0.0.1_tn2fmq2vwpycrgubxzjnyj6txm
+  '@arco-themes/react-dtable': 0.0.12_tn2fmq2vwpycrgubxzjnyj6txm
   '@easyv/react-icons': 3.0.0
   '@xiaoyaoliu/x-arco-design': 0.0.3_shf6yauk5xnezf6uzpjo2tbrxi
   classnames: 2.3.2
@@ -126,10 +126,10 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
 
-  /@arco-themes/react-dtable/0.0.1_tn2fmq2vwpycrgubxzjnyj6txm:
-    resolution: {integrity: sha512-OqS+lyTmIP1sRS8QfsYG1WrsSB+SgU/DTjPzufopEuBqhyxKLQNraYPL95X5UVbcEcqxDmUm7onc/cTce/mzgw==}
+  /@arco-themes/react-dtable/0.0.12_tn2fmq2vwpycrgubxzjnyj6txm:
+    resolution: {integrity: sha512-sa/0adDc2AwxUVRHTQXiToX09aZykhmsDplOZqjCRpoWaB0ty60ClQzDw+pdBYvdbYBmKdAXnqFCSvoDNmDPQA==}
     peerDependencies:
-      '@arco-design/web-react': ^2.49.2
+      '@arco-design/web-react': ^2.50.0
     dependencies:
       '@arco-design/web-react': 2.49.2_qzycrpzqvmvb7wd2jdibmpq2cy
     dev: false

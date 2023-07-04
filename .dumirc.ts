@@ -1,7 +1,7 @@
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  outputPath: 'docs-dist',
+  outputPath: 'ui-docs',
   themeConfig: {
     name: '@xiaoyaoliu/x-arco-design',
   },

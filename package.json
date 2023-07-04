@@ -46,13 +46,12 @@
     ]
   },
   "dependencies": {
-    "@arco-themes/react-dtable": "^0.0.1",
     "@easyv/react-icons": "3.0.0",
-    "@xiaoyaoliu/x-arco-design": "^0.0.3",
     "classnames": "^2.3.2"
   },
   "devDependencies": {
     "@arco-design/web-react": "^2.49.2",
+    "@arco-themes/react-dtable": "0.0.12",
     "@arco-themes/react-xiaoyao-test": "^0.0.1",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",

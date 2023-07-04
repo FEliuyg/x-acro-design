@@ -39,6 +39,7 @@ $ pnpm run doctor
 
 - radius 没有应用四种尺寸
 - select 下的 tag 颜色没有应用对
+- input disabled background-color 优先级问题
 
 ## LICENSE
 

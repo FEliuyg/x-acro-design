@@ -643,6 +643,18 @@ const App = () => {
 export default App;
 ```
 
+## 无边框
+
+```tsx
+import { Input } from '@xiaoyaoliu/x-arco-design';
+
+function App() {
+  return <Input placeholder="borderedless" bordered={false} />;
+}
+
+export default App;
+```
+
 ## API
 
 ### Input
@@ -674,6 +686,12 @@ export default App;
 | onChange      | 输入时的回调                                                                                                 | (value: string, e) => void                        | `-`       | -                     |
 | onClear       | 点击清除按钮的回调                                                                                           | () => void                                        | `-`       | -                     |
 | onPressEnter  | 按下回车键的回调                                                                                             | (e) => void                                       | `-`       | -                     |
+| bordered      | 是否有边框                                                                                                   | boolean                                           | true      | ui 0.0.4              |
+
+对比 antd
+
+- ~~addonAfter~~ -> addAfter
+- ~~addonBefefore~~ -> addBefore
 
 ### Input.TextArea
 

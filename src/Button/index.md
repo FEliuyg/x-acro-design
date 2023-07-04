@@ -34,13 +34,13 @@ Button 可以嵌入图标，在只设置图标而没有 children 时，按钮的
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus, IconDelete } from '@arco-design/web-react/icon';
+import { PlusOutlined, DeleteOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
-      <Button type="primary" icon={<IconPlus />} />
-      <Button type="primary" icon={<IconDelete />}>
+      <Button type="primary" icon={<PlusOutlined />} />
+      <Button type="primary" icon={<DeleteOutlined />}>
         Delete
       </Button>
     </Space>
@@ -58,13 +58,13 @@ Button 有多种形状，`square` - 长方形 **(默认)**, `circle` - 圆形, `
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
+import { PlusOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
-      <Button type="primary" icon={<IconPlus />} />
-      <Button shape="circle" type="primary" icon={<IconPlus />} />
+      <Button type="primary" icon={<PlusOutlined />} />
+      <Button shape="circle" type="primary" icon={<PlusOutlined />} />
       <Button shape="round" type="primary">
         Primary
       </Button>
@@ -114,7 +114,7 @@ export default App;
 `warning`, `danger`, and `success` status. Status can co-exist with `type` but with higher priority.
 
 ```tsx
-import { Button, Switch } from '@xiaoyaoliu/x-arco-design';
+import { Button } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
   return (
@@ -259,7 +259,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Button, Divider } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
+import { PlusOutlined } from '@easyv/react-icons';
 
 function App() {
   const [loading1, setLoading1] = useState(false);
@@ -325,7 +325,7 @@ function App() {
         onClick={onClickBtn2}
         style={{ margin: 24 }}
       >
-        {!loading2 && <IconPlus />}Click Me
+        {!loading2 && <PlusOutlined />}Click Me
       </Button>
       <Divider style={{ width: 440, minWidth: 440 }}>
         loading fixed width
@@ -354,14 +354,14 @@ export default App;
 import React from 'react';
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconLeft,
-  IconRight,
-  IconMore,
-  IconStar,
-  IconSettings,
-  IconMessage,
-  IconDown,
-} from '@arco-design/web-react/icon';
+  LeftOutlined,
+  RightOutlined,
+  MoreOutlined,
+  StarOutlined,
+  SettingOutlined,
+  MessageOutlined,
+  DownOutlined,
+} from '@easyv/react-icons';
 const ButtonGroup = Button.Group;
 
 const App = () => {
@@ -370,22 +370,22 @@ const App = () => {
       <Space size="large">
         <ButtonGroup>
           <Button>Publish</Button>
-          <Button icon={<IconDown />} />
+          <Button icon={<DownOutlined />} />
         </ButtonGroup>
         <ButtonGroup>
           <Button type="secondary">Publish</Button>
-          <Button type="secondary" icon={<IconMore />} />
+          <Button type="secondary" icon={<MoreOutlined />} />
         </ButtonGroup>
       </Space>
       <ButtonGroup>
         <Button type="primary">Publish</Button>
-        <Button type="primary" icon={<IconDown />} />
+        <Button type="primary" icon={<DownOutlined />} />
       </ButtonGroup>
       <Space size="large">
         <ButtonGroup>
           <Button
             type="primary"
-            icon={<IconLeft />}
+            icon={<LeftOutlined />}
             shape="round"
             style={{ padding: '0 8px' }}
           >
@@ -393,19 +393,19 @@ const App = () => {
           </Button>
           <Button type="primary" shape="round" style={{ padding: '0 8px' }}>
             Next
-            <IconRight />
+            <RightOutlined />
           </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button type="primary" icon={<IconStar />} />
-          <Button type="primary" icon={<IconMessage />} />
-          <Button type="primary" icon={<IconSettings />} />
+          <Button type="primary" icon={<StarOutlined />} />
+          <Button type="primary" icon={<MessageOutlined />} />
+          <Button type="primary" icon={<SettingOutlined />} />
         </ButtonGroup>
         <ButtonGroup>
-          <Button type="primary" icon={<IconStar />}>
+          <Button type="primary" icon={<StarOutlined />}>
             Favorite
           </Button>
-          <Button type="primary" icon={<IconSettings />}>
+          <Button type="primary" icon={<SettingOutlined />}>
             Setting
           </Button>
         </ButtonGroup>
@@ -423,7 +423,6 @@ export default App;
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconUpload } from '@arco-design/web-react/icon';
 
 const App = () => {
   return (

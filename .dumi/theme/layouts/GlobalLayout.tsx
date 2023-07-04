@@ -1,5 +1,5 @@
 import { ConfigProvider } from '@arco-design/web-react';
-import '@arco-themes/react-xiaoyao-test/index.less';
+import '@arco-themes/react-dtable/index.less';
 import { Outlet, usePrefersColor } from 'dumi';
 import React, { useEffect } from 'react';
 

@@ -10,9 +10,7 @@ nav:
 
 ## 基本用法
 
-按钮分为 主要按钮、次要按钮、虚线按钮、线形按钮和文本按钮五种。
-
-`primary`, `secondary`, `dashed`, `outline` and `text` button types.
+按钮分为 主要按钮、次要按钮、虚线按钮、线形按钮和文本按钮五种。默认为次要按钮。
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -21,7 +19,7 @@ const App = () => {
   return (
     <Space size="large">
       <Button type="primary">Primary</Button>
-      <Button type="secondary">Secondary</Button>
+      <Button>Default</Button>
       <Button type="dashed">Dashed</Button>
       <Button type="outline">Outline</Button>
       <Button type="text">Text</Button>
@@ -35,8 +33,6 @@ export default App;
 ## 图标按钮
 
 Button 可以嵌入图标，在只设置图标而没有 children 时，按钮的高宽相等。
-
-`icon` is set and there are no children, the height and width of the button are equal.
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -60,8 +56,6 @@ export default App;
 
 Button 有多种形状，`square` - 长方形 **(默认)**, `circle` - 圆形, `round` - 全圆角。
 
-`square`-rectangle **(default)**, `circle`-round, `round`-full rounded corners.
-
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
 import { PlusOutlined } from '@easyv/react-icons';
@@ -84,9 +78,7 @@ export default App;
 
 ## 按钮尺寸
 
-按钮分为：迷你、小、中、大，四种尺寸。高度分别为：`24px/28px/32px/36px`。推荐及默认为尺寸「中」。可在不同场景及不同业务需求选择适合尺寸。
-
-`mini`, `small`, `medium` and `large` in size, with corresponding height of `24px/28px/32px/36px`. The recommended and default size is `medium`. The suitable size can be selected in different scenarios and different business needs.
+按钮分为：迷你、小、中、大，四种尺寸。高度分别为：`24px/28px/32px/40px`。推荐及默认为尺寸「中」。可在不同场景及不同业务需求选择适合尺寸。
 
 ```tsx
 import { Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -116,8 +108,6 @@ export default App;
 ## 按钮状态
 
 按钮状态分为 警告，危险，成功 三种，可以与按钮类型同时生效，优先级高于按钮类型。
-
-`warning`, `danger`, and `success` status. Status can co-exist with `type` but with higher priority.
 
 ```tsx
 import { Button } from '@xiaoyaoliu/x-arco-design';
@@ -259,8 +249,6 @@ export default App;
 ## 加载中按钮
 
 通过设置`loading`可以让一个按钮处于加载中状态。处于加载中状态的按钮不会触发点击事件。
-
-`loading`. Click events are not triggered when buttons are on loading state.
 
 ```tsx
 import { useState } from 'react';
@@ -445,14 +433,14 @@ const App = () => {
       <Button type="primary" long>
         Primary
       </Button>
-      <Button type="secondary" long>
-        Secondary
+      <Button type="default" long>
+        Default
       </Button>
       <Button type="dashed" long>
         Dashed
       </Button>
-      <Button type="default" long>
-        Default
+      <Button type="outline" long>
+        Dashed
       </Button>
       <Button type="text" long>
         Text

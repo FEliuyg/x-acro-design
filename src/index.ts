@@ -1,3 +1,5 @@
+import './index.css';
+
 export { default as Affix } from './Affix';
 export { default as Alert } from './Alert';
 export { default as Anchor } from './Anchor';

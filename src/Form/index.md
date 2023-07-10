@@ -12,18 +12,24 @@ const FormItem = Form.Item;
 
 const App = () => {
   return (
-    <Form style={{ width: 600 }} autoComplete="off">
-      <FormItem label="Username">
+    <Form
+      style={{ width: 600 }}
+      autoComplete="off"
+      onSubmit={(values) => console.log(values)}
+    >
+      <FormItem label="Username" field="username">
         <Input placeholder="please enter your username..." />
       </FormItem>
-      <FormItem label="Post">
+      <FormItem label="Post" field="password">
         <Input placeholder="please enter your post..." />
       </FormItem>
       <FormItem wrapperCol={{ offset: 5 }}>
         <Checkbox>I have read the manual</Checkbox>
       </FormItem>
       <FormItem wrapperCol={{ offset: 5 }}>
-        <Button type="primary">Submit</Button>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
       </FormItem>
     </Form>
   );
@@ -37,8 +43,6 @@ export default App;
 `Form` 支持三种排列方式：
 
 horizontal 水平排列 (**默认**)、 vertical 垂直排列、 inline 行内排列
-
-`Form` supports three layout: horizontal (**default**), vertical, inline.
 
 ```tsx
 import React from 'react';
@@ -54,7 +58,9 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [layout, setLayout] = React.useState('horizontal');
+  const [layout, setLayout] = React.useState<
+    'vertical' | 'horizontal' | 'inline'
+  >('horizontal');
   return (
     <Form
       style={
@@ -136,17 +142,6 @@ export default App;
   </li>
 </ol>
 
-`field` property in `Form.Item` to control the field.
-
-<ol>
-  <li>
-    In the controlled mode, `Form.Item` will automatically set `value` (or other attribute set by `triggerPropName`) and `onChange` (or other attribute set by `trigger`) properties for Form.Item's children. All data will be processed by `Form`.
-  </li>
-  <li>
-    You cannot set `defaultValue` for Form.Item's children.  The default value can be set by the `initialValues` of `Form` or the `initialValue` of `Form.Item`.
-  </li>
-</ol>
-
 ```tsx
 import { useRef, useEffect, useState } from 'react';
 import {
@@ -167,6 +162,7 @@ import {
   Upload,
   DatePicker,
   Modal,
+  FormInstance,
 } from '@xiaoyaoliu/x-arco-design';
 const FormItem = Form.Item;
 const cascaderOptions = [
@@ -225,15 +221,20 @@ const noLabelLayout = {
 };
 
 function App() {
-  const formRef = useRef();
-  const [size, setSize] = useState('default');
+  const formRef = useRef<FormInstance>();
+  const [size, setSize] = useState<'mini' | 'small' | 'default' | 'large'>(
+    'default',
+  );
   useEffect(() => {
-    formRef.current.setFieldsValue({
+    formRef.current?.setFieldsValue({
       rate: 5,
     });
   }, []);
 
-  const onValuesChange = (changeValue, values) => {
+  const onValuesChange = (
+    changeValue: Partial<any>,
+    values: Partial<any>[],
+  ) => {
     console.log('onValuesChange: ', changeValue, values);
   };
 
@@ -425,7 +426,7 @@ function App() {
                 title: 'Preview',
                 content: (
                   <img
-                    src={file.url || URL.createObjectURL(file.originFile)}
+                    src={file.url || URL.createObjectURL(file.originFile!)}
                     style={{
                       maxWidth: '100%',
                     }}
@@ -463,7 +464,7 @@ function App() {
           </Button>
           <Button
             onClick={() => {
-              formRef.current.resetFields();
+              formRef.current?.resetFields();
             }}
           >
             Reset
@@ -472,7 +473,7 @@ function App() {
             type="text"
             onClick={() => {
               Message.info(
-                `fields: ${formRef.current.getTouchedFields().join(',')}`,
+                `fields: ${formRef.current?.getTouchedFields().join(',')}`,
               );
             }}
           >
@@ -496,14 +497,6 @@ export default App;
 受控模式会接管表单控件，会自动给表单控件添加相应的 trigger (默认是 onChange)函数，并且会自动收集表单数据。
 也可以进行表单验证。也就是说，你不需要给表单控件添加 onChange 等事件了。
 通过给 Form.Control 设置 initialValue 来设置初始值，而不是 defaultValue。
-
-`1.15.0` to make `Form` into controlled component, `Form.Control` is required.
-
-**Notice:**
-
-The controlled mode will take over the form, will automatically add the corresponding trigger (default onChange) function to the Form, and will automatically collect the form data.
-You can also perform Form validation. In other words, you don't need to add events such as onChange to Form.
-Set the initial value by setting initialValue to Form.Control instead of defaultValue.
 
 ```tsx
 import React from 'react';
@@ -578,8 +571,6 @@ export default App;
 在函数式组件里可以使用`Form.useForm`获取表单实例。通过该实例调用表单方法，例如设置表单字段值，重置表单等。
 在类组件里可以使用`ref` 获取表单实例。
 
-`Form.useForm` to get a form instance, You can call all form methods through this instance, such as setting form value, reset form, etc. If you are using class component, you can get it by `ref`.
-
 ```tsx
 import { Form, Input, Button, InputNumber } from '@xiaoyaoliu/x-arco-design';
 const FormItem = Form.Item;
@@ -643,8 +634,6 @@ export default App;
 ## 控制表单项错误状态
 
 通过 `setFields` 方法的 `error` 参数，可以在外部控制表单项的错误状态。
-
-`error` parameter of the `setFields` method.
 
 ```tsx
 import { Form, Input, Button, InputNumber } from '@xiaoyaoliu/x-arco-design';
@@ -715,8 +704,6 @@ export default App;
 
 通过设置 `field` 为 `a.b.c` 格式，可以得到 `{a:{b:{c: xx}}}`。
 
-`field` to `a.b.c`, you will get `{a:{b:{c: xx}}}`.
-
 ```tsx
 import React from 'react';
 import { Form, Input, Button, Modal } from '@xiaoyaoliu/x-arco-design';
@@ -778,8 +765,6 @@ export default App;
 ## 表单控件嵌套
 
 `Form.Item` 可以互相嵌套。
-
-`Form.Item` can be nested.
 
 ```tsx
 import {
@@ -896,8 +881,6 @@ export default App;
 
 可以通过`shouldUpdate` 实现控件间的联动。
 
-`shouldUpdate`.
-
 ```tsx
 import { useRef, useState, useEffect } from 'react';
 import {
@@ -975,8 +958,6 @@ export default App;
 ## 动态增减表单项
 
 通过`Form.List`管理数组类型的表单结构。设置校验规则时 `Form.List` 会渲染出额外的 `DOM` 节点用来展示校验信息，如果不需要可以传入 `noStyle=false`，并通过 `Form.useFormState` 自定义校验信息的展示。
-
-`Form.List`. When setting validation rules, `Form.List` will render an additional `DOM` node to display the validation information. If you don’t need it, you can pass in `noStyle=false` and customize the validation information through `Form.useFormState` display.
 
 ```tsx
 import { useRef, useState } from 'react';
@@ -1217,8 +1198,6 @@ export default App;
 
 `Form.Item` 会给自己的直接子节点（必须是唯一子节点）传递 `onChange` 和 `value` 属性，自定义控件只有在调用这个`onChange` 之后，自己的值才能被 `Form.Item` 收集到 。
 
-`Form.Item` will pass the `onChange` and `value` properties to its direct child nodes. Only after calling this `onChange`, can its own value be collected by `Form.Item`.
-
 ```tsx
 import { useRef, useState, useEffect } from 'react';
 import { Form, Input, Select, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -1300,8 +1279,6 @@ export default App;
 ## 处理表单项的值
 
 首先，在使用受控表单时，所有表单项的值在改变时，都会被 `Form` 收集到。如果需要对表单项的值进行处理后再存储在 `Form` 中，可以使用 `normalize` 属性。与之相对，在进行表单项的渲染时，都会从 `Form` 中取值，并作为 `value` 属性传递给对应的表单项，如果需要对从 `Form` 中取出的值进行转换再传递给表单项，可以使用 `formatter` 属性。
-
-`Form` when they change. If you need to process the value of the form item and store it in the `Form`, you can use the `normalize` attribute. In contrast, when the form item is rendered, the value is taken from the `Form` and passed to the corresponding form item as the `value` attribute. If the value taken from the `Form` needs to be converted and then passed to For form items, you can use the `formatter` attribute.
 
 ```tsx
 import { Form, DatePicker, Input, Button } from '@xiaoyaoliu/x-arco-design';
@@ -1430,8 +1407,6 @@ export default App;
 ## 全局禁用
 
 给 `Form` 组件设置 `disabled` 可以全局禁用所有表单控件。
-
-`disabled` to the `Form` component to globally disable all form controls.
 
 ```tsx
 import { useRef, useEffect, useState } from 'react';
@@ -1785,8 +1760,6 @@ export default App;
 
 通过 `size` 属性可以设置不同尺寸的表单
 
-`size` attribute allows you to set forms of different sizes
-
 ```tsx
 import { useRef, useEffect, useState } from 'react';
 import {
@@ -1958,8 +1931,6 @@ export default App;
 
 `Form.Item` 支持通过 hasFeedback`validateStatus` 和 `help` 属性自定义表单校验状态及校验文案。
 
-`Form.Item` supports customizing the form verification status and verification copy through the hasFeedback`validateStatus` and `help` attributes.
-
 ```tsx
 import React from 'react';
 import {
@@ -2105,8 +2076,6 @@ export default App;
 
 可以通过 `form.validate` 方法进行表单字段的校验。可以通过参数指定校验特定字段。
 
-`form.validate` method. You can specify to verify specific fields through parameters.
-
 ```tsx
 import {
   Form,
@@ -2197,10 +2166,6 @@ export default App;
 
 p.s: 如果用 `lodash.debounce` 不生效，建议使用 `debounce.promise` ，它返回的是一个 `promise`。
 
-`validator` method in `rules` and return a `Promise` to achieve asynchronous validation of the form.
-
-p.s: If using `lodash.debounce` does not work, it is recommended to use `debounce.promise`, which returns a `promise`.
-
 ```tsx
 import {
   Form,
@@ -2269,10 +2234,6 @@ export default App;
 可以通过 `validateMessages` 属性设置校验信息提示模板(`2.32.0`支持)。[示例](https://github.com/arco-design/arco-design/blob/main/components/locale/zh-CN.tsx#L165)
 
 也可以在 `ConfigProvider` 组件的 `componentConfig` 参数，为全局的 `Form` 组件设置 `validateMessages` 。
-
-`validateMessages` property (`2.32.0` support). [example](https://github.com/arco-design/arco-design/blob/main/components/locale/zh-CN.tsx#L165)
-
-You can also set `validateMessages` for the global `Form` component in the `componentConfig` parameter of the `ConfigProvider` component.
 
 ```tsx
 import {
@@ -2503,8 +2464,6 @@ export default App;
 
 可以通过 `Form.Provider` 组件管理多个表单的数据。`2.30.0` 支持。需要想要获得对应的表单实例，需要为 `Form` 组件设置 `id` 属性。
 
-`2.30.0` support. To get the corresponding Form instance, you need to set the ID property for the Form component.
-
 ```tsx
 import React from 'react';
 import {
@@ -2699,8 +2658,6 @@ export default App;
 
 可以通过 `Form.useWatch` 监听表单内部字段值的变动。（`2.33.0` 支持）
 
-`Form.useWatch` to monitor the changes of field values inside the form. (`2.33.0` support)
-
 ```tsx
 import {
   Form,
@@ -2739,9 +2696,6 @@ export default App;
 ## 获取表单上下文
 
 在函数式组件里可以使用 `Form.useFormContext` 获取 Form 组件上下文，便于表单控件的封装。(version `2.33.0`, `isSubmitting` in `2.44.0`). `isSubmitting` 仅在通过 `type=submit` 的 `button` 触发表单 `Form` 的 `onSubmit` 属性进行提交时有效。如果 `onSubmit` 内部包含异步逻辑，请返回一个 Promise.
-
-`Form.useFormContext` to get a form context. Facilitate the encapsulation of form controls. (version `2.33.0`, `isSubmitting` in `2.44.0`).
-`isSubmitting` is only valid when the `onSubmit` attribute of the form `Form` is triggered to be submitted by a `button` with `type=submit`. If `onSubmit` contains asynchronous logic inside, return a Promise.
 
 ```tsx
 import React, { useEffect, useRef } from 'react';

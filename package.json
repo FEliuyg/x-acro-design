@@ -1,6 +1,6 @@
 {
   "name": "@xiaoyaoliu/x-arco-design",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "a react component library base on arco design",
   "license": "MIT",
   "module": "dist/index.js",
@@ -51,8 +51,7 @@
   },
   "devDependencies": {
     "@arco-design/web-react": "^2.49.2",
-    "@arco-themes/react-dtable": "0.0.12",
-    "@arco-themes/react-xiaoyao-test": "^0.0.1",
+    "@arco-themes/react-dtable": "0.0.20",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@easyv/sync-to-mirror": "^0.0.2",

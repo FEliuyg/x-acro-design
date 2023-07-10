@@ -3,7 +3,10 @@ export { default as Alert } from './Alert';
 export { default as Anchor } from './Anchor';
 export { default as AutoComplete } from './AutoComplete';
 export { default as Avatar } from './Avatar';
+
 export { default as Button } from './Button';
+export type { ButtonProps, ButtonGroupProps } from './Button';
+
 export { default as BackTop } from './BackTop';
 export { default as Badge } from './Badge';
 export { default as Breadcrumb } from './Breadcrumb';
@@ -21,7 +24,10 @@ export { default as Divider } from './Divider';
 export { default as Drawer } from './Drawer';
 export { default as Dropdown } from './Dropdown';
 export { default as Empty } from './Empty';
+
 export { default as Form } from './Form';
+export type { FormInstance } from './Form';
+
 export { default as Grid } from './Grid';
 export { default as Image } from './Image';
 export { default as InputNumber } from './InputNumber';

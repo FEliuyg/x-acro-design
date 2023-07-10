@@ -13,7 +13,8 @@ const App = () => {
   return (
     <Input
       style={{ width: 350 }}
-      allowClear
+      maxLength={100}
+      showWordLimit
       placeholder="Please Enter something"
     />
   );

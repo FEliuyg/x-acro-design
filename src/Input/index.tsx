@@ -4,11 +4,17 @@ import classNames from 'classnames';
 import './index.less';
 
 interface XInputProps extends InputProps {
+  addonAfter?: React.ReactNode;
+  addonBefore?: React.ReactNode;
   bordered?: boolean;
 }
 
 export default function XInput({
   bordered = true,
+  addonAfter,
+  addAfter,
+  addonBefore,
+  addBefore,
   className,
   ...restProps
 }: XInputProps) {
@@ -17,6 +23,8 @@ export default function XInput({
       className={classNames(className, {
         'arco-input-borderless': !bordered,
       })}
+      addAfter={addAfter ?? addonAfter}
+      addBefore={addBefore ?? addonBefore}
       {...restProps}
     />
   );

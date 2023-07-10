@@ -3,7 +3,7 @@ import { defineConfig } from 'dumi';
 export default defineConfig({
   outputPath: 'ui-docs',
   themeConfig: {
-    name: '@xiaoyaoliu/x-arco-design',
+    name: 'Easy Design',
   },
   theme: {
     '@c-primary': 'rgb(5, 185, 116)',

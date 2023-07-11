@@ -1,4 +1,28 @@
 .arco-btn {
+  &.arco-btn-link {
+    color: rgb(var(--primary-6));
+
+    &:not(.arco-btn-disabled):not(.arco-btn-loading):hover {
+      color: rgb(var(--primary-5));
+    }
+
+    &:not(.arco-btn-disabled):not(.arco-btn-loading):active {
+      color: rgb(var(--primary-7));
+    }
+
+    &.arco-btn-disabled {
+      color: rgb(var(--primary-3));
+
+      &:hover {
+        color: rgb(var(--primary-3));
+      }
+
+      &:active {
+        color: rgb(var(--primary-3));
+      }
+    }
+  }
+
   span:has(svg) {
     vertical-align: -2px;
   }

@@ -8,6 +8,8 @@
 
 ```tsx
 import { Layout } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Footer = Layout.Footer;
@@ -56,42 +58,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.layout-basic-demo .arco-layout-header,
-.layout-basic-demo .arco-layout-footer,
-.layout-basic-demo .arco-layout-sider,
-.layout-basic-demo .arco-layout-sider-children,
-.layout-basic-demo .arco-layout-content {
-  color: var(--color-white);
-  text-align: center;
-  font-stretch: condensed;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-basic-demo .arco-layout-header,
-.layout-basic-demo .arco-layout-footer {
-  height: 64px;
-  background-color: var(--color-primary-light-4);
-}
-
-.layout-basic-demo .arco-layout-sider {
-  width: 206px;
-  background-color: var(--color-primary-light-3);
-}
-
-.layout-basic-demo .arco-layout-content {
-  background-color: rgb(var(--arcoblue-6));
-}
-```
-
 ## 自定义按钮
 
 通过设置 `Menu.Sider` 的 `trigger` 属性，实现自定义收起按钮的图标。
-
-`trigger` property of `Menu.Sider`, the icon of the collapse button can be customized.
 
 ```tsx
 import React from 'react';
@@ -218,65 +187,9 @@ class App extends React.Component {
 export default App;
 ```
 
-```css
-.layout-collapse-demo {
-  height: 500px;
-  border: 1px solid var(--color-border);
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-sider .logo {
-  height: 32px;
-  margin: 12px 8px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.layout-collapse-demo .arco-layout-sider-light .logo {
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-footer,
-.layout-collapse-demo .arco-layout-content {
-  color: var(--color-white);
-  text-align: center;
-  font-stretch: condensed;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-collapse-demo .arco-layout-footer {
-  color: var(--color-text-2);
-  height: 48px;
-  line-height: 48px;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-content {
-  background: var(--color-bg-3);
-  color: var(--color-text-2);
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-header {
-  height: 64px;
-  line-height: 64px;
-  background: var(--color-bg-3);
-}
-
-.layout-collapse-demo .arco-layout-header .trigger {
-  margin-left: 20px;
-}
-```
-
 ## 自定义收起按钮
 
 设置 `Menu.Sider` 的 `trigger` 属性为 `null` 后，`Sider` 内置的缩起按钮不会显示。此时可自定义收起按钮。
-
-`trigger` property of `Menu.Sider` to `null`, the built-in trigger of `Sider` will not be displayed. At this time, you can customize the collapse button.
 
 ```tsx
 import React from 'react';
@@ -408,69 +321,19 @@ class App extends React.Component {
 export default App;
 ```
 
-```css:silent
-.layout-collapse-demo {
-  height: 500px;
-  border: 1px solid var(--color-border);
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-sider .logo {
-  height: 32px;
-  margin: 12px 8px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.layout-collapse-demo .arco-layout-sider-light .logo {
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-footer,
-.layout-collapse-demo .arco-layout-content {
-  color: var(--color-white);
-  text-align: center;
-  font-stretch: condensed;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-collapse-demo .arco-layout-footer {
-  color: var(--color-text-2);
-  height: 48px;
-  line-height: 48px;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-content {
-  background: var(--color-bg-3);
-  color: var(--color-text-2);
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-header {
-  height: 64px;
-  line-height: 64px;
-  background: var(--color-bg-3);
-}
-
-.layout-collapse-demo .arco-layout-header .trigger {
-  margin-left: 20px;
-}
-```
-
 ## 响应式侧边栏
 
 左侧 Sider 可以结合 Menu 设置为展开/收起状态, 设置 `breakpoint` 可触发响应式收缩。
 
-`breakpoint` can enable responsive contraction.
-
 ```tsx
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Message } from '@xiaoyaoliu/x-arco-design';
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Message,
+  MenuProps,
+} from '@xiaoyaoliu/x-arco-design';
 import { IconHome, IconCalendar } from '@arco-design/web-react/icon';
 
 const MenuItem = Menu.Item;
@@ -480,7 +343,7 @@ const Header = Layout.Header;
 const Footer = Layout.Footer;
 const Content = Layout.Content;
 
-function BaseMenu(props) {
+function BaseMenu(props: MenuProps) {
   return (
     <Menu defaultOpenKeys={['1']} defaultSelectedKeys={['0_2']} {...props}>
       <MenuItem key="0_1" disabled>
@@ -533,7 +396,7 @@ class App extends React.Component {
   state = {
     collapsed: false,
   };
-  onCollapse = (collapsed, type) => {
+  onCollapse = (collapsed: boolean, type: 'clickTrigger' | 'responsive') => {
     const content = type === 'responsive' ? '触发响应式收缩' : '点击触发收缩';
     Message.info({
       content,
@@ -589,65 +452,9 @@ class App extends React.Component {
 export default App;
 ```
 
-```css:silent
-.layout-collapse-demo {
-  height: 500px;
-  border: 1px solid var(--color-border);
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-sider .logo {
-  height: 32px;
-  margin: 12px 8px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.layout-collapse-demo .arco-layout-sider-light .logo {
-  background: var(--color-fill-2);
-}
-
-.layout-collapse-demo .arco-layout-footer,
-.layout-collapse-demo .arco-layout-content {
-  color: var(--color-white);
-  text-align: center;
-  font-stretch: condensed;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-collapse-demo .arco-layout-footer {
-  color: var(--color-text-2);
-  height: 48px;
-  line-height: 48px;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-content {
-  background: var(--color-bg-3);
-  color: var(--color-text-2);
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.layout-collapse-demo .arco-layout-header {
-  height: 64px;
-  line-height: 64px;
-  background: var(--color-bg-3);
-}
-
-.layout-collapse-demo .arco-layout-header .trigger {
-  margin-left: 20px;
-}
-```
-
 ## 可伸缩侧边栏
 
 可以用鼠标进行拖拽放大缩小的侧边栏，需要用到的参数：`resizeDirections`。
-
-`resizeDirections`, you can use the mouse to drag the sidebar to zoom in and out.
 
 ```tsx
 import { Layout } from '@xiaoyaoliu/x-arco-design';
@@ -683,46 +490,11 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.layout-basic-demo .arco-layout-header,
-.layout-basic-demo .arco-layout-footer,
-.layout-basic-demo .arco-layout-sider,
-.layout-basic-demo .arco-layout-sider-children,
-.layout-basic-demo .arco-layout-content {
-  color: var(--color-white);
-  text-align: center;
-  font-stretch: condensed;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.layout-basic-demo .arco-layout-header,
-.layout-basic-demo .arco-layout-footer {
-  height: 64px;
-  background-color: var(--color-primary-light-4);
-}
-
-.layout-basic-demo .arco-layout-sider {
-  width: 206px;
-  background-color: var(--color-primary-light-3);
-}
-
-.layout-basic-demo .arco-layout-content {
-  background-color: rgb(var(--arcoblue-6));
-}
-```
-
 ## 伸缩
 
 通过 `resizeBoxProps.onMoving`方法， 配置 `width` 和 `collapsed` 可以实现即可以拖拽伸缩杆也可以点击收缩的侧边栏。
 
 这时侧边栏的宽度完全受控于 `width` 的值
-
-`resizeBoxProps.onMoving` method, configuring `width` and `collapsed` can realize that you can drag the telescopic rod or click the collapsed sidebar.
-
-At this point the width of the sidebar is fully controlled by `width`.
 
 ```tsx
 import { useState } from 'react';
@@ -739,12 +511,20 @@ function App() {
   const [collapsed, setCollapsed] = useState(false);
   const [siderWidth, setSiderWidth] = useState(normalWidth);
 
-  const onCollapse = (collapsed) => {
+  const onCollapse = (collapsed: boolean) => {
     setCollapsed(collapsed);
     setSiderWidth(collapsed ? collapsedWidth : normalWidth);
   };
 
-  const handleMoving = (_, { width }) => {
+  const handleMoving = (
+    _: MouseEvent,
+    {
+      width,
+    }: {
+      width: number;
+      height: number;
+    },
+  ) => {
     if (width > collapsedWidth) {
       setSiderWidth(width);
       setCollapsed(!(width > collapsedWidth + 20));

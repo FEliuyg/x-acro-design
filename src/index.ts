@@ -38,7 +38,10 @@ export { default as Layout } from './Layout';
 export { default as Link } from './Link';
 export { default as List } from './List';
 export { default as Mentions } from './Mentions';
+
 export { default as Menu } from './Menu';
+export type { MenuProps } from './Menu';
+
 export { default as Notification } from './Notification';
 export { default as PageHeader } from './PageHeader';
 export { default as Pagination } from './Pagination';

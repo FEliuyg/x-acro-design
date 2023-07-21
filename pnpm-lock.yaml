@@ -17,8 +17,8 @@ devDependencies:
     specifier: ^2.49.2
     version: 2.49.2(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
   '@arco-themes/react-dtable':
-    specifier: 0.0.25
-    version: 0.0.25(@arco-design/web-react@2.49.2)
+    specifier: 0.0.27
+    version: 0.0.27(@arco-design/web-react@2.49.2)
   '@commitlint/cli':
     specifier: ^17.1.2
     version: 17.6.6
@@ -157,8 +157,8 @@ packages:
       - '@types/react'
     dev: true
 
-  /@arco-themes/react-dtable@0.0.25(@arco-design/web-react@2.49.2):
-    resolution: {integrity: sha512-tz+pV74O5b/GX53DjHx2WB3uihM6N9bSSnofDnCVDg7IfsHHdxewFK6JWzQT2VH67d12yJmrdBF0kfPxuF2lnQ==}
+  /@arco-themes/react-dtable@0.0.27(@arco-design/web-react@2.49.2):
+    resolution: {integrity: sha512-x/8aCchHcHNkFvwd0rVTAf9jrNz22mqc3ueMIK0TDXOXSt7zctN1E1AyFyKHWuwytYYv0RXkV1YgulWZEHz3dw==}
     peerDependencies:
       '@arco-design/web-react': ^2.50.0
     dependencies:

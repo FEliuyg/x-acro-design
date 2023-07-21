@@ -41,6 +41,7 @@ $ pnpm run doctor
 - select 下的 tag 颜色没有应用对
 - input disabled background-color 优先级问题
 - radio 中心点的样式 为 color-white 暗色模式下 为透明色，应该为白色，文档中为 hsla(0,0%,100%,0.9)，实际配置 rgba(255,255,255,0)
+- input 聚焦的输入框圆角问题
 
 ## LICENSE
 

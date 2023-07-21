@@ -8,6 +8,8 @@
 
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const Row = Grid.Row;
 const Col = Grid.Col;
 
@@ -79,75 +81,6 @@ const App = () => {
 export default App;
 ```
 
-```css
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-
-.grid-demo-background {
-  background-image: linear-gradient(
-    90deg,
-    var(--color-fill-2) 4.16666667%,
-    transparent 4.16666667%,
-    transparent 8.33333333%,
-    var(--color-fill-2) 8.33333333%,
-    var(--color-fill-2) 12.5%,
-    transparent 12.5%,
-    transparent 16.66666667%,
-    var(--color-fill-2) 16.66666667%,
-    var(--color-fill-2) 20.83333333%,
-    transparent 20.83333333%,
-    transparent 25%,
-    var(--color-fill-2) 25%,
-    var(--color-fill-2) 29.16666667%,
-    transparent 29.16666667%,
-    transparent 33.33333333%,
-    var(--color-fill-2) 33.33333333%,
-    var(--color-fill-2) 37.5%,
-    transparent 37.5%,
-    transparent 41.66666667%,
-    var(--color-fill-2) 41.66666667%,
-    var(--color-fill-2) 45.83333333%,
-    transparent 45.83333333%,
-    transparent 50%,
-    var(--color-fill-2) 50%,
-    var(--color-fill-2) 54.16666667%,
-    transparent 54.16666667%,
-    transparent 58.33333333%,
-    var(--color-fill-2) 58.33333333%,
-    var(--color-fill-2) 62.5%,
-    transparent 62.5%,
-    transparent 66.66666667%,
-    var(--color-fill-2) 66.66666667%,
-    var(--color-fill-2) 70.83333333%,
-    transparent 70.83333333%,
-    transparent 75%,
-    var(--color-fill-2) 75%,
-    var(--color-fill-2) 79.16666667%,
-    transparent 79.16666667%,
-    transparent 83.33333333%,
-    var(--color-fill-2) 83.33333333%,
-    var(--color-fill-2) 87.5%,
-    transparent 87.5%,
-    transparent 91.66666667%,
-    var(--color-fill-2) 91.66666667%,
-    var(--color-fill-2) 95.83333333%,
-    transparent 95.83333333%
-  );
-}
-```
-
 ## 栅格偏移
 
 指定 `offset` 可以对栅格进行平移操作。
@@ -197,23 +130,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-```
-
 ## 栅格排序
 
 指定 `push` 或者 `pull` 可以对栅格进行排序。
@@ -244,23 +160,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
 ```
 
 ## 区块间隔
@@ -333,28 +232,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css
-.grid-gutter-demo .arco-col {
-  height: 48px;
-  color: var(--color-white);
-}
-
-.grid-gutter-demo .arco-col > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.grid-gutter-demo .arco-col:nth-child(2n + 1) > div {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-
-.grid-gutter-demo .arco-col:nth-child(2n) > div {
-  background-color: var(--color-primary-light-4);
-}
 ```
 
 ## 水平布局
@@ -471,23 +348,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-```
-
 ## 垂直布局
 
 通过 `align` 来进行垂直布局。
@@ -568,23 +428,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-```
-
 ## 排序
 
 通过 `order` 来进行元素排序。
@@ -620,23 +463,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-```
-
 ## 响应式布局
 
 预置六种响应尺寸, 分别为 `xs`, `sm`, `md`, `lg`, `xl`, `xxl`。
@@ -665,23 +491,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
 ```
 
 ## 其他属性的响应式
@@ -716,23 +525,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
 ```
 
 ## Flex
@@ -786,23 +578,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.grid-demo .arco-col {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo .arco-col:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-
-.grid-demo .arco-col:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-```
-
 ## Grid
 
 基于 CSS 的 Grid 布局实现的布局组件，支持折叠，并且可以设置后缀节点，后缀节点会显示在一行的结尾。
@@ -851,24 +626,6 @@ const App = () => {
 export default App;
 ```
 
-```css
-.grid-demo-grid .demo-item,
-.grid-demo-grid .demo-suffix {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-
-.grid-demo-grid .demo-item:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-
-.grid-demo-grid .demo-item:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
-```
-
 ## 响应式的
 
 Grid 组件的响应式配置格式为 `{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 6, xxxl: 7 }`。
@@ -905,22 +662,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css
-.grid-responsive-demo .demo-item,
-.grid-responsive-demo .demo-suffix {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-.grid-responsive-demo .demo-item:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-.grid-responsive-demo .demo-item:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
-}
 ```
 
 ## API

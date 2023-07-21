@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Space>
       <Typography.Text>Space:</Typography.Text>
-      <Tag color="arcoblue">Tag</Tag>
+      <Tag color="green">Tag</Tag>
       <Button type="primary">Item1</Button>
       <Button type="primary">Item2</Button>
       <Switch defaultChecked />
@@ -54,14 +54,14 @@ export default App;
 
 内置 4 个尺寸，`mini - 4px` `small - 8px (默认)` `medium - 16px` `large - 24px`，也支持传数字来自定义尺寸。
 
-`mini-4px` `small-8px (default)` `medium-16px` `large-24px`, and also support to pass numbers to customize the size.
-
 ```tsx
 import { useState } from 'react';
 import { Space, Button, Radio } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [size, setSize] = useState('small');
+  const [size, setSize] = useState<
+    'mini' | 'small' | 'medium' | 'large' | number
+  >('small');
   return (
     <div>
       <div style={{ marginBottom: 20 }}>
@@ -88,8 +88,6 @@ export default App;
 
 内置 4 种对齐方式，分别为 `start` `center` `end` `baseline`，在水平模式下默认为 `center`。
 
-`start` `center` `end` `baseline`, and the default is `center` in horizontal mode.
-
 ```tsx
 import { useState } from 'react';
 import {
@@ -101,7 +99,9 @@ import {
 } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [align, setAlign] = useState('center');
+  const [align, setAlign] = useState<'start' | 'end' | 'center' | 'baseline'>(
+    'center',
+  );
   return (
     <div>
       <div style={{ marginBottom: 20 }}>

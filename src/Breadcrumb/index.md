@@ -131,9 +131,9 @@ import { Breadcrumb, Menu } from '@xiaoyaoliu/x-arco-design';
 const BreadcrumbItem = Breadcrumb.Item;
 const menu = (
   <Menu>
-    <Menu.Item>Data</Menu.Item>
-    <Menu.Item>Users</Menu.Item>
-    <Menu.Item>Permission</Menu.Item>
+    <Menu.Item key="1">Data</Menu.Item>
+    <Menu.Item key="2">Users</Menu.Item>
+    <Menu.Item key="3">Permission</Menu.Item>
   </Menu>
 );
 const routes = [
@@ -191,7 +191,7 @@ const BreadcrumbItem = Breadcrumb.Item;
 const App = () => {
   return (
     <div>
-      <Breadcrumb maxCount="3">
+      <Breadcrumb maxCount={3}>
         <BreadcrumbItem>Home</BreadcrumbItem>
         <BreadcrumbItem>Sub Home</BreadcrumbItem>
         <BreadcrumbItem>All Channel</BreadcrumbItem>

@@ -9,6 +9,8 @@
 ```tsx
 import { Dropdown, Menu, Button, Space } from '@xiaoyaoliu/x-arco-design';
 import { IconDown } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const dropList = (
   <Menu>
     <Menu.Item key="1">Beijing</Menu.Item>
@@ -38,26 +40,20 @@ function App() {
 export default App;
 ```
 
-```css
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 弹出方向
 
 通过 `position` 支持指定 6 种弹出方位，分别是：`top: 向上`, `tl: 左上`, `tr: 右上`, `bottom: 下方`, `bl: 左下(默认)`, `br: 右下`。
 
-`position` are available: `top`, `tl: top-left`, `tr: top-right`, `bottom`, `bl: bottom-left` (default), `br: bottom-right`。
-
 ```tsx
 import { Dropdown, Menu, Button, Space } from '@xiaoyaoliu/x-arco-design';
-const positions = ['bl', 'bottom', 'br', 'tl', 'top', 'tr'];
+const positions: ('top' | 'tl' | 'tr' | 'bottom' | 'bl' | 'br')[] = [
+  'bl',
+  'bottom',
+  'br',
+  'tl',
+  'top',
+  'tr',
+];
 const descriptions = [
   'BottomLeft',
   'BottomCenter',
@@ -90,17 +86,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
 ```
 
 ## 其他元素
@@ -136,17 +121,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
 ```
 
 ## 触发方式
@@ -188,17 +162,6 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 触发事件
 
 通过 `Menu.onClickMenuItem` 来为菜单指定点击菜单项时触发的回调函数。
@@ -235,22 +198,9 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 按钮下拉框
 
 使用 `<Dropdown.Button>` 可以使用右边是额外的相关功能菜单的按钮。
-
-`<Dropdown.Button>` to use the Dropdown with button on its right side which are additional menus.
 
 ```tsx
 import React from 'react';
@@ -295,17 +245,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 多级菜单
 
 带有多级菜单的下拉框。
@@ -325,9 +264,9 @@ const dropList = (
   <Menu>
     {data.map((city, outerIndex) => {
       if (city.length > 1) {
-        const districts = city[1];
+        const districts = city[1] as string[];
         return (
-          <SubMenu key={outerIndex} title={<span>{city[0]}</span>}>
+          <SubMenu key={`${outerIndex}`} title={<span>{city[0]}</span>}>
             {districts.map((district, innerIndex) => {
               return (
                 <MenuItem key={`${outerIndex}_${innerIndex}`}>
@@ -339,7 +278,7 @@ const dropList = (
         );
       }
 
-      return <MenuItem key={outerIndex}>{city[0]}</MenuItem>;
+      return <MenuItem key={`${outerIndex}`}>{city[0]}</MenuItem>;
     })}
   </Menu>
 );
@@ -360,24 +299,10 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 隐藏菜单
 
 通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。具体 `onVisibleChange` 的触发时机可查看[Trigger](/react/components/trigger#受控用法)组件文档。
 如果 `droplist` 是 `Menu`，可以通过在 `onClickMenuItem` 中返回 `false` 来避免菜单自动隐藏。
-
-`popupVisible` and `onVisibleChange` to control the visibility of the dropdown menu. Refer to [Trigger](/react/components/trigger#Controlled) for more details about trigger timing of `onVisibleChange`.
-If `droplist` is `Menu`, you can also prevent menu hiding by returning `false` in `onClickMenuItem`.
 
 ```tsx
 import { useState, useRef } from 'react';
@@ -386,7 +311,8 @@ import { IconDown } from '@arco-design/web-react/icon';
 
 function DemoWithPopupVisible() {
   const [popupVisible, setPopupVisible] = useState(false);
-  const refMenuItemClicked = useRef(null);
+  const refMenuItemClicked = useRef<string>(null);
+
   const dropList = (
     <Menu
       onClickMenuItem={(key) => {
@@ -457,17 +383,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
-```
-
 ## 分组菜单
 
 通过 `Menu.ItemGroup` 使用分组。
@@ -480,13 +395,13 @@ import { IconDown } from '@arco-design/web-react/icon';
 const dropList = (
   <Menu>
     <Menu.ItemGroup title="Beijing">
-      <Menu.Item>Haidian</Menu.Item>
-      <Menu.Item>Chaoyang</Menu.Item>
-      <Menu.Item>Shunyi</Menu.Item>
+      <Menu.Item key="1">Haidian</Menu.Item>
+      <Menu.Item key="2">Chaoyang</Menu.Item>
+      <Menu.Item key="2">Shunyi</Menu.Item>
     </Menu.ItemGroup>
     <Menu.ItemGroup title="Hebei Province">
-      <Menu.Item>Tangshan</Menu.Item>
-      <Menu.Item>Baoding</Menu.Item>
+      <Menu.Item key="4">Tangshan</Menu.Item>
+      <Menu.Item key="5">Baoding</Menu.Item>
     </Menu.ItemGroup>
   </Menu>
 );
@@ -509,17 +424,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
 ```
 
 ## 右键菜单
@@ -604,17 +508,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css:silent
-.dropdown-demo > .arco-btn {
-  padding: 0 8px;
-  font-weight: normal;
-}
-
-.dropdown-demo .arco-dropdown-popup-visible .arco-icon-down {
-  transform: rotate(180deg);
-}
 ```
 
 ## API

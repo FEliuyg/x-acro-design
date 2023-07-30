@@ -70,7 +70,7 @@ export { default as Typography } from './Typography';
 export { default as Upload } from './Upload';
 
 export { default as Input } from './Input';
-export type { InputProps } from './Input';
+export type { InputProps, InputSearchProps } from './Input';
 
 export { default as Message } from './Message';
 export { default as Modal } from './Modal';

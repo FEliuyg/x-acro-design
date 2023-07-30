@@ -68,7 +68,10 @@ export { default as TreeSelect } from './TreeSelect';
 export { default as Trigger } from './Trigger';
 export { default as Typography } from './Typography';
 export { default as Upload } from './Upload';
+
 export { default as Input } from './Input';
+export type { InputProps } from './Input';
+
 export { default as Message } from './Message';
 export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';

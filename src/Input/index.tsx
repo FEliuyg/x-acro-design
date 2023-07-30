@@ -47,3 +47,5 @@ XInput.TextArea = Input.TextArea;
 XInput.Password = Input.Password;
 XInput.Group = Input.Group;
 XInput.Search = InputSearch;
+
+export { XInputProps as InputProps };

@@ -51,8 +51,6 @@ export default App;
 
 输入框定义了四种默认尺寸（`mini`,`small`, `default`, `large`），分别为 24px，28px，32px，36px。
 
-`mini`, `small`, `default`, `large`), which are 24px, 28px, 32px, and 36px.
-
 ```tsx
 import React from 'react';
 import {
@@ -71,17 +69,22 @@ import {
 const RadioGroup = Radio.Group;
 const InputSearch = Input.Search;
 
+interface SizeAndHeight {
+  size: 'mini' | 'small' | 'default' | 'large';
+  height?: number;
+}
+
 class App extends React.Component {
-  state = {
+  state: SizeAndHeight = {
     size: 'default',
     height: 0,
   };
-  handleHeightChange = (height) => {
+  handleHeightChange = (height: number | number[]) => {
     this.setState({
       height,
     });
   };
-  handleChange = (size) => {
+  handleChange = (size: string) => {
     this.setState({
       height: undefined,
       size,
@@ -90,7 +93,7 @@ class App extends React.Component {
 
   render() {
     const { size, height } = this.state;
-    const props = {
+    const props: SizeAndHeight = {
       size,
     };
 
@@ -168,7 +171,6 @@ class App extends React.Component {
             {...props}
             placeholder="Please enter something"
             style={{ width: 350, margin: 12 }}
-            searchButton={true}
           />
         </div>
         <div>
@@ -206,8 +208,6 @@ export default App;
 ## 前置
 
 指定`addBefore`和`addAfter`在输入框前后添加元素。
-
-`addBefore`/`addAfter` to add elements before/after the input box.
 
 ```tsx
 import { Input, Select, Space } from '@xiaoyaoliu/x-arco-design';
@@ -264,8 +264,6 @@ export default App;
 ## 前后缀
 
 通过指定`prefix`和`suffix`来在输入框内添加前缀和后缀。
-
-`prefix`(`suffix`).
 
 ```tsx
 import { Input, Space } from '@xiaoyaoliu/x-arco-design';
@@ -328,57 +326,6 @@ const App = () => {
     <Space wrap>
       <InputSearch
         allowClear
-        placeholder="Enter keyword to search"
-        style={{ width: 350 }}
-      />
-      <InputSearch
-        searchButton
-        defaultValue="Search content"
-        placeholder="Enter keyword to search"
-        style={{ width: 350 }}
-      />
-      <InputSearch
-        searchButton="Search"
-        defaultValue="Search content"
-        placeholder="Enter keyword to search"
-        style={{ width: 350 }}
-      />
-    </Space>
-  );
-};
-
-export default App;
-```
-
-## 搜索框
-
-通过 `loading` 属性可以设置搜索框在 `onSearch` 的时候展示 `loading`。
-
-`loading` property, you can set the search box to display `loading` when `onSearch`.
-
-```tsx
-import { Input, Space } from '@xiaoyaoliu/x-arco-design';
-const InputSearch = Input.Search;
-
-const App = () => {
-  return (
-    <Space wrap>
-      <InputSearch
-        loading
-        placeholder="Enter keyword to search"
-        style={{ width: 350 }}
-      />
-      <InputSearch
-        searchButton
-        loading
-        defaultValue="Search content"
-        placeholder="Enter keyword to search"
-        style={{ width: 350 }}
-      />
-      <InputSearch
-        searchButton="Search"
-        loading
-        defaultValue="Search content"
         placeholder="Enter keyword to search"
         style={{ width: 350 }}
       />
@@ -466,12 +413,8 @@ const App = () => {
             marginBottom: 24,
           }}
         >
-          <Input.Group>
-            <Input
-              style={{ width: '24%', marginRight: 8 }}
-              value="010"
-              readOnly
-            />
+          <Input.Group compact>
+            <Input style={{ width: '24%' }} value="010" readOnly />
             <Input style={{ width: '60%' }} placeholder="Phone number" />
           </Input.Group>
         </div>
@@ -512,12 +455,6 @@ export default App;
 设置 `maxLength.errorOnly` 后不会限制用户输入字数，但是超过最大字数会展示错误状态。
 
 值得注意的是，如果配置了 `showWordLimit`，那么你将不能使用 `suffix`。
-
-`maxLength` to limit the maximum number of words, and use `showWordLimit` to display word count statistics.
-
-Setting `maxLength.errorOnly` will not limit the number of words entered by the user, but if the maximum number of words is exceeded, an error status will be displayed.
-
-It is worth noting that if `showWordLimit` is configured, then you cannot use `suffix`.
 
 ```tsx
 import { Input, Space } from '@xiaoyaoliu/x-arco-design';
@@ -592,15 +529,13 @@ export default App;
 
 指定 `autoSize`，文本域会自动根据输入的文本调整文本域的高度。如果指定`autoSize={{ minRows, maxRows }}`，也能指定最小行数和最大行数。
 
-`autoSize`, the text field will automatically adjust the height of the text field according to the input text. If you specify `autoSize={{ minRows, maxRows }}`, you can also specify the minimum/maximum number of rows.
-
 ```tsx
 import { Input, Space } from '@xiaoyaoliu/x-arco-design';
 const TextArea = Input.TextArea;
 
 const App = () => {
   return (
-    <Space wrap align="top">
+    <Space wrap align="start">
       <TextArea
         placeholder="Please enter ..."
         defaultValue="This is the contents of the textarea. "
@@ -726,11 +661,9 @@ export default App;
 
 包含 Input 组件所有参数
 
-| 参数名       | 描述               | 类型                    | 默认值 | 版本                 |
-| ------------ | ------------------ | ----------------------- | ------ | -------------------- |
-| loading      | 搜索时展示加载状态 | boolean                 | `-`    | 2.6.0                |
-| searchButton | 搜索按钮           | boolean \| ReactNode    | `-`    | `ReactNode` in 2.6.0 |
-| onSearch     | 点击搜索按钮的回调 | (value: string) => void | `-`    | -                    |
+| 参数名   | 描述               | 类型                    | 默认值 | 版本 |
+| -------- | ------------------ | ----------------------- | ------ | ---- |
+| onSearch | 点击搜索按钮的回调 | (value: string) => void | `-`    | -    |
 
 ### Input.Password
 

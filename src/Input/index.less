@@ -3,14 +3,61 @@
     border: none;
     box-shadow: none;
   }
+
+  &.arco-input-warning {
+    background-color: transparent;
+    border: 1px solid rgb(var(--warning-6));
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgb(var(--warning-1));
+    }
+  }
 }
 
 .arco-input-group {
-  & > .arco-input-group-addbefore ~ .arco-input-inner-wrapper-focus {
+  .arco-input-group-addafter {
+    border-left: none;
+
+    .arco-select {
+      .arco-select-view {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .arco-input-group-addbefore {
+    border-right: none;
+
+    .arco-select {
+      .arco-select-view {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  & > :first-child:is(.arco-input-inner-wrapper-focus):not(:only-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  & > :last-child:is(.arco-input-inner-wrapper-focus):not(:only-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  & > :nth-child(2):is(.arco-input-inner-wrapper-focus):not(:last-child) {
     border-radius: 0;
   }
 
-  & > .arco-input-group-addafter ~ .arco-input-inner-wrapper-focus {
-    border-radius: 0;
+  &.arco-input-group-compact > .arco-select .arco-select-view:first-child {
+    border-top-left-radius: var(--border-radius-medium);
+    border-bottom-left-radius: var(--border-radius-medium);
+    border-right-color: transparent;
+
+    &:hover {
+      border-color: rgb(var(--primary-6));
+    }
   }
 }

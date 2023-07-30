@@ -1,6 +1,6 @@
 {
   "name": "@xiaoyaoliu/x-arco-design",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "a react component library base on arco design",
   "license": "MIT",
   "module": "dist/index.js",

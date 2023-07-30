@@ -21,7 +21,7 @@
     "prepublishOnly": "father doctor && npm run build",
     "postpublish": "sync-to-mirror",
     "push": "npm run build && npm publish --registry=https://registry.npmjs.org",
-    "release": "release-it",
+    "release": "release-it --no-npm",
     "start": "npm run dev"
   },
   "commitlint": {
@@ -88,8 +88,7 @@
     "react-dom": ">=16.9.0"
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
+    "access": "public"
   },
   "authors": [
     "xiaoyaoliu@dtstack.com"

@@ -77,8 +77,6 @@ export default App;
 
 生成复选框组。设置 `direction="vertical"` 可以展示竖向的复选框组
 
-`vertical`, the vertical checkbox group will be displayed.
-
 ```tsx
 import { Checkbox } from '@xiaoyaoliu/x-arco-design';
 const CheckboxGroup = Checkbox.Group;
@@ -131,8 +129,6 @@ export default App;
 
 通过 `indeterminate` 属性可以实现半选效果。
 
-`indeterminate=true`
-
 ```tsx
 import { useState } from 'react';
 import { Checkbox } from '@xiaoyaoliu/x-arco-design';
@@ -144,7 +140,7 @@ function App() {
   const [checkAll, setCheckAll] = useState(false);
   const [value, setValue] = useState([0, 1]);
 
-  function onChangeAll(checked) {
+  function onChangeAll(checked: boolean) {
     if (checked) {
       setIndeterminate(false);
       setCheckAll(true);
@@ -156,7 +152,7 @@ function App() {
     }
   }
 
-  function onChange(checkList) {
+  function onChange(checkList: number[]) {
     setIndeterminate(
       !!(checkList.length && checkList.length !== options.length),
     );
@@ -233,8 +229,6 @@ export default App;
 
 通过 `icon` 属性自定义选中态图标。
 
-`icon` property.
-
 ```tsx
 import { Checkbox } from '@xiaoyaoliu/x-arco-design';
 import { IconAt } from '@arco-design/web-react/icon';
@@ -258,6 +252,7 @@ export default App;
 
 ```tsx
 import { Checkbox, Tag, Space, Typography } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const App = () => {
   return (
@@ -316,76 +311,11 @@ const App = () => {
 export default App;
 ```
 
-```css
-input[type='checkbox']:focus-visible + .arco-tag {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-input[type='checkbox']:focus-visible + .custom-checkbox-card {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-checkbox-card {
-  padding: 10px 16px;
-  border: 1px solid var(--color-border-2);
-  border-radius: 4px;
-  width: 250px;
-  box-sizing: border-box;
-}
-
-.custom-checkbox-card-mask {
-  height: 14px;
-  width: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 2px;
-  border: 1px solid var(--color-border-2);
-  box-sizing: border-box;
-}
-
-.custom-checkbox-card-mask-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-}
-
-.custom-checkbox-card-title {
-  color: var(--color-text-1);
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.custom-checkbox-card:hover,
-.custom-checkbox-card-checked,
-.custom-checkbox-card:hover .custom-checkbox-card-mask,
-.custom-checkbox-card-checked .custom-checkbox-card-mask {
-  border-color: rgb(var(--primary-6));
-}
-
-.custom-checkbox-card-checked {
-  background-color: var(--color-primary-light-1);
-}
-
-.custom-checkbox-card:hover .custom-checkbox-card-title,
-.custom-checkbox-card-checked .custom-checkbox-card-title {
-  color: rgb(var(--primary-6));
-}
-
-.custom-checkbox-card-checked .custom-checkbox-card-mask-dot {
-  background-color: rgb(var(--primary-6));
-}
-```
-
 ## useCheckbox
 
 使用 `useCheckbox` 快捷管理复选框数据
 
-`useCheckbox` hook offers an efficient way to manage checkbox state.
-
 ```tsx
-import { useState } from 'react';
 import {
   Checkbox,
   Divider,

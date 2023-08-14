@@ -1,0 +1,18 @@
+.my-animation-enter {
+  opacity: 0;
+}
+
+.my-animation-enter-active {
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.my-animation-exit {
+  opacity: 0;
+}
+
+.my-animation-exit-active {
+  opacity: 0;
+  height: 0;
+  transition: all 0.5s linear;
+}

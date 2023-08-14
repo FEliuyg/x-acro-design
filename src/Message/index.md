@@ -29,8 +29,6 @@ export default App;
 
 全局提示有 5 种不同的类型，分别为：`info`, `success`, `warning`, `error`, `normal`。
 
-`info`, `success`, `warning`, `error`, `normal`.
-
 ```tsx
 import { Message, Button, Space } from '@xiaoyaoliu/x-arco-design';
 
@@ -81,14 +79,15 @@ export default App;
 
 设置 `icon` 来自定义图标。
 
-`icon` to customize the icon.
-
 ```tsx
-import { Message, Button, Icon, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconFaceSmileFill } from '@arco-design/web-react/icon';
-const IconFont = Icon.addFromIconFontCn({
-  src: '//at.alicdn.com/t/font_180975_26f1p759rvn.js',
-});
+import { Message, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import {
+  InfoCircleFilled,
+  CheckCircleFilled,
+  CloseCircleFilled,
+  SmileFilled,
+  WarningFilled,
+} from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -96,7 +95,7 @@ const App = () => {
       <Button
         onClick={() =>
           Message.info({
-            icon: <IconFont type="icon-info" />,
+            icon: <InfoCircleFilled />,
             content: 'This is an info message!',
           })
         }
@@ -107,7 +106,7 @@ const App = () => {
       <Button
         onClick={() =>
           Message.success({
-            icon: <IconFont type="icon-success" />,
+            icon: <CheckCircleFilled />,
             content: 'This is a primary message!',
           })
         }
@@ -119,7 +118,7 @@ const App = () => {
       <Button
         onClick={() =>
           Message.warning({
-            icon: <IconFont type="icon-warning" />,
+            icon: <WarningFilled />,
             content: 'This is a warning message!',
           })
         }
@@ -131,7 +130,7 @@ const App = () => {
       <Button
         onClick={() =>
           Message.error({
-            icon: <IconFont type="icon-error" />,
+            icon: <CloseCircleFilled />,
             content: 'This is an error message!',
           })
         }
@@ -143,7 +142,7 @@ const App = () => {
       <Button
         onClick={() =>
           Message.info({
-            icon: <IconFaceSmileFill />,
+            icon: <SmileFilled />,
             content: 'This is a message!',
           })
         }
@@ -161,8 +160,6 @@ export default App;
 ## 更新全局提醒内容
 
 通过指定 `id`，可以更新已经存在的全局提示。
-
-`id`, the existing Message can be updated.
 
 ```tsx
 import { Message, Button } from '@xiaoyaoliu/x-arco-design';
@@ -236,8 +233,6 @@ export default App;
 
 通过指定 `id`，可以更新已经存在的全局提示的`duration` 属性。
 
-`id`, the `duration` attribute of the existing Message can be updated.
-
 ```tsx
 import { Message, Button } from '@xiaoyaoliu/x-arco-design';
 
@@ -271,8 +266,6 @@ export default App;
 
 `Message.xxx()` 会返回一个函数，调用此函数能手动关闭通知。
 
-`Message.xxx()` will return a function, use this function to close the notification.
-
 ```tsx
 import { Message, Button } from '@xiaoyaoliu/x-arco-design';
 
@@ -300,8 +293,6 @@ export default App;
 ## 显示关闭按钮
 
 设置 `closable` 来显示关闭按钮。
-
-`closable` to show the close button.
 
 ```tsx
 import { Message, Button } from '@xiaoyaoliu/x-arco-design';
@@ -331,10 +322,6 @@ export default App;
 可以通过 `useMessage`**(2.40.0)** 去创建可以读取 context 的对话框。
 
 但是通过 `useMessage` 渲染的 `message` 挂载在 `contextHolder` 所在位置。无法通过 `getContainer()` 修改容器。
-
-`useMessage` to create a dialog that can read the context.
-
-But the `message` rendered by `useMessage` is mounted where the `contextHolder` is. The container cannot be modified via `getContainer()`.
 
 ```tsx
 import React, { createContext } from 'react';
@@ -406,13 +393,10 @@ export default App;
 
 动画实现基于 [react-transition-group](https://reactcommunity.org/react-transition-group/css-transition)
 
-`transitionClassNames` and `transitionTimeout`
-
-The animation implementation is based on [react-transition-group](https://reactcommunity.org/react-transition-group/css-transition)
-
 ```tsx
 import React from 'react';
-import { Message, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import { Message, Button } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const App = () => {
   return (
@@ -435,27 +419,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css
-.my-animation-enter {
-  opacity: 0;
-}
-
-.my-animation-enter-active {
-  opacity: 1;
-  transition: opacity 1s linear;
-}
-
-.my-animation-exit {
-  opacity: 0;
-}
-
-.my-animation-exit-active {
-  opacity: 0;
-  height: 0;
-  transition: all 0.5s linear;
-}
 ```
 
 ## API

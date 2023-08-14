@@ -478,10 +478,10 @@ import {
   IconInfoCircleFill,
 } from '@arco-design/web-react/icon';
 
-const sleep = async (time) => {
+const sleep = async (time: number) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve('');
     }, time);
   });
 };
@@ -582,7 +582,14 @@ export default App;
 import React from 'react';
 import { Modal, Button, Table, Spin } from '@xiaoyaoliu/x-arco-design';
 
-function getDataFromServer() {
+interface DataItem {
+  id: string;
+  name: string;
+  version: string;
+  author: string;
+}
+
+function getDataFromServer(): Promise<DataItem[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve([
@@ -613,23 +620,23 @@ function App() {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false); // table
 
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState<DataItem[]>([]);
   const columns = [
     {
       title: 'Name',
       dataIndex: 'name',
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a: DataItem, b: DataItem) => a.name.length - b.name.length,
     },
     {
       title: 'Version',
       dataIndex: 'version',
-      sorter: (a, b) => {
+      sorter: (a: DataItem, b: DataItem) => {
         const aVersion = a.version.split('.');
         const bVersion = b.version.split('.');
 
         for (let i = 0; i < aVersion.length; i++) {
           if (aVersion[i] === bVersion[i]) continue;
-          return aVersion[i] - bVersion[i];
+          return +aVersion[i] - +bVersion[i];
         }
 
         return 1;
@@ -638,7 +645,7 @@ function App() {
     {
       title: 'Author',
       dataIndex: 'author',
-      sorter: (a, b) => a.author.length - b.author.length,
+      sorter: (a: DataItem, b: DataItem) => a.author.length - b.author.length,
     },
   ];
 
@@ -717,6 +724,13 @@ export default App;
 import React from 'react';
 import { Modal, Button, Table, Alert } from '@xiaoyaoliu/x-arco-design';
 
+interface DataItem {
+  id: string;
+  name: string;
+  version: string;
+  author: string;
+}
+
 function App() {
   const [visible, setVisible] = React.useState(false); // table
 
@@ -724,18 +738,18 @@ function App() {
     {
       title: 'Name',
       dataIndex: 'name',
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a: DataItem, b: DataItem) => a.name.length - b.name.length,
     },
     {
       title: 'Version',
       dataIndex: 'version',
-      sorter: (a, b) => {
+      sorter: (a: DataItem, b: DataItem) => {
         const aVersion = a.version.split('.');
         const bVersion = b.version.split('.');
 
         for (let i = 0; i < aVersion.length; i++) {
           if (aVersion[i] === bVersion[i]) continue;
-          return aVersion[i] - bVersion[i];
+          return +aVersion[i] - +bVersion[i];
         }
 
         return 1;
@@ -744,10 +758,10 @@ function App() {
     {
       title: 'Author',
       dataIndex: 'author',
-      sorter: (a, b) => a.author.length - b.author.length,
+      sorter: (a: DataItem, b: DataItem) => a.author.length - b.author.length,
     },
   ];
-  const data = [
+  const data: DataItem[] = [
     {
       id: '1',
       name: 'EduTools',
@@ -819,6 +833,13 @@ import {
 } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
 
+interface DataItem {
+  id: string;
+  name: string;
+  version: string;
+  author: string;
+}
+
 function App() {
   const [visible, setVisible] = React.useState(false); // table
 
@@ -826,18 +847,18 @@ function App() {
     {
       title: 'Name',
       dataIndex: 'name',
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a: DataItem, b: DataItem) => a.name.length - b.name.length,
     },
     {
       title: 'Version',
       dataIndex: 'version',
-      sorter: (a, b) => {
+      sorter: (a: DataItem, b: DataItem) => {
         const aVersion = a.version.split('.');
         const bVersion = b.version.split('.');
 
         for (let i = 0; i < aVersion.length; i++) {
           if (aVersion[i] === bVersion[i]) continue;
-          return aVersion[i] - bVersion[i];
+          return +aVersion[i] - +bVersion[i];
         }
 
         return 1;
@@ -846,10 +867,10 @@ function App() {
     {
       title: 'Author',
       dataIndex: 'author',
-      sorter: (a, b) => a.author.length - b.author.length,
+      sorter: (a: DataItem, b: DataItem) => a.author.length - b.author.length,
     },
   ];
-  const data = [
+  const data: DataItem[] = [
     {
       id: '1',
       name: 'EduTools',
@@ -869,6 +890,7 @@ function App() {
       author: 'Hemingway',
     },
   ];
+
   return (
     <div>
       <Button onClick={() => setVisible(true)} type="primary">
@@ -944,7 +966,6 @@ import Draggable from 'react-draggable';
 
 function App() {
   const [visible, setVisible] = React.useState(false);
-  const [disabled, setDisabled] = React.useState(true);
   return (
     <div>
       <Button onClick={() => setVisible(true)} type="primary">
@@ -957,15 +978,7 @@ function App() {
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
         autoFocus={false}
-        onMouseOver={() => {
-          disabled && setDisabled(false);
-        }}
-        onMouseOut={() => {
-          !disabled && setDisabled(true);
-        }}
-        modalRender={(modal) => (
-          <Draggable disabled={disabled}>{modal}</Draggable>
-        )}
+        modalRender={(modal) => <Draggable>{modal}</Draggable>}
       >
         <p>
           You can customize modal body text by the current situation. This modal
@@ -1004,19 +1017,19 @@ function App() {
     <ConfigContext.Provider value="PJY">
       {contextHolder}
       <Space>
-        <Button onClick={() => modal.confirm(config)} type="secondary">
+        <Button onClick={() => modal.confirm?.(config)} type="secondary">
           Confirm
         </Button>
-        <Button onClick={() => modal.info(config)} type="secondary">
+        <Button onClick={() => modal.info?.(config)} type="secondary">
           Info
         </Button>
-        <Button onClick={() => modal.success(config)} type="secondary">
+        <Button onClick={() => modal.success?.(config)} type="secondary">
           Success
         </Button>
-        <Button onClick={() => modal.warning(config)} type="secondary">
+        <Button onClick={() => modal.warning?.(config)} type="secondary">
           Warning
         </Button>
-        <Button onClick={() => modal.error(config)} type="secondary">
+        <Button onClick={() => modal.error?.(config)} type="secondary">
           Error
         </Button>
         <Button

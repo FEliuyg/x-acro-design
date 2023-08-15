@@ -624,11 +624,6 @@ export default App;
 | onPressEnter  | 按下回车键的回调                                                                                             | (e) => void                                       | `-`       | -                     |
 | bordered      | 是否有边框                                                                                                   | boolean                                           | true      | ui 0.0.4              |
 
-对比 antd
-
-- ~~addonAfter~~ -> addAfter
-- ~~addonBefefore~~ -> addBefore
-
 ### Input.TextArea
 
 | 参数名       | 描述                                                                                                         | 类型                                              | 默认值 | 版本                  |

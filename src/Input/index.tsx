@@ -7,17 +7,11 @@ import { SearchCircleOutlined } from '@easyv/react-icons';
 import './index.less';
 
 interface XInputProps extends InputProps {
-  addonAfter?: React.ReactNode;
-  addonBefore?: React.ReactNode;
   bordered?: boolean;
 }
 
 export default function XInput({
   bordered = true,
-  addonAfter,
-  addAfter,
-  addonBefore,
-  addBefore,
   className,
   ...restProps
 }: XInputProps) {
@@ -26,19 +20,30 @@ export default function XInput({
       className={classNames(className, {
         'arco-input-borderless': !bordered,
       })}
-      addAfter={addAfter ?? addonAfter}
-      addBefore={addBefore ?? addonBefore}
       {...restProps}
     />
   );
 }
 
-function InputSearch({ onSearch, ...restProps }: InputSearchProps) {
+interface XInputSearchProps extends InputSearchProps {
+  bordered?: boolean;
+}
+
+function InputSearch({
+  bordered = true,
+  className,
+  onSearch,
+  ...restProps
+}: XInputSearchProps) {
   return (
     <XInput
-      {...restProps}
+      className={classNames(className, {
+        'arco-input-borderless': !bordered,
+      })}
       prefix={<SearchCircleOutlined />}
       onChange={onSearch}
+      onPressEnter={(e) => e.currentTarget.blur()}
+      {...restProps}
     />
   );
 }

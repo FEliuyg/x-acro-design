@@ -7,13 +7,13 @@
 最简单的例子。
 
 ```tsx
-import { Message, Button } from '@xiaoyaoliu/x-arco-design';
+import { message, Button } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
   return (
     <Button
       onClick={() => {
-        Message.info('This is an info message!');
+        message.info('This is an info message!');
       }}
       type="primary"
     >

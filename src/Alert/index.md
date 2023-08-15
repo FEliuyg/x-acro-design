@@ -20,8 +20,6 @@ export default App;
 
 警告提示的类型有 `info`, `success`, `warning`, `error` 四种。
 
-`info`, `success`, `warning`, and `error`.
-
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
 const { Row, Col } = Grid;
@@ -57,8 +55,6 @@ export default App;
 ## 可关闭
 
 指定 `closable = true`，可开启关闭按钮。
-
-`closable = true` to turn on the close button.
 
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
@@ -110,8 +106,6 @@ export default App;
 
 指定 `closeElement`，自定义关闭元素。`closeElement` 可以接收 `onClick`，并且自带 `close` 参数，调用 `close()` 可以关闭。
 
-`closeElement` to customize the close element. `closeElement` can receive `onClick`, has its own `close` parameter, and can be closed by calling `close()`.
-
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
 import { IconCheck } from '@arco-design/web-react/icon';
@@ -148,8 +142,6 @@ export default App;
 ## 含有标题
 
 通过设置 `title` 可以给添加标题，将 `content` 变为辅助性介绍文字。
-
-`content` is turned into auxiliary introduction text with presence of `title`.
 
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
@@ -192,8 +184,6 @@ export default App;
 ## 不含图标
 
 通过指定 `showIcon=false` 来不显示图标。
-
-`showIcon=false` to hide the icon.
 
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
@@ -243,8 +233,6 @@ export default App;
 
 设置 `banner = true`，可以当作顶部公告使用。
 
-`banner = true` to display Alert as a banner on top of the page.
-
 ```tsx
 import { Alert } from '@xiaoyaoliu/x-arco-design';
 
@@ -291,8 +279,6 @@ export default App;
 ## 操作项
 
 通过 `action` 可以自定义右上角操作项。
-
-`action`.
 
 ```tsx
 import { Alert, Button, Space } from '@xiaoyaoliu/x-arco-design';

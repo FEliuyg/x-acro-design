@@ -82,6 +82,14 @@ export { default as Message, default as message } from './Message';
 
 export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';
+
 export { default as Select } from './Select';
+export type {
+  SelectProps,
+  SelectOptionProps,
+  SelectOptionGroupProps,
+  SelectHandle,
+} from './Select';
+
 export { default as Space } from './Space';
 export { default as Tag } from './Tag';

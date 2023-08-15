@@ -112,8 +112,6 @@ export default App;
 
 指定 `mode=multiple`，即可使用多选。通过 `maxTagCount` 设置最多显示的标签个数，通过 `renderTag` 属性自定义标签的渲染方式，实现更复杂的定制。
 
-`mode=multiple` to use multiple selection. Set the maximum number of tags displayed through `maxTagCount`, and customize the rendering method of tags through the `renderTag` property to achieve more complex customization.
-
 ```tsx
 import { Select, Space, Tag } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
@@ -222,8 +220,6 @@ export default App;
 
 通过 `addBefore` 设置前置标签 (`2.41.0`)
 
-`addBefore` to add elements before the select box. (`2.41.0`)
-
 ```tsx
 import { Select, Message, Space } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
@@ -272,7 +268,7 @@ export default App;
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
-const options = [];
+const options: string[] = [];
 
 for (let i = 10; i < 24; i++) {
   options.push(i.toString(36) + i);
@@ -327,9 +323,6 @@ export default App;
 
 指定`showSearch=true`，可以对展开的选项进行搜索，配合 `filterOption` 可以自定义搜索。
 搜索框聚焦时默认会清空已输入的内容，通过指定 `showSearch={ retainInputValue: true }` 来保留内容。
-
-`showSearch=true` to search for the expanded options, and cooperate with `filterOption` to customize the search.
-When the search box is focused, the entered content will be cleared by default, however the content can be retained by specifying `showSearch={ retainInputValue: true }`.
 
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
@@ -428,19 +421,18 @@ export default App;
 
 指定 `showSearch`，并且结合 `filterOption` 和 `onSearch`，可以使用远程搜索功能。
 
-`showSearch`, `filterOption` and `onSearch`, you can search user from origin and select them.
-
 ```tsx
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, isValidElement } from 'react';
 import { Select, Spin, Avatar } from '@xiaoyaoliu/x-arco-design';
 import debounce from 'lodash/debounce';
 
 function App() {
   const [options, setOptions] = useState([]);
   const [fetching, setFetching] = useState(false);
-  const refFetchId = useRef(null);
+  const refFetchId = useRef<number | null>(null);
+
   const debouncedFetchUser = useCallback(
-    debounce((inputValue) => {
+    debounce(() => {
       refFetchId.current = Date.now();
       const fetchId = refFetchId.current;
       setFetching(true);
@@ -449,7 +441,7 @@ function App() {
         .then((response) => response.json())
         .then((body) => {
           if (refFetchId.current === fetchId) {
-            const options = body.results.map((user) => ({
+            const options = body.results.map((user: any) => ({
               label: (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Avatar size={24} style={{ marginLeft: 6, marginRight: 12 }}>
@@ -476,7 +468,9 @@ function App() {
       placeholder="Search by name"
       filterOption={false}
       renderFormat={(option) => {
-        return option.children.props.children[1];
+        if (isValidElement(option?.children)) {
+          return option?.children?.props?.children[1];
+        }
       }}
       notFoundContent={
         fetching ? (
@@ -505,10 +499,6 @@ export default App;
 `triggerProps.autoAlignPopupWidth` 参数为弹出框宽度跟输入框保持一致。
 `triggerProps.autoAlignPopupMinWidth` 参数为弹出框最小宽度跟输入框保持一致。
 可以自由组合。
-
-`triggerProps.autoAlignPopupWidth` property is to keep the width of popup box consistent with the input box.
-The `triggerProps.autoAlignPopupMinWidth` property is to keep the minimum width of the popup box consistent with the input box.
-They can be freely combined.
 
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
@@ -559,11 +549,10 @@ export default App;
 
 通过 `size` 选择 Select 的尺寸（`mini`, `small`, `default`, `large`），高度分别对应`24px`、`28px`、`32px`、`36px`。
 
-`size` to select the size of Select (`mini`, `small`, `default`, `large`), the height corresponds to `24px`, `28px`, `32px`, `36px`.
-
 ```tsx
 import React from 'react';
 import { Select, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { SelectProps } from '@xiaoyaoliu/x-arco-design';
 
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
@@ -577,7 +566,9 @@ const options = [
 ];
 
 class App extends React.Component {
-  state = {
+  state: {
+    value: SelectProps['size'];
+  } = {
     value: 'default',
   };
 
@@ -642,10 +633,6 @@ export default App;
 
 **注意：在如远程加载选项数据的场景下，value 中对应的选项可能在某些时刻并不存在，需要判断若 `option` 不存在则返回 `value` 作为显示的内容。**
 
-`renderFormat` to customize the content what will be rendered in select box.
-
-**Note: In scenarios such as remote loading of option data, the corresponding option in value may not exist at some point. It is necessary to determine if the option does not exist, return the value as the displayed content.**
-
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
 import { IconStar, IconDelete } from '@arco-design/web-react/icon';
@@ -665,7 +652,7 @@ function App() {
               {` ${option.value} `}
             </span>
           ) : (
-            value
+            <span>value</span>
           );
         }}
       >
@@ -694,7 +681,7 @@ function App() {
               {` ${option.value} City `}
             </span>
           ) : (
-            value
+            <span>value</span>
           );
         }}
       >
@@ -714,8 +701,6 @@ export default App;
 ## 分组
 
 使用 `Select.Group` 对下拉菜单选项进行编组。
-
-`Select.Group` to group the drop-down menu options.
 
 ```tsx
 import { Select } from '@xiaoyaoliu/x-arco-design';
@@ -758,8 +743,6 @@ export default App;
 
 通过传入`options`指定可选项。
 
-`options`.
-
 ```tsx
 import { Select, Message, Space } from '@xiaoyaoliu/x-arco-design';
 const options = [
@@ -801,20 +784,18 @@ export default App;
 
 当动态加载时，可通过`onPopupScroll`来监听滚动事件
 
-`onPopupScroll`.
-
 ```tsx
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState, isValidElement } from 'react';
 import { Select, Spin, Avatar } from '@xiaoyaoliu/x-arco-design';
 import debounce from 'lodash/debounce';
 
 function App() {
   const [options, setOptions] = useState([]);
   const [fetching, setFetching] = useState(false);
-  const refFetchId = useRef(null);
+  const refFetchId = useRef<number | null>(null);
   const refCanTriggerLoadMore = useRef(true);
   const debouncedFetchUser = useCallback(
-    debounce((inputValue) => {
+    debounce(() => {
       refFetchId.current = Date.now();
       const fetchId = refFetchId.current;
       setFetching(true);
@@ -823,7 +804,7 @@ function App() {
         .then((response) => response.json())
         .then((body) => {
           if (refFetchId.current === fetchId) {
-            const newOptions = body.results.map((user) => ({
+            const newOptions = body.results.map((user: any) => ({
               label: (
                 <div
                   style={{
@@ -853,7 +834,7 @@ function App() {
     [options],
   );
 
-  const popupScrollHandler = (element) => {
+  const popupScrollHandler = (element: any) => {
     const { scrollTop, scrollHeight, clientHeight } = element;
     const scrollBottom = scrollHeight - (scrollTop + clientHeight);
 
@@ -875,7 +856,9 @@ function App() {
       placeholder="Search by name"
       filterOption={false}
       renderFormat={(option) => {
-        return option.children.props.children[1];
+        if (isValidElement(option?.children)) {
+          return option?.children.props.children[1];
+        }
       }}
       notFoundContent={
         fetching ? (
@@ -902,8 +885,6 @@ export default App;
 ## 自动分词
 
 设置 `tokenSeparators` 可以使用自动分词功能。试试复制 `Beijing,Shanghai,Shenzhen|Nanjing/Xi'an|Hangzhou` 到输入框里。只在 `multiple` 模式下可用。
-
-`tokenSeparators` to use automatic word segmentation. Try copying `Beijing,Shanghai,Shenzhen|Nanjing/Xi'an|Hangzhou` into the input box. Only available in `multiple` mode.
 
 ```tsx
 import { Select } from '@xiaoyaoliu/x-arco-design';
@@ -936,15 +917,16 @@ export default App;
 
 设置 `triggerElement` 可以自定义触发下拉框的节点。当自定义了触发节点时，由于内部绑定的键盘处理事件失效，所以快捷键操作将不可用，需要通过组件引用的 `hotkeyHandler` 进行额外处理。
 
-`triggerElement` to customize the node that triggers the drop-down box. When the trigger element is customized, the shortcut key operation will not be available due to the invalidation of the internally bound keyboard processing functions, and additional processing needs to be performed through the `hotkeyHandler`.
-
 ```tsx
 import { useState, useRef } from 'react';
 import { Select, Typography, Link } from '@xiaoyaoliu/x-arco-design';
+import type { SelectHandle } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const Option = Select.Option;
 
 const DemoSelect = () => {
-  const refSelect = useRef(null);
+  const refSelect = useRef<SelectHandle>(null);
   const [text, setText] = useState('None');
   return (
     <div>
@@ -952,8 +934,10 @@ const DemoSelect = () => {
         ref={refSelect}
         mode="multiple"
         onChange={(_, option) => {
-          const array = option.map((item) => item.children);
-          setText(array.join('，') || 'None');
+          if (Array.isArray(option)) {
+            const array = option.map((item: any) => item.children);
+            setText(array.join('，') || 'None');
+          }
         }}
         triggerElement={
           <Typography.Paragraph
@@ -963,7 +947,7 @@ const DemoSelect = () => {
             className="trigger-element"
             tabIndex={0}
             onKeyDown={(e) => {
-              refSelect.current && refSelect.current.hotkeyHandler(e);
+              refSelect.current?.hotkeyHandler(e as any as KeyboardEvent);
             }}
           >
             Favorite Cities：<Link>{text}</Link>
@@ -988,26 +972,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.trigger-element {
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.trigger-element:hover {
-  background-color: var(--color-fill-2);
-}
-
-.trigger-element:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-```
-
 ## 扩展菜单
 
 使用 `dropdownRender` 对下拉菜单进行自由扩展。
-
-`dropdownRender` to freely customize the drop-down menu.
 
 ```tsx
 import { useState } from 'react';
@@ -1082,8 +1049,6 @@ export default App;
 
 使用 `bordered = false`，可以使用无边框的选择器。
 
-`bordered = false` to use Select without borders.
-
 ```tsx
 import { Select, Message, Space } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
@@ -1140,10 +1105,9 @@ export default App;
 
 指定 `renderTag` 来自定义标签节点。
 
-`renderTag` to customize Tags will be rendered in select box.
-
 ```tsx
 import { Select, Tag } from '@xiaoyaoliu/x-arco-design';
+import type { SelectProps } from '@xiaoyaoliu/x-arco-design';
 const options = [
   'red',
   'orangered',
@@ -1158,7 +1122,7 @@ const options = [
   'magenta',
 ];
 
-function tagRender(props) {
+function tagRender(props: Parameters<Required<SelectProps>['renderTag']>[0]) {
   const { label, value, closable, onClose } = props;
   return (
     <Tag
@@ -1201,7 +1165,7 @@ export default App;
 import { useEffect, useState } from 'react';
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
-const data = {
+const data: { [k: string]: string[] } = {
   Beijing: ['Haidian', 'Chaoyang', 'Changping'],
   Sichuan: ['Chengdu', 'Mianyang', 'Aba'],
   Guangdong: ['Guangzhou', 'Shenzhen', 'Shantou'],
@@ -1211,7 +1175,7 @@ function App() {
   const provinces = Object.keys(data);
   const defaultProvince = provinces[0];
   const [province, setProvince] = useState(defaultProvince);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState<string[]>([]);
   const [city, setCity] = useState('');
   useEffect(() => {
     const cities = data[province] || [];
@@ -1258,6 +1222,8 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Select } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const Option = Select.Option;
 const OPTIONS = new Array(10)
   .fill(null)
@@ -1290,12 +1256,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.select-demo-hide-option-checkbox .arco-checkbox {
-  display: none;
-}
 ```
 
 ## 大数据
@@ -1342,8 +1302,6 @@ export default App;
 ## 拖拽排序
 
 多选时，指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
-
-`dragToSort` property to allow sort the entered values by dragging.
 
 ```tsx
 import { Select, Message, Space } from '@xiaoyaoliu/x-arco-design';

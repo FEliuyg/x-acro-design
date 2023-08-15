@@ -28,6 +28,9 @@ devDependencies:
   '@easyv/sync-to-mirror':
     specifier: ^0.0.2
     version: 0.0.2
+  '@types/lodash':
+    specifier: ^4.14.197
+    version: 4.14.197
   '@types/react':
     specifier: ^18.0.0
     version: 18.2.14
@@ -3347,6 +3350,10 @@ packages:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
       '@types/node': 20.3.1
+    dev: true
+
+  /@types/lodash@4.14.197:
+    resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
     dev: true
 
   /@types/mdast@3.0.11:

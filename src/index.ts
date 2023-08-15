@@ -32,7 +32,10 @@ export type { FormInstance } from './Form';
 
 export { default as Grid } from './Grid';
 export { default as Image } from './Image';
+
 export { default as InputNumber } from './InputNumber';
+export type { InputNumberProps } from './InputNumber';
+
 export { default as InputTag } from './InputTag';
 export { default as Layout } from './Layout';
 export { default as Link } from './Link';

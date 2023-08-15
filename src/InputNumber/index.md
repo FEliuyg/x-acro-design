@@ -34,8 +34,6 @@ export default App;
 
 指定 `mode` 为 `button` 来使用带按钮的数字输入框。
 
-`mode` as `button` to use a numeric input box with buttons.
-
 ```tsx
 import { InputNumber } from '@xiaoyaoliu/x-arco-design';
 
@@ -64,15 +62,14 @@ export default App;
 
 设置 `size` 可以使用四种尺寸（`mini`, `small`, `default`, `large`）的数字输入框。高度分别对应`24px`、`28px`、`32px`、`36px`。
 
-`size` can use four sizes (`mini`, `small`, `default`, `large`) number input box. The corresponding heights are `24px`, `28px`, `32px`, and `36px` respectively.
-
 ```tsx
 import { useState } from 'react';
 import { InputNumber, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { InputNumberProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<InputNumberProps['size']>('default');
   return (
     <div>
       <RadioGroup
@@ -113,8 +110,6 @@ export default App;
 
 通过 `precision` 来设置数字精度。当 `precision` 小于 `step` 的小数位时，精度取 `step` 的小数个数。
 
-`precision` to set the number precision. When `precision` is less than the decimal place of `step`, the precision is taken as the number of decimal places of `step`.
-
 ```tsx
 import { InputNumber } from '@xiaoyaoliu/x-arco-design';
 
@@ -149,10 +144,6 @@ export default App;
 通过 `formatter`、 `parser` 配合使用可以定义输入框展示值。
 
 通过 `formatter` 中的 `userTyping` 参数，判断是否正在输入，可以延迟显示 `formatter` 后的值
-
-`formatter` and `parser` together.
-
-Use the `userTyping` parameter in the `formatter` to determine whether the input is in progress. You can delay the display of the value after the `formatter`
 
 ```tsx
 import { useState } from 'react';
@@ -236,8 +227,6 @@ export default App;
 ## 高精度
 
 通过 `stringMode` 开启严格模式以支持更高精度，`onChange` 此时将会返回字符串。
-
-`stringMode` to support higher precision, `onChange` will return a string at this time.
 
 ```tsx
 import { useState } from 'react';

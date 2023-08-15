@@ -49,12 +49,10 @@ export default App;
 
 Tooltip 支持 12 个不同的方位。分别为：`上左` `上` `上右` `下左` `下` `下右` `左上` `左` `左下` `右上` `右` `右下`。
 
-`upper left` `upper` `upper right` `lower left` `down` `lower right` `upper left` `left` `lower left` `upper right` `right` `lower right`.
-
 ```tsx
 import { Tooltip, Button } from '@xiaoyaoliu/x-arco-design';
 
-function getStyle(top, left) {
+function getStyle(top: number, left: number): React.CSSProperties {
   return {
     position: 'absolute',
     width: 80,
@@ -120,9 +118,6 @@ export default App;
 通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。
 具体 onVisibleChange 的触发时机可查看[Trigger](/react/components/trigger#受控用法)组件文档
 
-`popupVisible` and `onVisibleChange` to control the expansion and collapse of the drop-down box.
-The specific trigger timing of onVisibleChange can be found in the [Trigger](/react/components/trigger#controlled-usage) component document
-
 ```tsx
 import React from 'react';
 import { Tooltip, Button, Switch, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -160,8 +155,6 @@ export default App;
 ## 不同颜色
 
 通过 `color` 属性设置不同背景色的 `tooltip`
-
-`color` property
 
 ```tsx
 import { Tooltip, Button } from '@xiaoyaoliu/x-arco-design';

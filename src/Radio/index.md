@@ -7,7 +7,7 @@
 基础单选框。
 
 ```tsx
-import { Radio, Message, Space } from '@xiaoyaoliu/x-arco-design';
+import { Radio, Space } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
   return (
@@ -105,11 +105,6 @@ export default App;
 
 ```tsx
 import { Radio } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconXiguaColor,
-  IconLarkColor,
-  IconTiktokColor,
-} from '@arco-design/web-react/icon';
 const RadioGroup = Radio.Group;
 const imgStyle = {
   width: 30,
@@ -185,8 +180,6 @@ export default App;
 
 按钮类型的单选框分为 4 个尺寸，分别为 `mini`, `small`, `default`, `large`。
 
-`mini`, `small`, `default`, `large`.
-
 ```tsx
 import { Radio } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
@@ -255,10 +248,9 @@ export default App;
 
 可以通过传入函数类型的 `children` 来自定义渲染单选节点。(`2.29.0`)
 
-`2.29.0`)
-
 ```tsx
 import { Radio, Button, Space, Typography } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const App = () => {
   return (
@@ -322,68 +314,6 @@ const App = () => {
 export default App;
 ```
 
-```css
-input[name='button-radio-group']:focus-visible + .arco-btn {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-radio-card {
-  padding: 10px 16px;
-  border: 1px solid var(--color-border-2);
-  border-radius: 4px;
-  width: 250px;
-  box-sizing: border-box;
-}
-
-.custom-radio-card-mask {
-  height: 14px;
-  width: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  border: 1px solid var(--color-border-2);
-  box-sizing: border-box;
-}
-
-.custom-radio-card-mask-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 100%;
-}
-
-.custom-radio-card-title {
-  color: var(--color-text-1);
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-input[name='card-radio-group']:focus-visible + .custom-radio-card {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-radio-card:hover,
-.custom-radio-card-checked,
-.custom-radio-card:hover .custom-radio-card-mask,
-.custom-radio-card-checked .custom-radio-card-mask {
-  border-color: rgb(var(--primary-6));
-}
-
-.custom-radio-card-checked {
-  background-color: var(--color-primary-light-1);
-}
-
-.custom-radio-card:hover .custom-radio-card-title,
-.custom-radio-card-checked .custom-radio-card-title {
-  color: rgb(var(--primary-6));
-}
-
-.custom-radio-card-checked .custom-radio-card-mask-dot {
-  background-color: rgb(var(--primary-6));
-}
-```
-
 ## API
 
 ### Radio
@@ -400,15 +330,16 @@ input[name='card-radio-group']:focus-visible + .custom-radio-card {
 
 ### Radio.Group
 
-| 参数名       | 描述                                       | 类型                                                                         | 默认值       |
-| ------------ | ------------------------------------------ | ---------------------------------------------------------------------------- | ------------ |
-| name         | `Radio` 的 name                            | string                                                                       | `-`          |
-| direction    | 方向                                       | 'vertical' \| 'horizontal'                                                   | `horizontal` |
-| size         | 按钮类型的单选框尺寸（只在按钮类型下生效） | 'small' \| 'default' \| 'large' \| 'mini'                                    | `-`          |
-| type         | 单选的类型，是单选还是按钮                 | 'radio' \| 'button'                                                          | `radio`      |
-| className    | 节点类名                                   | string \| string[]                                                           | `-`          |
-| defaultValue | 默认选中的值                               | any                                                                          | `-`          |
-| options      | 以数组配置的形式来设置单选组               | (string \| number \| { label: ReactNode; value: any; disabled?: boolean })[] | `-`          |
-| style        | 节点样式                                   | CSSProperties                                                                | `-`          |
-| value        | 选中的值（受控模式）                       | any                                                                          | `-`          |
-| onChange     | 点击单选的回调                             | (value: any, event: ChangeEvent) => void                                     | `-`          |
+| 参数名       | 描述                                       | 类型                                                                         | 默认值        |
+| ------------ | ------------------------------------------ | ---------------------------------------------------------------------------- | ------------- |
+| buttonStyle  | RadioButton 的风格样式                     | 'solid' \| 'semi' \| 'transparent'                                           | `transparent` |
+| name         | `Radio` 的 name                            | string                                                                       | `-`           |
+| direction    | 方向                                       | 'vertical' \| 'horizontal'                                                   | `horizontal`  |
+| size         | 按钮类型的单选框尺寸（只在按钮类型下生效） | 'small' \| 'default' \| 'large' \| 'mini'                                    | `-`           |
+| type         | 单选的类型，是单选还是按钮                 | 'radio' \| 'button'                                                          | `radio`       |
+| className    | 节点类名                                   | string \| string[]                                                           | `-`           |
+| defaultValue | 默认选中的值                               | any                                                                          | `-`           |
+| options      | 以数组配置的形式来设置单选组               | (string \| number \| { label: ReactNode; value: any; disabled?: boolean })[] | `-`           |
+| style        | 节点样式                                   | CSSProperties                                                                | `-`           |
+| value        | 选中的值（受控模式）                       | any                                                                          | `-`           |
+| onChange     | 点击单选的回调                             | (value: any, event: ChangeEvent) => void                                     | `-`           |

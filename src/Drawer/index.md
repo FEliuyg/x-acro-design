@@ -48,23 +48,15 @@ export default App;
 
 自定义位置，点击触发按钮抽屉从相应的位置滑出。
 
-`placement` to customize the position where the drawer will slide out from.
-
 ```tsx
 import { useState } from 'react';
-import {
-  Drawer,
-  Trigger,
-  Skeleton,
-  Button,
-  Radio,
-} from '@xiaoyaoliu/x-arco-design';
-import { IconExclamationCircleFill } from '@arco-design/web-react/icon';
+import { Drawer, Button, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { DrawerProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [visible, setVisible] = useState();
-  const [placement, setPlacement] = useState('right');
+  const [visible, setVisible] = useState(false);
+  const [placement, setPlacement] = useState<DrawerProps['placement']>('right');
   return (
     <div>
       <RadioGroup
@@ -113,8 +105,6 @@ export default App;
 ## 自定义节点
 
 可以通过 `title` 属性和 `footer` 属性定制节点内容。当设置为 `null` 时，将不会渲染对应的 dom 节点。
-
-`title` and `footer`. When set to `null`, the corresponding dom node won't be rendered.
 
 ```tsx
 import { useState } from 'react';
@@ -425,7 +415,7 @@ function App() {
             },
             {
               label: 'Website',
-              value: <Link to="/">https://123456789/design.com/</Link>,
+              value: <Link href="/">https://123456789/design.com/</Link>,
             },
           ]}
         />
@@ -441,12 +431,10 @@ export default App;
 
 可以通过 `getPopupContainer` 指定抽屉挂载的父级节点。
 
-`getPopupContainer` to specify the parent node where the drawer should mount to.
-
 ```tsx
 import { useState, useRef } from 'react';
 import { Drawer, Button } from '@xiaoyaoliu/x-arco-design';
-const wrapperStyle = {
+const wrapperStyle: React.CSSProperties = {
   width: '100%',
   height: 300,
   backgroundColor: 'var(--color-fill-2)',
@@ -458,7 +446,7 @@ const wrapperStyle = {
 
 function App() {
   const [visible, setVisible] = useState(true);
-  const refWrapper = useRef(null);
+  const refWrapper = useRef<HTMLDivElement>(null!);
   return (
     <div ref={refWrapper} style={wrapperStyle}>
       <Button type="primary" onClick={() => setVisible(true)}>

@@ -23,7 +23,10 @@ export { default as ConfigProvider } from './ConfigProvider';
 export { default as DatePicker } from './DatePicker';
 export { default as Descriptions } from './Descriptions';
 export { default as Divider } from './Divider';
+
 export { default as Drawer } from './Drawer';
+export type { DrawerProps } from './Drawer';
+
 export { default as Dropdown } from './Dropdown';
 export { default as Empty } from './Empty';
 

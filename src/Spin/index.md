@@ -20,8 +20,6 @@ export default App;
 
 通过 `dot`属性，可以展示点类型的指示符。
 
-`dot` property.
-
 ```tsx
 import { Spin } from '@xiaoyaoliu/x-arco-design';
 
@@ -35,8 +33,6 @@ export default App;
 ## 容器中
 
 可以给任意元素添加加载状态。容器默认是 `inline-block` 布局，当你需要撑满父级容器时，可以设置 `style={{ display: 'block' }}`。
-
-`inline-block` layout. When you need to fill the parent container, you can set `style={{ display:'block' }}`.
 
 ```tsx
 import { useState } from 'react';
@@ -97,8 +93,6 @@ export default App;
 
 通过 `tip` 字段自定义加载时的文案。
 
-`tip` property to customize the tip when loading.
-
 ```tsx
 import { Spin, Card, Link } from '@xiaoyaoliu/x-arco-design';
 
@@ -125,8 +119,6 @@ export default App;
 ## 延迟
 
 通过 `delay` 延迟显示 loading，对状态切换进行防抖处理，有效避免状态快速切换时的屏幕闪烁。
-
-`delay` to delay the switch of loading status, which effectively avoids screen flicker during rapid state switching.
 
 ```tsx
 import { useState } from 'react';
@@ -169,15 +161,13 @@ export default App;
 
 通过指定 `icon` 可以指定自定义图标作为加载组件。
 
-`icon`, you can specify a custom icon as a loading component.
-
 ```tsx
 import { Spin, Card, Link } from '@xiaoyaoliu/x-arco-design';
-import { IconLoading } from '@arco-design/web-react/icon';
+import { LoadingOutlined } from '@easyv/react-icons';
 
 function App() {
   return (
-    <Spin loading={true} size={30} icon={<IconLoading />}>
+    <Spin loading={true} size={30} icon={<LoadingOutlined />}>
       <Card
         style={{ width: 360 }}
         title="Arco Card"
@@ -198,8 +188,6 @@ export default App;
 ## 不同尺寸
 
 设置 `size` 可以得到不同尺寸的加载图标。
-
-`size` to get different sizes of loading icons.
 
 ```tsx
 import { Spin, Space } from '@xiaoyaoliu/x-arco-design';

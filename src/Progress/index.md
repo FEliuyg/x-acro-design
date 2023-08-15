@@ -26,8 +26,6 @@ export default App;
 
 `showText` 属性设置为 `false` 时，将不会展示文本。
 
-`showText` is `false`, the percentage text will not be displayed.
-
 ```tsx
 import React from 'react';
 import { Progress, Slider, Space } from '@xiaoyaoliu/x-arco-design';
@@ -73,7 +71,11 @@ function Demo() {
       <div style={{ marginTop: 40 }}>
         <Slider
           value={value}
-          onChange={setValue}
+          onChange={(value) => {
+            if (typeof value === 'number') {
+              setValue(value);
+            }
+          }}
           style={{ width: 100 }}
         ></Slider>
       </div>
@@ -122,7 +124,11 @@ function App() {
       <div style={{ marginTop: 40 }}>
         <Slider
           value={value}
-          onChange={setValue}
+          onChange={(value) => {
+            if (typeof value === 'number') {
+              setValue(value);
+            }
+          }}
           style={{ width: 100 }}
         ></Slider>
       </div>
@@ -230,8 +236,6 @@ export default App;
 
 设置`size`为 `small`、`default`、`large`，可设置小、中、大三种尺寸。
 
-`min`, `small`, `default`, `large`.
-
 ```tsx
 import React from 'react';
 import {
@@ -241,13 +245,15 @@ import {
   Radio,
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
+import type { ProgressProps } from '@xiaoyaoliu/x-arco-design';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
 function Demo() {
   const [value, setValue] = React.useState(90);
-  const [size, setSize] = React.useState('default');
+  const [size, setSize] = React.useState<ProgressProps['size']>('default');
+
   return (
     <div>
       <Row align="center" style={{ marginBottom: 44 }}>
@@ -319,7 +325,14 @@ function Demo() {
         />
       </Row>
       <div style={{ width: 100, marginTop: 44 }}>
-        <Slider value={value} onChange={setValue}></Slider>
+        <Slider
+          value={value}
+          onChange={(value) => {
+            if (typeof value === 'number') {
+              setValue(value);
+            }
+          }}
+        ></Slider>
       </div>
     </div>
   );
@@ -335,8 +348,6 @@ export default App;
 ## 动画效果
 
 设置 `animation` 为 `true` 时，将会显示动画效果，仅当 `type = line` 时生效
-
-`type` is `'line'`.
 
 ```tsx
 import { Progress } from '@xiaoyaoliu/x-arco-design';

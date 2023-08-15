@@ -47,7 +47,10 @@ export { default as PageHeader } from './PageHeader';
 export { default as Pagination } from './Pagination';
 export { default as Popconfirm } from './Popconfirm';
 export { default as Popover } from './Popover';
+
 export { default as Progress } from './Progress';
+export type { ProgressProps } from './Progress';
+
 export { default as Rate } from './Rate';
 export { default as ResizeBox } from './ResizeBox';
 export { default as Result } from './Result';

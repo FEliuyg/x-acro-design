@@ -51,60 +51,49 @@ import {
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-    };
-  }
+function App() {
+  const [loading, setLoading] = React.useState(true);
 
-  onChange = (value) => {
-    this.setState({
-      loading: !this.state.loading,
-    });
+  const onChange = () => {
+    setLoading((prev) => !prev);
   };
 
-  render() {
-    return (
-      <div>
-        <div style={{ marginBottom: 40 }}>
-          <Typography.Text style={{ margin: '0 8px' }}>
-            Animation
-          </Typography.Text>
-          <Switch
-            style={{ verticalAlign: 'middle' }}
-            size="small"
-            onChange={this.onChange}
-            checked={this.state.loading}
-          />
-        </div>
-        <Skeleton
-          loading={this.state.loading}
-          text={{ width: '90%' }}
-          image={{ shape: 'circle' }}
-          animation
-        >
-          <div style={{ display: 'flex' }}>
-            <Avatar size={50} style={{ margin: '0 20px' }}>
-              Arco
-            </Avatar>
-            <Typography>
-              <Typography.Paragraph style={{ margin: 0 }}>
-                This is content, this is content, this is content
-              </Typography.Paragraph>
-              <Typography.Paragraph style={{ margin: 0 }}>
-                This is content, this is content
-              </Typography.Paragraph>
-              <Typography.Paragraph style={{ margin: 0 }}>
-                This is content, this is content
-              </Typography.Paragraph>
-            </Typography>
-          </div>
-        </Skeleton>
+  return (
+    <div>
+      <div style={{ marginBottom: 40 }}>
+        <Typography.Text style={{ margin: '0 8px' }}>Animation</Typography.Text>
+        <Switch
+          style={{ verticalAlign: 'middle' }}
+          size="small"
+          onChange={onChange}
+          checked={loading}
+        />
       </div>
-    );
-  }
+      <Skeleton
+        loading={loading}
+        text={{ width: '90%' }}
+        image={{ shape: 'circle' }}
+        animation
+      >
+        <div style={{ display: 'flex' }}>
+          <Avatar size={50} style={{ margin: '0 20px' }}>
+            Arco
+          </Avatar>
+          <Typography>
+            <Typography.Paragraph style={{ margin: 0 }}>
+              This is content, this is content, this is content
+            </Typography.Paragraph>
+            <Typography.Paragraph style={{ margin: 0 }}>
+              This is content, this is content
+            </Typography.Paragraph>
+            <Typography.Paragraph style={{ margin: 0 }}>
+              This is content, this is content
+            </Typography.Paragraph>
+          </Typography>
+        </div>
+      </Skeleton>
+    </div>
+  );
 }
 
 export default App;

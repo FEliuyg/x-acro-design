@@ -75,8 +75,6 @@ export default App;
 
 气泡确认框支持 12 个不同的方位。分别为：`上左`、 `上`、 `上右`、`下左`、 `下`、 `下右`、 `左上`、 `左`、 `左下`、 `右上`、 `右`、 `右下`。
 
-`top left`, `top`, `top right`, `bottom left`, `bottom`, `bottom right`, `left top`, `left`, `left bottom`, `right top`, `right` , `bottom right`.
-
 ```tsx
 import { Popconfirm, Button, Message } from '@xiaoyaoliu/x-arco-design';
 const props = {
@@ -259,15 +257,13 @@ export default App;
 
 **用法**：返回一个 `Promise` 用于异步关闭。
 
-`Promise` for asynchronous closing.
-
 ```tsx
 import { Popconfirm, Message, Button } from '@xiaoyaoliu/x-arco-design';
 
 function delayClose() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve();
+      resolve('');
       Message.info({
         content: 'ok',
       });
@@ -301,7 +297,7 @@ export default App;
 
 ```tsx
 import { Popconfirm, Message, Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconFaceSmileFill } from '@arco-design/web-react/icon';
+import { SmileFilled } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -309,7 +305,7 @@ const App = () => {
       <Popconfirm
         focusLock
         title="Are you sure you want to delete?"
-        icon={<IconFaceSmileFill style={{ color: '#0057fe' }} />}
+        icon={<SmileFilled style={{ color: '#0057fe' }} />}
         onOk={() => {
           Message.info({
             content: 'ok',

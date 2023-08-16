@@ -5,11 +5,10 @@
 ## 基础用法
 
 基础的用法。只需指定 `count`，即可显示徽标。
-`count` to display the badge.
 
 ```tsx
 import { Badge, Avatar, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconClockCircle } from '@arco-design/web-react/icon';
+import { ClockOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -22,7 +21,7 @@ const App = () => {
       </Badge>
       <Badge
         count={
-          <IconClockCircle
+          <ClockOutlined
             style={{ verticalAlign: 'middle', color: 'var(--color-text-2)' }}
           />
         }
@@ -66,11 +65,9 @@ export default App;
 
 设置 `dot`，即可只显示小红点而不显示数字。`count > 0` 时才显示。
 
-`dot=true`. If count equals 0, the dot will be hidden.
-
 ```tsx
 import { Badge, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconNotification } from '@arco-design/web-react/icon';
+import { BellOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -79,7 +76,7 @@ const App = () => {
         <a href="#">Link</a>
       </Badge>
       <Badge count={9} dot offset={[2, -2]}>
-        <IconNotification
+        <BellOutlined
           style={{
             color: '#888',
             fontSize: 18,
@@ -100,7 +97,7 @@ export default App;
 
 ```tsx
 import { Badge, Avatar, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconUser } from '@arco-design/web-react/icon';
+import { UserOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -108,14 +105,14 @@ const App = () => {
       <Badge text="NEW">
         <Avatar shape="square">
           <span>
-            <IconUser />
+            <UserOutlined />
           </span>
         </Avatar>
       </Badge>
       <Badge text="HOT">
         <Avatar shape="square">
           <span>
-            <IconUser />
+            <UserOutlined />
           </span>
         </Avatar>
       </Badge>
@@ -130,11 +127,9 @@ export default App;
 
 设置 `maxCount`，可以限制最大显示的徽标数值，超过将会加 `+` 后缀。`maxCount` 默认为 `99`。
 
-`maxCount`, `${maxCount}+` will be displayed. The default value of `maxCount` is `99`.
-
 ```tsx
 import { Badge, Avatar, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconUser } from '@arco-design/web-react/icon';
+import { UserOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -142,21 +137,21 @@ const App = () => {
       <Badge count={100} maxCount={10}>
         <Avatar shape="square">
           <span>
-            <IconUser />
+            <UserOutlined />
           </span>
         </Avatar>
       </Badge>
       <Badge count={100}>
         <Avatar shape="square">
           <span>
-            <IconUser />
+            <UserOutlined />
           </span>
         </Avatar>
       </Badge>
       <Badge count={1000} maxCount={999}>
         <Avatar shape="square">
           <span>
-            <IconUser />
+            <UserOutlined />
           </span>
         </Avatar>
       </Badge>
@@ -171,11 +166,8 @@ export default App;
 
 设置 `status`，可以得到不同的状态点。`default - 默认` `processing - 进行中` `success - 成功` `warning - 提醒` `error - 错误`。
 
-`default`, `processing`, `success`, `warning` and `error`.
-
 ```tsx
-import { Badge, Divider, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconMessage } from '@arco-design/web-react/icon';
+import { Badge, Space } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
   return (
@@ -205,10 +197,8 @@ export default App;
 
 我们提供多种预设色彩的徽标样式。如果预设值不能满足你的需求，`color` 字段也可以设置自定义色值。
 
-`color` property.
-
 ```tsx
-import { Badge, Divider } from '@xiaoyaoliu/x-arco-design';
+import { Badge } from '@xiaoyaoliu/x-arco-design';
 const COLORS = [
   'red',
   'orangered',
@@ -291,7 +281,7 @@ import {
   Switch,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus, IconMinus } from '@arco-design/web-react/icon';
+import { PlusOutlined, MinusOutlined } from '@easyv/react-icons';
 
 function App() {
   const [count, setCount] = React.useState<number>(12);
@@ -311,11 +301,11 @@ function App() {
         </Badge>
         <Button.Group>
           <Button
-            icon={<IconPlus />}
+            icon={<PlusOutlined />}
             onClick={() => setCount((c) => c + 1)}
           ></Button>
           <Button
-            icon={<IconMinus />}
+            icon={<MinusOutlined />}
             onClick={() => setCount((c) => Math.max(c - 1, 0))}
           ></Button>
         </Button.Group>

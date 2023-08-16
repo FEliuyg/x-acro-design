@@ -40,8 +40,6 @@ export default App;
 
 通过 `disabled` 设置 `Switch` 为禁用状态。
 
-`Switch` to be disabled by `disabled`.
-
 ```tsx
 import { Switch, Space } from '@xiaoyaoliu/x-arco-design';
 
@@ -92,7 +90,7 @@ export default App;
 
 ```tsx
 import { Switch, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconCheck, IconClose } from '@arco-design/web-react/icon';
+import { CheckOutlined, CloseOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -100,8 +98,8 @@ const App = () => {
       <Switch checkedText="ON" uncheckedText="OFF" />
       <Switch checkedText="1" uncheckedText="0" type="round" defaultChecked />
       <Switch
-        checkedText={<IconCheck />}
-        uncheckedText={<IconClose />}
+        checkedText={<CheckOutlined />}
+        uncheckedText={<CloseOutlined />}
         defaultChecked
       />
     </Space>
@@ -117,26 +115,26 @@ export default App;
 
 ```tsx
 import { Switch, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconCheck, IconClose } from '@arco-design/web-react/icon';
+import { CheckOutlined, CloseOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
       <Switch
-        checkedIcon={<IconCheck />}
-        uncheckedIcon={<IconClose />}
+        checkedIcon={<CheckOutlined />}
+        uncheckedIcon={<CloseOutlined />}
         defaultChecked
       />
       <Switch
         type="round"
-        checkedIcon={<IconCheck />}
-        uncheckedIcon={<IconClose />}
+        checkedIcon={<CheckOutlined />}
+        uncheckedIcon={<CloseOutlined />}
         defaultChecked
       />
       <Switch
         type="line"
-        checkedIcon={<IconCheck />}
-        uncheckedIcon={<IconClose />}
+        checkedIcon={<CheckOutlined />}
+        uncheckedIcon={<CloseOutlined />}
         defaultChecked
       />
     </Space>
@@ -150,10 +148,8 @@ export default App;
 
 开关处于加载中状态，不可点击。
 
-`Switch` is in the loading state and cannot be clicked.
-
 ```tsx
-import { Switch, Divider, Space } from '@xiaoyaoliu/x-arco-design';
+import { Switch, Space } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
   return (

@@ -35,8 +35,6 @@ export default App;
 
 通过设置 `trigger`，可以指定不同的触发方式。
 
-`trigger`, you can specify different trigger methods.
-
 ```tsx
 import { Popover, Button, Space } from '@xiaoyaoliu/x-arco-design';
 const style = {
@@ -93,15 +91,14 @@ export default App;
 
 `Popover` 支持 12 个不同的方位。分别为：`上左` `上` `上右` `下左` `下` `下右` `左上` `左` `左下` `右上` `右` `右下`。
 
-`Popover` supports 12 different positions. `top left` `top` `top right` `bottom left` `bottom` `bottom right` `top left` `left` `bottom left` `top right` `right` `bottom right`.
-
 ```tsx
+import React from 'react';
 import { Popover, Button } from '@xiaoyaoliu/x-arco-design';
 const style = {
   margin: 0,
 };
 
-function getStyle(top, left) {
+function getStyle(top: number, left: number): React.CSSProperties {
   return {
     position: 'absolute',
     width: 80,

@@ -34,15 +34,14 @@ export default App;
 
 设置 `size` 可以使用三种尺寸（`small`, `default`, `large`）的列表，可根据业务需求自行选择。
 
-`small` `default` `large`) that you can select according to your need.
-
 ```tsx
 import { useState } from 'react';
 import { List, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { ListProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<ListProps['size']>('default');
   return (
     <>
       <RadioGroup
@@ -80,8 +79,6 @@ export default App;
 
 使用 `List.Item.Meta` 可快速指定头像、标题、文字。
 
-`List.Item.Meta` to quickly specify avatar, title, and text.
-
 ```tsx
 import { List, Avatar } from '@xiaoyaoliu/x-arco-design';
 
@@ -114,17 +111,17 @@ export default App;
 
 通过 `actions` 来为列表添加操作项。
 
-`actions` to add operation items to the list.
-
 ```tsx
 import { useState } from 'react';
 import { List, Avatar } from '@xiaoyaoliu/x-arco-design';
+
 import {
-  IconEdit,
-  IconDelete,
-  IconDown,
-  IconLoading,
-} from '@arco-design/web-react/icon';
+  EditOutlined,
+  DeleteOutlined,
+  DownOutlined,
+  LoadingOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
 
 function App() {
   const dataSource = new Array(4).fill({
@@ -134,7 +131,7 @@ function App() {
   });
   const [loading, setLoading] = useState(false);
 
-  const render = (actions, item, index) => (
+  const render = (actions: any, item: any, index: any) => (
     <List.Item key={index} actions={actions}>
       <List.Item.Meta
         avatar={<Avatar shape="square">A</Avatar>}
@@ -163,7 +160,7 @@ function App() {
     >
       {loading ? (
         <span style={{ color: 'var(--color-text-3)' }}>
-          <IconLoading
+          <LoadingOutlined
             style={{ marginRight: 8, color: 'rgb(var(--arcoblue-6))' }}
           />
           loading...
@@ -171,7 +168,7 @@ function App() {
       ) : (
         <span className="list-demo-actions-button" tabIndex={0}>
           More
-          <IconDown style={{ marginLeft: 8 }} />
+          <DownOutlined style={{ marginLeft: 8 }} />
         </span>
       )}
     </div>
@@ -184,10 +181,10 @@ function App() {
         dataSource={dataSource}
         render={render.bind(null, [
           <span className="list-demo-actions-icon">
-            <IconEdit />
+            <EditOutlined />
           </span>,
           <span className="list-demo-actions-icon">
-            <IconDelete />
+            <DeleteOutlined />
           </span>,
         ])}
         footer={footer}
@@ -208,59 +205,19 @@ function App() {
 export default App;
 ```
 
-```css
-.list-demo-actions-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transition: all 0.1s;
-}
-
-.list-demo-actions-icon:hover {
-  background-color: var(--color-fill-3);
-}
-
-.list-demo-actions-button[tabindex]:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-.list-demo-actions-button {
-  position: relative;
-  padding: 0 4px;
-  border-radius: 2px;
-  color: rgb(var(--arcoblue-6));
-  cursor: pointer;
-  transition: all 0.1s;
-}
-
-.list-demo-actions-button:hover {
-  background-color: var(--color-fill-3);
-}
-
-.list-demo-actions
-  .arco-list-item-action
-  li:not(:last-child)
-  .list-demo-actions-button::after {
-  content: '';
-  position: absolute;
-  top: 3px;
-  right: -10px;
-  width: 1px;
-  height: 12px;
-  background-color: var(--color-fill-3);
-}
-```
-
 ## 竖排列表样式
 
 这是一个包括分页、右侧内容、下方列表操作的示例。
 
 ```tsx
 import { List, Avatar } from '@xiaoyaoliu/x-arco-design';
-import { IconHeart, IconMessage, IconStar } from '@arco-design/web-react/icon';
+import {
+  HeartOutlined,
+  MessageOutlined,
+  StarOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
+
 const names = ['Socrates', 'Balzac', 'Plato'];
 const avatarSrc = [
   '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp',
@@ -301,15 +258,15 @@ const App = () => {
           actionLayout="vertical"
           actions={[
             <span key={1}>
-              <IconHeart />
+              <HeartOutlined />
               {83}
             </span>,
             <span key={2}>
-              <IconStar />
+              <StarOutlined />
               {item.index}
             </span>,
             <span key={3}>
-              <IconMessage />
+              <MessageOutlined />
               Reply
             </span>,
           ]}
@@ -337,31 +294,12 @@ const App = () => {
 export default App;
 ```
 
-```css
-.list-demo-action-layout .image-area {
-  width: 183px;
-  height: 119px;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.list-demo-action-layout .image-area img {
-  width: 100%;
-}
-
-.list-demo-action-layout .arco-list-item-action .arco-icon {
-  margin: 0 4px;
-}
-```
-
 ## 栅格列表
 
 通过 `grid.span` 设置期望每行展示的列数。
 
-`grid.span` to set the number of columns expected to occupy.
-
 ```tsx
-import { List, Card } from '@xiaoyaoliu/x-arco-design';
+import { List } from '@xiaoyaoliu/x-arco-design';
 const data = [
   {
     title: 'Platform',
@@ -408,10 +346,8 @@ export default App;
 
 通过 `grid.sm` 等响应式参数动态设置每个单项横跨的列数，注意此时不要设置 `grid.span`。
 
-`grid.sm`. Be careful not to set `grid.span` at this time.
-
 ```tsx
-import { List, Card } from '@xiaoyaoliu/x-arco-design';
+import { List } from '@xiaoyaoliu/x-arco-design';
 const data = [
   {
     title: 'Platform',
@@ -482,17 +418,17 @@ export default App;
 
 可设置 `onReachBottom` 来动态滚动加载列表。当 `onReachBottom` 无法满足需求，可通过 `onListScroll` 来自定义列表滚动监听函数，此时默认的滚动监听函数将失效。
 
-`onReachBottom` to dynamically loading data when the list is scrolling. If `onReachBottom` cannot meet the requirements, you can customize the list scrolling monitor function through `onListScroll`, at this time the default monitor function will be invalid.
-
 ```tsx
 import { useState, useEffect } from 'react';
 import { List, Avatar, Spin } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
   const [mockData, setMockData] = useState([]);
-  const [scrollLoading, setScrollLoading] = useState(<Spin loading={true} />);
+  const [scrollLoading, setScrollLoading] = useState<React.ReactNode>(
+    <Spin loading={true} />,
+  );
 
-  const fetchData = (currentPage) => {
+  const fetchData = (currentPage: number) => {
     if (currentPage > 10) {
       setScrollLoading('No more data');
     } else {
@@ -514,7 +450,7 @@ function App() {
       scrollLoading={scrollLoading}
       onReachBottom={(currentPage) => fetchData(currentPage)}
       dataSource={mockData}
-      render={(item, index) => (
+      render={(item: any, index) => (
         <List.Item key={index}>
           <List.Item.Meta
             avatar={
@@ -540,11 +476,6 @@ export default App;
 在使用虚拟列表时，如果列表元素之间高度变化较大可能导致滚动时视口出现空白区域，可以通过设定 `virtualListProps.itemHeight` 解决。`itemHeight` 用于计算实际需要渲染的 DOM 节点数目（视口高度 / 元素高度），其值越小实际渲染的 DOM 节点越多，性能开销也会随之增大。
 
 **由于虚拟列表内部使用到了 ListItem 的 `ref`，因此如果你通过 `render` 返回了一个自定义函数组件，请使用 `React.forwardRef` 包裹它。**
-
-`virtualListProps` to turn on the virtual list, high performance can be obtained when a large amount of data is used.
-When using a virtual list, if the height of the list items varies greatly, it may cause blank space in the viewport when scrolling, which can be solved by setting `virtualListProps.itemHeight`. `itemHeight` is used to calculate the actual number of DOM nodes that need to be rendered (viewportHeight / itemHeight). The smaller the value, the more DOM nodes actually rendered, and the performance overhead will increase.
-
-**Because the virtual list uses the `ref` of ListItem internally, if you return a custom function component through `render`, please use `React.forwardRef` to wrap it.**
 
 ```tsx
 import { List, Avatar } from '@xiaoyaoliu/x-arco-design';

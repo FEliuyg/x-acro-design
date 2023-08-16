@@ -42,7 +42,10 @@ export type { InputNumberProps } from './InputNumber';
 export { default as InputTag } from './InputTag';
 export { default as Layout } from './Layout';
 export { default as Link } from './Link';
+
 export { default as List } from './List';
+export type { ListProps } from './List';
+
 export { default as Mentions } from './Mentions';
 
 export { default as Menu } from './Menu';

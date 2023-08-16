@@ -6,8 +6,6 @@
 
 `Empty` 空状态组件的基础用法。
 
-`Empty` component.
-
 ```tsx
 import { Empty } from '@xiaoyaoliu/x-arco-design';
 
@@ -22,11 +20,9 @@ export default App;
 
 可以通过 `icon` 参数传入自定义图标，`description` 修改显示文案。
 
-`icon` parameter, and `description` to modify the description.
-
 ```tsx
 import { Empty } from '@xiaoyaoliu/x-arco-design';
-import { IconExclamation } from '@arco-design/web-react/icon';
+import { ExclamationOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -45,7 +41,7 @@ const App = () => {
             justifyContent: 'center',
           }}
         >
-          <IconExclamation />
+          <ExclamationOutlined />
         </div>
       }
       description="No data, please reload!"
@@ -59,8 +55,6 @@ export default App;
 ## 自定义图片
 
 可以通过 `imgSrc` 参数传入图片 Url。
-
-`imgSrc` parameter.
 
 ```tsx
 import { Empty, Button } from '@xiaoyaoliu/x-arco-design';

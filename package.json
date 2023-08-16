@@ -59,6 +59,8 @@
     "@types/lodash": "^4.14.197",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-resizable": "^3.0.4",
+    "@types/react-sticky": "^6.0.4",
     "@umijs/lint": "^4.0.0",
     "dayjs": "^1.11.9",
     "dnd-core": "^16.0.1",

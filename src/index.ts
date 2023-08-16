@@ -66,7 +66,10 @@ export { default as Spin } from './Spin';
 export { default as Statistic } from './Statistic';
 export { default as Steps } from './Steps';
 export { default as Switch } from './Switch';
+
 export { default as Table } from './Table';
+export type { TableProps, TableColumnProps } from './Table';
+
 export { default as Tabs } from './Tabs';
 export { default as Timeline } from './Timeline';
 export { default as TimePicker } from './TimePicker';
@@ -79,7 +82,7 @@ export { default as Typography } from './Typography';
 export { default as Upload } from './Upload';
 
 export { default as Input } from './Input';
-export type { InputProps, InputSearchProps } from './Input';
+export type { InputProps, InputSearchProps, RefInputType } from './Input';
 
 export { default as Message, default as message } from './Message';
 

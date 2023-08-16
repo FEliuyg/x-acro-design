@@ -77,8 +77,6 @@ export default App;
 
 表格开启选择，可以设置 `rowSelection.type` 来使用复选框和单选框。 `checkbox` - 复选框。 `radio` - 单选框。
 
-`rowSelection.type` to use checkbox and radio.
-
 ```tsx
 import { useState } from 'react';
 import { Table, Radio } from '@xiaoyaoliu/x-arco-design';
@@ -139,8 +137,10 @@ const data = [
 ];
 
 function App() {
-  const [type, setType] = useState('checkbox');
-  const [selectedRowKeys, setSelectedRowKeys] = useState(['4']);
+  const [type, setType] = useState<'checkbox' | 'radio'>('checkbox');
+  const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([
+    '4',
+  ]);
   return (
     <div>
       <Radio.Group
@@ -183,8 +183,6 @@ export default App;
 ## 展开行
 
 当内容过长，可以通过`expandedRowRender`设置展开行。如果返回值是 `null`，不会渲染展开按钮。
-
-`expandedRowRender`. If the return value is `null`, the expand button will not be rendered.
 
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
@@ -274,11 +272,6 @@ export default App;
 可以通过 `expandProps` 定制展开列的图标，宽度，标题，是否展开等。
 
 **Tip:** 正常情况下，是否展开是由 `expandedRowRender` 返回值决定的，如果过多的 `expandedRowRender` 计算导致卡顿，建议使用 `expandProps.rowExpandable`。
-
-`expandProps`.
-
-**Tip:** whether to expandable or not is determined by the return value of `expandedRowRender`.
-If too many `expandedRowRender` calculations block page render, it is recommended to use `expandProps.rowExpandable`.
 
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
@@ -450,8 +443,6 @@ export default App;
 ## 树形数据展示
 
 树形数据展示的例子，`data` 里有 `children` 字段, 或者通过 `childrenColumnName` 设置成自定义字段。
-
-`children` field in `data`, or set as a custom field by `childrenColumnName` to display tree data.
 
 ```tsx
 import { useState } from 'react';
@@ -641,8 +632,13 @@ const defaultData = [
 ];
 let data = defaultData;
 
-class App extends React.Component {
-  constructor(props) {
+class App extends React.Component<
+  {},
+  {
+    [k: string]: any;
+  }
+> {
+  constructor(props: any) {
     super(props);
     this.state = {
       checkbox: true,
@@ -660,7 +656,7 @@ class App extends React.Component {
     };
   }
 
-  onChange = (type, checked) => {
+  onChange = (type: string, checked: any) => {
     if (type === 'no_data') {
       data = checked ? [] : defaultData;
     }
@@ -835,16 +831,11 @@ export default App;
 
 **默认排序和筛选**：通过指定 `defaultFilters` 和 `defaultSortOrder` 可以指定默认的排序和筛选。
 
-`sorter` of `Column` to sort the table.
-Configure the `filters` of `Column` to filter the table.
-`sorter` is a sorting function. You can also specify `sorter` to `true`, so that you can customize the sorting through the `onChange` event of `Table`.
-`filters` is an array containing the information to be filtered, which needs to be used with `onFilter`. You can also use the `onChange` event of the `Table` for custom filtering or server-side filtering.
-
-**Default sort and filter**: You can specify the default sort and filter by specifying `defaultFilters` and `defaultSortOrder`.
-
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -941,9 +932,12 @@ export default App;
 自定义筛选菜单。
 
 ```tsx
-import { useState, useRef } from 'react';
-import { Table, Input, Button } from '@xiaoyaoliu/x-arco-design';
+import { useRef } from 'react';
+import { Table, Input } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps, RefInputType } from '@xiaoyaoliu/x-arco-design';
 import { IconSearch } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const data = [
   {
     key: '1',
@@ -983,8 +977,8 @@ const data = [
 ];
 
 function App() {
-  const inputRef = useRef(null);
-  const columns = [
+  const inputRef = useRef<RefInputType>(null);
+  const columns: TableProps['columns'] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -996,12 +990,12 @@ function App() {
               ref={inputRef}
               searchButton
               placeholder="Please enter name"
-              value={filterKeys[0] || ''}
+              value={filterKeys?.[0] || ''}
               onChange={(value) => {
-                setFilterKeys(value ? [value] : []);
+                setFilterKeys?.(value ? [value] : []);
               }}
               onSearch={() => {
-                confirm();
+                confirm?.();
               }}
             />
           </div>
@@ -1010,7 +1004,7 @@ function App() {
       onFilter: (value, row) => (value ? row.name.indexOf(value) !== -1 : true),
       onFilterDropdownVisibleChange: (visible) => {
         if (visible) {
-          setTimeout(() => inputRef.current.focus(), 150);
+          setTimeout(() => inputRef.current?.focus(), 150);
         }
       },
     },
@@ -1033,28 +1027,18 @@ function App() {
 export default App;
 ```
 
-```css
-.arco-table-custom-filter {
-  padding: 10px;
-  background-color: var(--color-bg-5);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 多列排序
 
 `column.sorter` 支持传入一个对象，指定该对象的 `multiple` 属性可以实现多列排序的效果。`multiple`为`number`类型，数字越大代表排序优先级越高。
 **注意：** 多列排序配合 `sortOrder` 使用时，为保持状态一致性，所有指定了`sorter`的列都需要同时指定`sortOrder`（可为 undefined），同时需要注意列之间的互斥关系。
 
-`column.sorter` supports passing in an object that has a `multiple` property that can be used to sort multiple columns. `multiple` is of type `number`. The larger the number, the higher the sorting priority.
-** Note: ** Multiple column sorting with `sortOrder` when used, in order to maintain state consistency, all specified `sorter` columns need to specify `sortOrder` (can be undefined), while needing to pay attention to the mutual exclusion relationship between columns.
-
 ```tsx
 import { useState } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
 
 const App = () => {
-  const columns = [
+  const columns: TableProps['columns'] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -1160,11 +1144,11 @@ export default App;
 
 自定义分页，通过设置 `total`，`pageSize`，通过 `onChange` 来动态更新表格数据。当分页设置 `simple` 为 `true` 时，会应用简单分页样式。关于 `pagination` 的具体设置可查看[pagination 组件](/react/components/Pagination)文档。通过 `renderPagination` 可以自定义分页渲染部分。
 
-`total`, `pageSize`, and `onChange` to dynamically update table data. When the pagination setting `simple` is `true`, the simple pagination style will be applied. For the specific settings of `pagination`, please refer to the [pagination component](/react/components/Pagination) document. Through `renderPagination`, you can customize the pagination render.
-
 ```tsx
 import { useState, useEffect } from 'react';
 import { Table, Space, Button } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
 const columns = [
   {
     title: 'Name',
@@ -1195,7 +1179,9 @@ const allData = Array(200)
 
 function App() {
   const [data, setData] = useState(allData);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>(
+    [],
+  );
   const [pagination, setPagination] = useState({
     sizeCanChange: true,
     showTotal: true,
@@ -1206,7 +1192,7 @@ function App() {
   });
   const [loading, setLoading] = useState(false);
 
-  function onChangeTable(pagination) {
+  function onChangeTable(pagination: any) {
     const { current, pageSize } = pagination;
     setLoading(true);
     setTimeout(() => {
@@ -1258,11 +1244,11 @@ export default App;
 
 通过 `columns` 中的 `render` 字段，可以自定义单元格的内容
 
-`render` field in `columns`.
-
 ```tsx
-import { Table, Tag } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import { Table } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -1270,7 +1256,7 @@ const columns = [
   {
     title: 'Salary',
     dataIndex: 'salary',
-    render: (col, record, index) => (
+    render: (_, record) => (
       <span>
         <span
           style={{
@@ -1343,12 +1329,10 @@ export default App;
 在 `column` 中指定 `fixed: "left"` 或 `fixed: "right"`，可将列固定到左侧或右侧，设置 `fixed` 的列，也需要设置 `width`。
 **注意：** 要配合 `scroll={{ x: number }}` 使用，`columns` 中需要有一列不设置宽度，自适应，不然会有样式问题。
 
-`fixed: "left"` or `fixed: "right"` in `column` to fix the column to the left or right. To set the column of `fixed`, you also need to set `width`.
-**Note:** To be used with `scroll={{ x: number }}`, there needs to be a column in `columns` that does not set the width and is adaptive, otherwise there will be style problems.
-
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -1447,8 +1431,6 @@ export default App;
 
 有多种方式定制行列样式，`rowClassName` 可以对每一行进行样式定制，`Column.className` 可以对列进行样式定制。此外，还有 `headerCellStyle`, `bodyCellStyle`， 对表头和表格主体的列进行样式定制。
 
-`rowClassName` can customize the style of each row, and `Column.className` can customize the style of columns. In addition, there are `headerCellStyle` and `bodyCellStyle` to customize the styles of the columns of the table header and table body.
-
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
 const columns = [
@@ -1539,11 +1521,11 @@ export default App;
 
 `columns` 内可以嵌套 `children`，用于表头分组。
 
-`children` can be nested in `columns` for group columns.
-
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -1690,7 +1672,9 @@ export default App;
 
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -1701,7 +1685,7 @@ const columns = [
       };
 
       if (index > 3) {
-        obj.props.colSpan = 2;
+        (obj.props as any).colSpan = 2;
       }
 
       return obj;
@@ -1717,7 +1701,7 @@ const columns = [
       };
 
       if (index > 3) {
-        obj.props.colSpan = 0;
+        (obj.props as any).colSpan = 0;
       }
 
       return obj;
@@ -1734,11 +1718,11 @@ const columns = [
       };
 
       if (index === 0) {
-        obj.props.rowSpan = 3;
+        (obj.props as any).rowSpan = 3;
       }
 
       if (index === 1 || index === 2) {
-        obj.props.rowSpan = 0;
+        (obj.props as any).rowSpan = 0;
       }
 
       return obj;
@@ -1815,14 +1799,17 @@ import {
   Form,
   FormInstance,
 } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const FormItem = Form.Item;
 const EditableContext = React.createContext<{ getForm?: () => FormInstance }>(
   {},
 );
 
-function EditableRow(props) {
+function EditableRow(props: any) {
   const { children, record, className, ...rest } = props;
-  const refForm = useRef(null);
+  const refForm = useRef<any>(null);
 
   const getForm = () => refForm.current;
 
@@ -1844,14 +1831,14 @@ function EditableRow(props) {
   );
 }
 
-function EditableCell(props) {
+function EditableCell(props: any) {
   const { children, className, rowData, column, onHandleSave } = props;
-  const ref = useRef(null);
-  const refInput = useRef(null);
+  const ref = useRef<any>(null);
+  const refInput = useRef<any>(null);
   const { getForm } = useContext(EditableContext);
   const [editing, setEditing] = useState(false);
   const handleClick = useCallback(
-    (e) => {
+    (e: any) => {
       if (
         editing &&
         column.editable &&
@@ -1874,7 +1861,7 @@ function EditableCell(props) {
     };
   }, [handleClick]);
 
-  const cellValueChangeHandler = (value) => {
+  const cellValueChangeHandler = (value: any) => {
     if (column.dataIndex === 'salary') {
       const values = {
         [column.dataIndex]: value,
@@ -1882,8 +1869,8 @@ function EditableCell(props) {
       onHandleSave && onHandleSave({ ...rowData, ...values });
       setTimeout(() => setEditing(!editing), 300);
     } else {
-      const form = getForm();
-      form.validate([column.dataIndex], (errors, values) => {
+      const form = getForm?.();
+      form?.validate([column.dataIndex], (errors, values) => {
         if (!errors || !errors[column.dataIndex]) {
           setEditing(!editing);
           onHandleSave && onHandleSave({ ...rowData, ...values });
@@ -1966,7 +1953,7 @@ function EditableTable() {
       email: 'william.smith@example.com',
     },
   ]);
-  const columns = [
+  const columns: TableProps['columns'] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -2000,14 +1987,14 @@ function EditableTable() {
     },
   ];
 
-  function handleSave(row) {
+  function handleSave(row: any) {
     const newData = [...data];
     const index = newData.findIndex((item) => row.key === item.key);
     newData.splice(index, 1, { ...newData[index], ...row });
     setData(newData);
   }
 
-  function removeRow(key) {
+  function removeRow(key: string) {
     setData(data.filter((item) => item.key !== key));
   }
 
@@ -2056,29 +2043,16 @@ function EditableTable() {
 export default EditableTable;
 ```
 
-```css
-.table-demo-editable-cell .editable-row .editable-cell {
-  display: inline-block;
-  padding: 5px 11px;
-}
-
-.table-demo-editable-cell .editable-row .editable-cell:hover {
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  padding: 4px 10px;
-}
-```
-
 ## 可伸缩列
 
 配合 `react-resizable@3.0.0` 可以实现可伸缩列的效果。
-
-`react-resizable@3.0.0`, the effect of resize columns can be achieved.
 
 ```tsx
 import { useState, forwardRef } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
 import { Resizable } from 'react-resizable';
+import './demo.css';
+
 const originColumns = [
   {
     title: 'Name',
@@ -2137,7 +2111,7 @@ const data = [
     email: 'william.smith@example.com',
   },
 ];
-const CustomResizeHandle = forwardRef((props, ref) => {
+const CustomResizeHandle = forwardRef((props: any, ref) => {
   const { handleAxis, ...restProps } = props;
   return (
     <span
@@ -2151,7 +2125,7 @@ const CustomResizeHandle = forwardRef((props, ref) => {
   );
 });
 
-const ResizableTitle = (props) => {
+const ResizableTitle = (props: any) => {
   const { onResize, width, ...restProps } = props;
 
   if (!width) {
@@ -2179,7 +2153,7 @@ function App() {
       if (column.width) {
         return {
           ...column,
-          onHeaderCell: (col) => ({
+          onHeaderCell: (col: any) => ({
             width: col.width,
             onResize: handleResize(index),
           }),
@@ -2190,8 +2164,8 @@ function App() {
     }),
   );
 
-  function handleResize(index) {
-    return (e, { size }) => {
+  function handleResize(index: number) {
+    return (_: any, { size }: { size: any }) => {
       setColumns((prevColumns) => {
         const nextColumns = [...prevColumns];
         nextColumns[index] = { ...nextColumns[index], width: size.width };
@@ -2220,32 +2194,15 @@ function App() {
 export default App;
 ```
 
-```css
-.table-demo-resizable-column .react-resizable {
-  position: relative;
-  background-clip: padding-box;
-}
-
-.table-demo-resizable-column .react-resizable-handle {
-  position: absolute;
-  width: 10px;
-  height: 100%;
-  bottom: 0;
-  right: -5px;
-  cursor: col-resize;
-  z-index: 1;
-}
-```
-
 ## 表头吸顶
 
 配合 `react-sticky@6.0.3` 可以实现表头吸顶的效果。
 
-`react-sticky@6.0.3` to achieve the effect of header sticky.
-
 ```tsx
+import React from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
 import { StickyContainer, Sticky } from 'react-sticky';
+
 const columns = [
   {
     title: 'Name',
@@ -2302,10 +2259,16 @@ const data = [
   },
 ];
 
-function Wrapper(props) {
+function Wrapper(props: any) {
   return (
     <Sticky topOffset={-60}>
-      {({ style, isSticky }) => (
+      {({
+        style,
+        isSticky,
+      }: {
+        style: React.CSSProperties;
+        isSticky: boolean;
+      }) => (
         <div
           style={{
             ...style,
@@ -2353,13 +2316,12 @@ export default App;
 
 可以通过 `components` 来定制前置操作列，包括新增列、调整列的顺序等。
 
-`components`, including adding new columns, adjusting the order of columns, etc.
-
 ```tsx
 import { useState } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
-import { IconDragDotVertical } from '@arco-design/web-react/icon';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -2416,7 +2378,7 @@ const data = [
     email: 'william.smith@example.com',
   },
 ];
-const components = {
+const components: TableProps['components'] = {
   header: {
     operations: ({ selectionNode, expandNode }) => [
       {
@@ -2456,7 +2418,9 @@ const components = {
 };
 
 function App() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState(['4']);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([
+    '4',
+  ]);
   return (
     <Table
       components={components}
@@ -2478,7 +2442,7 @@ function App() {
         },
         checkboxProps: (record) => {
           return {
-            disabled: record.id === 4,
+            disabled: record.key === '4',
           };
         },
       }}
@@ -2496,14 +2460,16 @@ export default App;
 
 可以配合 `react-sortable-hoc@2.0.0` 实现拖拽排序。
 
-`react-sortable-hoc@2.0.0` to drag rows.
-
 ```tsx
 import { useState } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 
-const arrayMoveMutate = (array, from, to) => {
+const arrayMoveMutate = (
+  array: typeof initialData,
+  from: number,
+  to: number,
+) => {
   const startIndex = to < 0 ? array.length + to : to;
 
   if (startIndex >= 0 && startIndex < array.length) {
@@ -2512,7 +2478,7 @@ const arrayMoveMutate = (array, from, to) => {
   }
 };
 
-const arrayMove = (array, from, to) => {
+const arrayMove = (array: typeof initialData, from: number, to: number) => {
   array = [...array];
   arrayMoveMutate(array, from, to);
   return array;
@@ -2573,10 +2539,10 @@ const initialData = [
     email: 'william.smith@example.com',
   },
 ];
-const SortableWrapper = SortableContainer((props) => {
+const SortableWrapper = SortableContainer((props: any) => {
   return <tbody {...props} />;
 });
-const SortableItem = SortableElement((props) => {
+const SortableItem = SortableElement((props: any) => {
   return (
     <tr
       style={{
@@ -2590,9 +2556,15 @@ const SortableItem = SortableElement((props) => {
 function App() {
   const [data, setData] = useState(initialData);
 
-  function onSortEnd({ oldIndex, newIndex }) {
+  function onSortEnd({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number;
+    newIndex: number;
+  }) {
     if (oldIndex !== newIndex) {
-      const newData = arrayMove([].concat(data), oldIndex, newIndex).filter(
+      const newData = arrayMove([...data], oldIndex, newIndex).filter(
         (el) => !!el,
       );
       console.log('New Data: ', newData);
@@ -2600,7 +2572,7 @@ function App() {
     }
   }
 
-  const DraggableContainer = (props) => (
+  const DraggableContainer = (props: any) => (
     <SortableWrapper
       onSortEnd={onSortEnd}
       helperContainer={() =>
@@ -2616,7 +2588,7 @@ function App() {
     />
   );
 
-  const DraggableRow = (props) => {
+  const DraggableRow = (props: any) => {
     const { record, index, ...rest } = props;
     return <SortableItem index={index} {...rest} />;
   };
@@ -2644,11 +2616,10 @@ export default App;
 
 可以配合 `react-sortable-hoc@2.0.0` 可以实现拖拽锚点排序。
 
-`react-sortable-hoc@2.0.0` to drag the anchor to sort table.
-
 ```tsx
 import { useState } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
 import { IconDragDotVertical } from '@arco-design/web-react/icon';
 import {
   SortableContainer,
@@ -2656,7 +2627,11 @@ import {
   SortableHandle,
 } from 'react-sortable-hoc';
 
-const arrayMoveMutate = (array, from, to) => {
+const arrayMoveMutate = (
+  array: typeof initialData,
+  from: number,
+  to: number,
+) => {
   const startIndex = to < 0 ? array.length + to : to;
 
   if (startIndex >= 0 && startIndex < array.length) {
@@ -2665,7 +2640,7 @@ const arrayMoveMutate = (array, from, to) => {
   }
 };
 
-const arrayMove = (array, from, to) => {
+const arrayMove = (array: typeof initialData, from: number, to: number) => {
   array = [...array];
   arrayMoveMutate(array, from, to);
   return array;
@@ -2734,19 +2709,25 @@ const DragHandle = SortableHandle(() => (
     }}
   />
 ));
-const SortableWrapper = SortableContainer((props) => {
+const SortableWrapper = SortableContainer((props: any) => {
   return <tbody {...props} />;
 });
-const SortableItem = SortableElement((props) => {
+const SortableItem = SortableElement((props: any) => {
   return <tr {...props} />;
 });
 
 function App() {
   const [data, setData] = useState(initialData);
 
-  function onSortEnd({ oldIndex, newIndex }) {
+  function onSortEnd({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number;
+    newIndex: number;
+  }) {
     if (oldIndex !== newIndex) {
-      const newData = arrayMove([].concat(data), oldIndex, newIndex).filter(
+      const newData = arrayMove([...data], oldIndex, newIndex).filter(
         (el) => !!el,
       );
       console.log('New Data: ', newData);
@@ -2754,7 +2735,7 @@ function App() {
     }
   }
 
-  const DraggableContainer = (props) => (
+  const DraggableContainer = (props: any) => (
     <SortableWrapper
       useDragHandle
       onSortEnd={onSortEnd}
@@ -2771,12 +2752,12 @@ function App() {
     />
   );
 
-  const DraggableRow = (props) => {
+  const DraggableRow = (props: any) => {
     const { record, index, ...rest } = props;
     return <SortableItem index={index} {...rest} />;
   };
 
-  const components = {
+  const components: TableProps['components'] = {
     header: {
       operations: ({ selectionNode, expandNode }) => [
         {
@@ -2818,6 +2799,7 @@ function App() {
       row: DraggableRow,
     },
   };
+
   return (
     <Table
       className="arco-drag-table-container-2"
@@ -2842,15 +2824,11 @@ export default App;
 
 **注意：** 开启虚拟滚动之后，不要给每一列都设置宽度，要保证有一列自适应，不然可能出现表头表身对不齐的情况。
 
-`virtualized=true` to enable.
-
-At present, the virtual scrolling table is more limited. After the virtual scrolling is turned on, the logic of expanding rows, tree data, etc. will be automatically disabled. We will gradually improve.
-
-**Note:** After enabling virtual scrolling, do not set the width for each column. Make sure that one column is adaptive, otherwise there may be misalignment between the header and the body.
-
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -2907,7 +2885,9 @@ export default App;
 
 ```tsx
 import { Table, Typography, Button } from '@xiaoyaoliu/x-arco-design';
-const columns = [
+import type { TableProps } from '@xiaoyaoliu/x-arco-design';
+
+const columns: TableProps['columns'] = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -2927,6 +2907,7 @@ const columns = [
     dataIndex: 'stars',
   },
 ];
+
 const data = [
   {
     key: '1',
@@ -2965,7 +2946,11 @@ const data = [
   },
 ];
 
-function summary(currentData) {
+function summary(currentData?: typeof data): React.ReactNode {
+  if (!currentData) {
+    return null;
+  }
+
   return (
     <Table.Summary.Row>
       <Table.Summary.Cell>Total</Table.Summary.Cell>
@@ -3023,35 +3008,37 @@ const App = () => {
           wrapper: true,
           cell: true,
         }}
-        summary={(currentData) => (
-          <Table.Summary>
-            <Table.Summary.Row>
-              <Table.Summary.Cell>Total</Table.Summary.Cell>
-              <Table.Summary.Cell>
-                <Typography.Text type="error">
-                  {currentData.reduce((prev, next) => prev + next.salary, 0)}
-                </Typography.Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell>
-                {currentData.reduce((prev, next) => prev + next.count, 0)}
-              </Table.Summary.Cell>
-              <Table.Summary.Cell>
-                {currentData.reduce((prev, next) => prev + next.stars, 0)}
-              </Table.Summary.Cell>
-              <Table.Summary.Cell />
-            </Table.Summary.Row>
-            <Table.Summary.Row>
-              <Table.Summary.Cell>Avarage</Table.Summary.Cell>
-              <Table.Summary.Cell colSpan={3}>
-                <Typography.Text type="success">
-                  {currentData.reduce((prev, next) => prev + next.salary, 0) /
-                    5}
-                </Typography.Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell />
-            </Table.Summary.Row>
-          </Table.Summary>
-        )}
+        summary={(currentData) =>
+          currentData && (
+            <Table.Summary>
+              <Table.Summary.Row>
+                <Table.Summary.Cell>Total</Table.Summary.Cell>
+                <Table.Summary.Cell>
+                  <Typography.Text type="error">
+                    {currentData.reduce((prev, next) => prev + next.salary, 0)}
+                  </Typography.Text>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell>
+                  {currentData.reduce((prev, next) => prev + next.count, 0)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell>
+                  {currentData.reduce((prev, next) => prev + next.stars, 0)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell />
+              </Table.Summary.Row>
+              <Table.Summary.Row>
+                <Table.Summary.Cell>Avarage</Table.Summary.Cell>
+                <Table.Summary.Cell colSpan={3}>
+                  <Typography.Text type="success">
+                    {currentData.reduce((prev, next) => prev + next.salary, 0) /
+                      5}
+                  </Typography.Text>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell />
+              </Table.Summary.Row>
+            </Table.Summary>
+          )
+        }
       />
       <Table
         style={{ marginTop: 20 }}
@@ -3065,9 +3052,11 @@ const App = () => {
           wrapper: true,
           cell: true,
         }}
-        summary={(currentData) => (
-          <Table.Summary fixed="bottom">{summary(currentData)}</Table.Summary>
-        )}
+        summary={(currentData) =>
+          currentData && (
+            <Table.Summary fixed="bottom">{summary(currentData)}</Table.Summary>
+          )
+        }
       />
     </div>
   );

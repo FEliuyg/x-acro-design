@@ -263,8 +263,6 @@ export default App;
 
 指定 `allowCreate` 为 `true`，即可创建选项中不存在的条目。
 
-`allowCreate` as `true` to create entries that do not exist in the options.
-
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
 const Option = Select.Option;
@@ -635,7 +633,7 @@ export default App;
 
 ```tsx
 import { Select, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconStar, IconDelete } from '@arco-design/web-react/icon';
+import { StarOutlined, DeleteOutlined } from '@easyv/react-icons';
 const Option = Select.Option;
 
 function App() {
@@ -648,7 +646,7 @@ function App() {
         renderFormat={(option, value) => {
           return option ? (
             <span>
-              <IconStar style={{ color: '#f7ba1e' }} />
+              <StarOutlined style={{ color: '#f7ba1e' }} />
               {` ${option.value} `}
             </span>
           ) : (
@@ -667,13 +665,13 @@ function App() {
         placeholder="Select city"
         style={{ width: 345 }}
         mode="multiple"
-        removeIcon={<IconDelete />}
+        removeIcon={<DeleteOutlined />}
         defaultValue={['Beijing', 'Shenzhen']}
         renderFormat={(option, value) => {
           // When labelInValue is true, the value is an object
           return option ? (
             <span>
-              <IconStar
+              <StarOutlined
                 style={{
                   color: '#f7ba1e',
                 }}
@@ -979,7 +977,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Select, Divider, Input, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
+import { PlusOutlined } from '@easyv/react-icons';
 const Option = Select.Option;
 
 function App() {
@@ -1025,7 +1023,7 @@ function App() {
               size="mini"
               onClick={addItem}
             >
-              <IconPlus />
+              <PlusOutlined />
               Add item
             </Button>
           </div>
@@ -1263,10 +1261,6 @@ export default App;
 `Select` 使用了虚拟滚动技术，在大量数据的情况也能保证性能。
 
 **当指定了 `triggerProps.autoAlignPopupWidth = false` 且 `Option.label` 为非文本类型时，由于无法在选项列表首次渲染时获取选项的最大宽度，虚拟滚动会被自动关闭。**
-
-`Select` uses virtual-scrolling to ensure performance even in large amounts of data.
-
-**When `triggerProps.autoAlignPopupWidth = false` and `Option.label` is a non-text type, virtual scrolling will be automatically closed because the maximum width of the option cannot be obtained when the option list is first rendered.**
 
 ```tsx
 import { Select, Typography } from '@xiaoyaoliu/x-arco-design';

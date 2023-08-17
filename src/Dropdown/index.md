@@ -166,8 +166,6 @@ export default App;
 
 通过 `Menu.onClickMenuItem` 来为菜单指定点击菜单项时触发的回调函数。
 
-`Menu.onClickMenuItem` to specify the callback function to be triggered when the menu item is clicked.
-
 ```tsx
 import { Dropdown, Menu, Button, Message } from '@xiaoyaoliu/x-arco-design';
 import { IconDown } from '@arco-design/web-react/icon';
@@ -229,7 +227,10 @@ const App = () => {
       <Dropdown.Button
         type="primary"
         droplist={dropList}
-        buttonsRender={([leftButton, rightButton]) => [
+        buttonsRender={([
+          leftButton,
+          rightButton,
+        ]: any[]): React.ReactNode[] => [
           <Tooltip content="Tooltip">{leftButton}</Tooltip>,
           React.cloneElement(rightButton, {
             loading: true,
@@ -311,7 +312,7 @@ import { IconDown } from '@arco-design/web-react/icon';
 
 function DemoWithPopupVisible() {
   const [popupVisible, setPopupVisible] = useState(false);
-  const refMenuItemClicked = useRef<string>(null);
+  const refMenuItemClicked = useRef<string | null>(null);
 
   const dropList = (
     <Menu
@@ -386,8 +387,6 @@ export default App;
 ## 分组菜单
 
 通过 `Menu.ItemGroup` 使用分组。
-
-`Menu.ItemGroup`.
 
 ```tsx
 import { Dropdown, Menu, Button } from '@xiaoyaoliu/x-arco-design';

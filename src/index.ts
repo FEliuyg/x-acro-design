@@ -53,7 +53,10 @@ export type { MenuProps } from './Menu';
 
 export { default as Notification } from './Notification';
 export { default as PageHeader } from './PageHeader';
+
 export { default as Pagination } from './Pagination';
+export type { PaginationProps } from './Pagination';
+
 export { default as Popconfirm } from './Popconfirm';
 export { default as Popover } from './Popover';
 

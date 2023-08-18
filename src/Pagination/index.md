@@ -62,15 +62,14 @@ export default App;
 
 通过指定 `size` 字段，可以使用不同尺寸的分页器。
 
-`size` field to use different sizes.
-
 ```tsx
 import { useState } from 'react';
 import { Pagination, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { PaginationProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<PaginationProps['size']>('default');
   return (
     <div>
       <RadioGroup
@@ -94,8 +93,6 @@ export default App;
 
 在空间有限的场景下，可以将 `simple` 设置为 `true`，使用较为简单的文本分页方式。
 
-`simple` to `true`.
-
 ```tsx
 import { Pagination } from '@xiaoyaoliu/x-arco-design';
 
@@ -109,8 +106,6 @@ export default App;
 ## 展示总数
 
 您可以通过设置 `showTotal` 来显示数据总数。
-
-`showTotal` to show the total number of data.
 
 ```tsx
 import { Pagination } from '@xiaoyaoliu/x-arco-design';
@@ -142,14 +137,19 @@ export default App;
 
 通过改变 `total` 的值，解决无法计算页码总数的情景。
 
-`total`, solve the situation where the total number of pages cannot be calculated.
-
 ```tsx
 import React from 'react';
 import { Pagination } from '@xiaoyaoliu/x-arco-design';
 
-class App extends React.Component {
-  constructor(props) {
+class App extends React.Component<
+  any,
+  {
+    current: number;
+    showMore: boolean;
+    total: number;
+  }
+> {
+  constructor(props: any) {
     super(props);
     this.state = {
       current: 1,
@@ -158,7 +158,7 @@ class App extends React.Component {
     };
   }
 
-  handeChange = (pageNum) => {
+  handeChange = (pageNum: number) => {
     if (pageNum > 20) {
       this.setState({
         showMore: false,
@@ -253,12 +253,11 @@ export default App;
 
 设置 `itemRender`，可以自由定制分页按钮。
 
-`itemRender` to customize the pagination buttons.
-
 ```tsx
 import { Pagination } from '@xiaoyaoliu/x-arco-design';
+import type { PaginationProps } from '@xiaoyaoliu/x-arco-design';
 
-function itemRender(page, type, originElement) {
+const itemRender: PaginationProps['itemRender'] = (_, type, originElement) => {
   if (type === 'prev') {
     return <a style={{ fontSize: 14, margin: '0 8px' }}>Prev</a>;
   }
@@ -268,7 +267,7 @@ function itemRender(page, type, originElement) {
   }
 
   return originElement;
-}
+};
 
 const App = () => {
   return <Pagination itemRender={itemRender} total={200} />;
@@ -282,10 +281,6 @@ export default App;
 通过 `bufferSize` 可以设置 `current` 页与 `...` 之间的页码个数。
 
 一个 `...` 至少代表省略 `2` 页。
-
-`bufferSize` you can set the number of pages between the `current` page and `...`.
-
-An `...` means at least `2` pages are omitted.
 
 ```tsx
 import { Pagination, Space } from '@xiaoyaoliu/x-arco-design';

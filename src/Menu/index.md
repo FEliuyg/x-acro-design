@@ -6,10 +6,10 @@
 
 设置 `mode` 为 `horizontal` 时，使用水平菜单。
 
-`mode` to `horizontal`, you can use the horizontal menu.
-
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -40,27 +40,14 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-```
-
 ## 深色模式导航
 
 通过 `theme` 指定主题，分为 `light` 和 `dark` 两种。
 
-`theme`, which can be divided into two types: `light` and `dark`.
-
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -90,24 +77,9 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-```
-
 ## 缩起内嵌菜单
 
 通过 `collapse` 来指定菜单收起。
-
-`collapse` to specify the menu to collapse.
 
 ```tsx
 import { useState } from 'react';
@@ -119,6 +91,8 @@ import {
   IconBug,
   IconBulb,
 } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -189,28 +163,15 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-```
-
 ## 内嵌菜单
 
 菜单内可以嵌入多个子项，通过 `defaultOpenKeys` 可以设置默认打开的子项。
 
-`defaultOpenKeys`.
-
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
 import { IconApps, IconBug, IconBulb } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -275,29 +236,16 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-```
-
 ## 不同大小菜单
 
 通过 `style` 自由指定菜单的宽度和菜单项的高度。
-
-`style`.
 
 ```tsx
 import { useState } from 'react';
 import { Menu, Slider } from '@xiaoyaoliu/x-arco-design';
 import { IconApps, IconBug, IconBulb } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -308,7 +256,11 @@ function App() {
       <Slider
         style={{ width: 320, marginBottom: 24 }}
         value={width}
-        onChange={(value) => setWidth(value)}
+        onChange={(value) => {
+          if (typeof value === 'number') {
+            setWidth(value);
+          }
+        }}
         step={10}
         min={160}
         max={400}
@@ -365,24 +317,9 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-```
-
 ## 悬浮菜单
 
 指定 `mode` 为 `pop` 可以使用悬浮菜单。
-
-`mode` as `pop` to use floating menu.
 
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
@@ -393,6 +330,8 @@ import {
   IconRobot,
   IconFire,
 } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -445,68 +384,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.menu-demo-round {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo-round .arco-menu-inner {
-  overflow-y: auto;
-}
-
-.menu-demo-round .arco-menu {
-  height: 100%;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-}
-
-.menu-demo-round
-  .arco-menu:not(.arco-menu-collapse)
-  .arco-menu-collapse-button {
-  right: 0;
-  bottom: 8px;
-  transform: translateX(50%);
-}
-
-.menu-demo-round .arco-menu:not(.arco-menu-collapse)::before {
-  content: '';
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background-color: inherit;
-  box-shadow: -4px 0 2px var(--color-bg-2), 0 0 1px rgba(0, 0, 0, 0.3);
-  transform: translateX(50%);
-}
-
-.menu-demo-round .arco-menu-collapse {
-  height: auto;
-  padding-top: 24px;
-  padding-bottom: 138px;
-  border-radius: 22px;
-}
-
-.menu-demo-round .arco-menu-collapse-button {
-  right: 8px;
-  bottom: 8px;
-}
-
-.menu-demo-round .arco-menu-collapse-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-```
-
 ## 悬浮按钮菜单
 
 指定 `mode` 为 `popButton` 使用按钮组样式的悬浮菜单。
-
-`mode` to `popButton`, you can use a button group style floating menu.
 
 ```tsx
 import { useState } from 'react';
@@ -517,6 +397,8 @@ import {
   IconBug,
   IconBulb,
 } from '@arco-design/web-react/icon';
+import './demo.css';
+
 const MenuItem = Menu.Item;
 
 function App() {
@@ -580,59 +462,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 40px;
-  background-color: var(--color-neutral-2);
-}
-
-.menu-demo .arco-menu-inner {
-  overflow-y: auto;
-}
-
-.menu-demo-button {
-  position: relative;
-  width: 660px;
-  height: 300px;
-  background-color: var(--color-fill-2);
-}
-
-.button-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 80px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 14px;
-  color: var(--color-white);
-  cursor: pointer;
-  transition: all 0.1s;
-}
-
-.button-trigger:nth-child(1) {
-  left: 150px;
-  background-color: var(--color-neutral-5);
-}
-
-.button-trigger:nth-child(1).button-trigger-active {
-  background-color: var(--color-neutral-4);
-}
-
-.button-trigger:nth-child(2) {
-  left: 372px;
-  background-color: rgb(var(--arcoblue-6));
-}
-
-.button-trigger:nth-child(2).button-trigger-active {
-  background-color: var(--color-primary-light-4);
-}
 ```
 
 ## API

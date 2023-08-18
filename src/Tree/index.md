@@ -6,8 +6,6 @@
 
 为每个 `TreeNode` 节点赋予全局唯一的 `key`（必填项），`title` 为该节点显示的内容。
 
-`TreeNode` node a globally unique `key` (required), and the `title` is the content to be displayed on the node.
-
 ```tsx
 import { Tree } from '@xiaoyaoliu/x-arco-design';
 const TreeNode = Tree.Node;
@@ -135,8 +133,6 @@ export default App;
 
 `Tree` 设置 `multiple` 属性为`true`，可以启用多选。
 
-`multiple={true}` to `Tree` to enable multiple selection.
-
 ```tsx
 import { useState } from 'react';
 import { Tree, Checkbox, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -229,8 +225,6 @@ export default App;
 
 为 `Tree` 添加 `checkable` 属性即可使树具有复选框功能，可以用 `defaultCheckedKeys` 指定复选框默认选中的节点。
 
-`checkable` attribute to display the checkbox, and you can use `defaultCheckedKeys` to specify which nodes are checked by default.
-
 ```tsx
 import { useState } from 'react';
 import { Tree, Checkbox } from '@xiaoyaoliu/x-arco-design';
@@ -322,8 +316,6 @@ export default App;
 ## 受控模式
 
 可以指定树的 `selectedKeys` 或 `checkedKeys` 或 `expandedKeys` 属性使树变为受控模式，在对应的 `onSelect` / `onCheck` / `onExpand` 回调中对返回值进行操作。
-
-`selectedKeys` or `checkedKeys` or `expandedKeys` property of the tree to turn the tree into a controlled mode, and operate on the return value in the `onSelect` / `onCheck` / `onExpand` callback.
 
 ```tsx
 import { useState } from 'react';
@@ -490,6 +482,8 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Checkbox } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const TreeNode = Tree.Node;
 const TreeData = [
   {
@@ -606,28 +600,9 @@ function App() {
 export default App;
 ```
 
-```css
-.tree-node-dropover > .arco-tree-node-title,
-.tree-node-dropover > .arco-tree-node-title:hover {
-  animation: blinkBg 0.4s 2;
-}
-
-@keyframes blinkBg {
-  0% {
-    background-color: transparent;
-  }
-
-  100% {
-    background-color: var(--color-primary-light-1);
-  }
-}
-```
-
 ## 设置回填方式
 
 为 `Tree` 添加 `checkedStrategy` 可以设置选中时的回填方式
-
-`checkedStrategy` to set the return value when selected.
 
 ```tsx
 import { useState } from 'react';
@@ -729,8 +704,6 @@ export default App;
 ## 显示连接线
 
 为 `Tree` 添加 `showLine` 属性即可使树具有连接线
-
-`showLine` property to `Tree` to display the connecting line.
 
 ```tsx
 import { useState } from 'react';
@@ -875,8 +848,6 @@ export default App;
 
 只需为 `TreeNode` 指定 `icon` 属性的值即可为任意节点指定任意图标。
 
-`icon` of `TreeNode` can specify an icon for the node.
-
 ```tsx
 import { Tree } from '@xiaoyaoliu/x-arco-design';
 import { IconStar } from '@arco-design/web-react/icon';
@@ -902,8 +873,6 @@ export default App;
 ## 定制额外节点
 
 为 `Tree` 设置 `renderExtra` 可以自定义树节点的展示。
-
-`renderExtra` property of `Tree` can customize node content.
 
 ```tsx
 import { useState } from 'react';
@@ -1013,8 +982,6 @@ export default App;
 
 通过`icons` 属性即可设置组件 `loadingIcon`,`dragIcon`,`switcherIcon`。
 
-`loadingIcon`, `dragIcon`, and `switcherIcon` can be set through the `icons` property.
-
 ```tsx
 import { Tree } from '@xiaoyaoliu/x-arco-design';
 import {
@@ -1063,8 +1030,6 @@ export default App;
 ## 虚拟列表
 
 通过指定 `virtualListProps` 来开启虚拟列表，在大量数据时获得高性能表现。
-
-`virtualListProps` to turn on the virtual list, high performance can be obtained when a large amount of data is used.
 
 ```tsx
 import React from 'react';
@@ -1249,8 +1214,6 @@ export default App;
 ## 自定义
 
 通过 `fieldNames` 字段可以自定义 TreeData 的字段名。
-
-`treeData` by `fieldNames`.
 
 ```tsx
 import { useState } from 'react';

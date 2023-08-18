@@ -80,7 +80,9 @@ export { default as Tooltip } from './Tooltip';
 export { default as Transfer } from './Transfer';
 export { default as Tree } from './Tree';
 export { default as TreeSelect } from './TreeSelect';
+
 export { default as Trigger } from './Trigger';
+
 export { default as Typography } from './Typography';
 export { default as Upload } from './Upload';
 

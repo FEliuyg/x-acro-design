@@ -16,8 +16,9 @@ import {
   Typography,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
-function Element(props) {
+function Element(props: any) {
   return (
     <Typography.Text {...props} style={{ marginRight: 20 }}>
       Hover me
@@ -70,16 +71,6 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 受控用法
 
 这个例子展示了如何完全控制弹出层的展示和隐藏。
@@ -94,6 +85,7 @@ import {
   Skeleton,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function Popup() {
   return (
@@ -162,87 +154,6 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
-自动调整弹出层位置。
-
-```tsx
-import React from 'react';
-import {
-  Button,
-  Popconfirm,
-  Message,
-  ResizeBox,
-} from '@xiaoyaoliu/x-arco-design';
-
-const props = {
-  getPopupContainer: () => document.querySelector('.popup-container'),
-  title: '确认编辑该选项吗？',
-  onOk: () => {
-    Message.info({
-      content: '你点击了确认',
-    });
-  },
-  onCancel: () => {
-    Message.error({
-      content: '你点击了取消',
-    });
-  },
-};
-
-class App extends React.Component {
-  render() {
-    return (
-      <div
-        className="popup-container"
-        directions={['right', 'bottom']}
-        style={{
-          width: 300,
-          height: 300,
-          overflow: 'auto',
-        }}
-      >
-        <div
-          style={{
-            width: 450,
-            height: 300,
-            position: 'relative',
-          }}
-        >
-          <Popconfirm
-            position="bottom"
-            {...props}
-            getPopupContainer={(node) => node.parentElement}
-          >
-            <Button style={{ margin: '0 200px' }}>popover</Button>
-          </Popconfirm>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default App;
-```
-
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 多层嵌套
 
 弹出层可以嵌套在另一个弹出层内。
@@ -255,6 +166,7 @@ import {
   Skeleton,
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
   return (
@@ -300,21 +212,9 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 多个触发方式
 
 通过`trigger`传入数组，可以设置多个触发方式。
-
-`trigger` property can be an array.
 
 ```tsx
 import {
@@ -325,6 +225,7 @@ import {
   Typography,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function Popup() {
   return (
@@ -372,16 +273,6 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 跟随鼠标显示弹出层
 
 设置 `alignPoint` 属性，可以使弹出层出现在鼠标位置。你可能想要`trigger=click`时候，在范围内点击时，弹出层一直展示，并根据鼠标位置更新弹出层位置，可以查看下一个示例。
@@ -390,12 +281,12 @@ export default App;
 import React from 'react';
 import {
   Trigger,
-  Button,
   Select,
   Grid,
   Skeleton,
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function Popup() {
   return (
@@ -411,7 +302,9 @@ function Popup() {
 }
 
 function App() {
-  const [trigger, setTrigger] = React.useState(['click']);
+  const [trigger, setTrigger] = React.useState<
+    ('click' | 'hover' | 'contextMenu')[]
+  >(['click']);
   return (
     <div>
       <Grid.Row align="center" style={{ marginBottom: 20 }}>
@@ -445,38 +338,16 @@ function App() {
 export default App;
 ```
 
-```css
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-
-.demo-trigger-manual {
-  width: 100%;
-  height: 400px;
-  background-color: var(--color-fill-2);
-  line-height: 400px;
-  text-align: center;
-  font-size: 20px;
-}
-```
+## 更新位置
 
 ```tsx
 import React from 'react';
-import {
-  Trigger,
-  Button,
-  Input,
-  Skeleton,
-  Typography,
-} from '@xiaoyaoliu/x-arco-design';
+import { Trigger, Skeleton, Typography } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
   const [visible, setVisible] = React.useState(false);
-  const triggerRef = React.useRef();
+  const triggerRef = React.useRef<Trigger>(null);
   return (
     <Trigger
       ref={triggerRef}
@@ -497,7 +368,7 @@ function App() {
         className="demo-trigger-manual"
         onClick={() => {
           if (visible) {
-            triggerRef.current.update();
+            triggerRef.current?.update();
           } else {
             setVisible(true);
           }
@@ -512,37 +383,13 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-
-.demo-trigger-manual {
-  width: 100%;
-  height: 400px;
-  background-color: var(--color-fill-2);
-  line-height: 400px;
-  text-align: center;
-  font-size: 20px;
-}
-```
-
 ## 展示箭头元素
 
 通过 `showArrow` 属性，可以展示默认的箭头元素。也可以通过 arrowProps 进行定制。
 
 ```tsx
-import {
-  Trigger,
-  Button,
-  Input,
-  Skeleton,
-  Space,
-} from '@xiaoyaoliu/x-arco-design';
+import { Trigger, Button, Skeleton, Space } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
   return (
@@ -585,32 +432,15 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 设置弹窗位置偏移量
 
 通过 `popupAlign` 属性，可以设置弹窗在原本位置的基础上进行额外的位置调整。
 
 例如 `position=top`时， 设置 `popupAlign={top: 20}`，弹窗会向上移动 `20px`。设置 `popupAlign={ top: [100, 20] }`，弹窗将会在水平方向移动 `100px`，并向上移动 `20px`。
 
-`position` is `'top'`, set popupAlign to `{ top: 20}`, the popup will move up by `20px`, and set popupAlign to `{top: [100, 20]}`, the popup will move horizontally `100px` right and `20px` up.
-
 ```tsx
-import {
-  Trigger,
-  Button,
-  Input,
-  Skeleton,
-  Space,
-} from '@xiaoyaoliu/x-arco-design';
+import { Trigger, Button, Skeleton, Space } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function Popup() {
   return <Skeleton className="demo-trigger-popup" style={{ width: 300 }} />;
@@ -688,24 +518,13 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
-```
-
 ## 滚动容器
 
 通过设置 `updateOnScroll` 监听容器的滚动。
 
-`updateOnScroll`.
-
 ```tsx
-import { Trigger, Button, Input, Skeleton } from '@xiaoyaoliu/x-arco-design';
+import { Trigger, Button, Skeleton } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function Popup() {
   return <Skeleton className="demo-trigger-popup" style={{ width: 300 }} />;
@@ -738,16 +557,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css:silent
-.demo-trigger-popup {
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-  background-color: var(--color-bg-popup);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
-}
 ```
 
 ## API

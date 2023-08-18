@@ -37,6 +37,40 @@ function App() {
 export default App;
 ```
 
+## 简洁模式
+
+```tsx
+import React from 'react';
+import { Modal, Button } from '@xiaoyaoliu/x-arco-design';
+
+function App() {
+  const [visible, setVisible] = React.useState(false);
+  return (
+    <div>
+      <Button onClick={() => setVisible(true)} type="primary">
+        Open Modal
+      </Button>
+      <Modal
+        simple
+        title="Modal Title"
+        visible={visible}
+        onOk={() => setVisible(false)}
+        onCancel={() => setVisible(false)}
+        autoFocus={false}
+        focusLock={true}
+      >
+        <p>
+          You can customize modal body text by the current situation. This modal
+          will be closed immediately once you press the OK button.
+        </p>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
+```
+
 ## 异步关闭
 
 在对话框中使用表单时，如提交表单，点击确定后异步关闭对话框。

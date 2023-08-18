@@ -33,8 +33,6 @@ export default App;
 
 通知提醒框有 5 种不同的类型，分别为：`info`, `success`, `warning`, `error`, `normal`。
 
-`info`, `success`, `warning`, `error`, `normal`.
-
 ```tsx
 import { Notification, Button, Space } from '@xiaoyaoliu/x-arco-design';
 
@@ -110,8 +108,6 @@ export default App;
 
 通过指定参数 `id`，可以更新已经存在的通知提醒框。
 
-`id` to update the existing notification.
-
 ```tsx
 import { Notification, Button } from '@xiaoyaoliu/x-arco-design';
 
@@ -144,8 +140,6 @@ export default App;
 ## 更新延迟
 
 通过指定参数 `id`，可以更新已经存在的通知提醒框。
-
-`id` to update the existing notification's duration.
 
 ```tsx
 import { Notification, Button } from '@xiaoyaoliu/x-arco-design';
@@ -181,8 +175,6 @@ export default App;
 ## 自定义操作按钮
 
 通过指定 `btn` 字段，可以添加操作按钮。
-
-`btn` field.
 
 ```tsx
 import { Notification, Button } from '@xiaoyaoliu/x-arco-design';
@@ -231,14 +223,15 @@ export default App;
 
 设置 `icon` 来自定义图标。
 
-`icon` to customize the icon.
-
 ```tsx
-import { Notification, Button, Icon, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconFaceSmileFill } from '@arco-design/web-react/icon';
-const IconFont = Icon.addFromIconFontCn({
-  src: '//at.alicdn.com/t/font_180975_26f1p759rvn.js',
-});
+import { Notification, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import {
+  SmileFilled,
+  InfoCircleFilled,
+  CheckCircleFilled,
+  ExclamationCircleFilled,
+  CloseCircleFilled,
+} from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -246,7 +239,7 @@ const App = () => {
       <Button
         onClick={() =>
           Notification.info({
-            icon: <IconFont type="icon-info" />,
+            icon: <InfoCircleFilled />,
             title: 'Upgrade',
             content: 'Ready to upgrade ArcoDesign 2.0',
           })
@@ -259,7 +252,7 @@ const App = () => {
       <Button
         onClick={() =>
           Notification.success({
-            icon: <IconFont type="icon-success" />,
+            icon: <CheckCircleFilled />,
             title: 'Success',
             content: 'ArcoDesign 2.0 upgrade completed!',
           })
@@ -273,7 +266,7 @@ const App = () => {
       <Button
         onClick={() =>
           Notification.warning({
-            icon: <IconFont type="icon-warning" />,
+            icon: <ExclamationCircleFilled />,
             title: 'Warning',
             content: 'Current version is at risk!',
           })
@@ -287,7 +280,7 @@ const App = () => {
       <Button
         onClick={() =>
           Notification.error({
-            icon: <IconFont type="icon-error" />,
+            icon: <CloseCircleFilled />,
             title: 'Error',
             content: 'Failed to upgrade ArcoDesign 2.0!',
           })
@@ -301,7 +294,7 @@ const App = () => {
       <Button
         onClick={() =>
           Notification.info({
-            icon: <IconFaceSmileFill />,
+            icon: <SmileFilled />,
             title: 'Upgrade',
             content: 'Ready to upgrade ArcoDesign 2.0!',
           })
@@ -321,8 +314,6 @@ export default App;
 ## 自定义样式
 
 可以设置 `style` 和 `className` 来定制样式。
-
-`style` and `className` to customize the style.
 
 ```tsx
 import { Notification, Button } from '@xiaoyaoliu/x-arco-design';
@@ -351,8 +342,6 @@ export default App;
 ## 通知提醒位置
 
 通知提醒框有 4 种不同的弹出位置，分别为：`左上角`, `右上角 (默认)`, `左下角`, `右下角`。
-
-`Top Left`, `Top Right (default)`, `Bottom Left`, `Bottom Right`.
 
 ```tsx
 import { Notification, Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -422,8 +411,6 @@ export default App;
 ## Hooks
 
 可以通过 `useNotification`**(2.40.0)** 去创建可以读取 context 的对话框。
-
-`useNotification` to create a dialog that can read the context.
 
 ```tsx
 import React, { createContext } from 'react';

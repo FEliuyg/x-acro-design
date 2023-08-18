@@ -8,7 +8,7 @@
 
 ```tsx
 import { Dropdown, Menu, Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 import './demo.css';
 
 const dropList = (
@@ -24,13 +24,13 @@ function App() {
     <Space className="dropdown-demo">
       <Dropdown droplist={dropList} position="bl">
         <Button type="text">
-          Hover me <IconDown />
+          Hover me <DownOutlined />
         </Button>
       </Dropdown>
 
       <Dropdown droplist={dropList} position="bl" disabled>
         <Button type="text">
-          Hover me <IconDown />
+          Hover me <DownOutlined />
         </Button>
       </Dropdown>
     </Space>
@@ -94,7 +94,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button, Divider } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const dropList = (
   <Menu>
     <Menu.Item key="1">Beijing</Menu.Item>
@@ -113,7 +113,7 @@ function App() {
       <Dropdown droplist={dropList} position="br">
         <Button type="text">
           Hover
-          <IconDown />
+          <DownOutlined />
         </Button>
       </Dropdown>
     </div>
@@ -131,7 +131,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const dropList = (
   <Menu>
     <Menu.Item key="1">Beijing</Menu.Item>
@@ -146,13 +146,13 @@ function App() {
       <Dropdown droplist={dropList} position="br">
         <Button type="text">
           Hover
-          <IconDown />
+          <DownOutlined />
         </Button>
       </Dropdown>
       <Dropdown droplist={dropList} trigger="click" position="br">
         <Button type="text">
           Click
-          <IconDown />
+          <DownOutlined />
         </Button>
       </Dropdown>
     </Space>
@@ -168,7 +168,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button, Message } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const dropList = (
   <Menu onClickMenuItem={(key) => Message.info(`You clicked ${key}`)}>
     <Menu.Item key="Beijing">Beijing</Menu.Item>
@@ -186,7 +186,7 @@ function App() {
         triggerProps={{ autoAlignPopupWidth: true }}
       >
         <Button type="text">
-          Hover me and click an item <IconDown />
+          Hover me and click an item <DownOutlined />
         </Button>
       </Dropdown>
     </div>
@@ -203,7 +203,7 @@ export default App;
 ```tsx
 import React from 'react';
 import { Dropdown, Menu, Tooltip, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 
 const dropList = (
   <Menu>
@@ -221,7 +221,11 @@ const App = () => {
       <Dropdown.Button type="secondary" droplist={dropList} disabled>
         Disabled
       </Dropdown.Button>
-      <Dropdown.Button type="primary" droplist={dropList} icon={<IconDown />}>
+      <Dropdown.Button
+        type="primary"
+        droplist={dropList}
+        icon={<DownOutlined />}
+      >
         Publish
       </Dropdown.Button>
       <Dropdown.Button
@@ -252,7 +256,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 const data = [
@@ -290,7 +294,7 @@ function App() {
       <Dropdown trigger="click" droplist={dropList} position="bl">
         <Button type="text">
           Click
-          <IconDown />
+          <DownOutlined />
         </Button>
       </Dropdown>
     </div>
@@ -308,7 +312,7 @@ export default App;
 ```tsx
 import { useState, useRef } from 'react';
 import { Dropdown, Menu, Button, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 
 function DemoWithPopupVisible() {
   const [popupVisible, setPopupVisible] = useState(false);
@@ -343,7 +347,7 @@ function DemoWithPopupVisible() {
     >
       <Button type="text">
         Click
-        <IconDown />
+        <DownOutlined />
       </Button>
     </Dropdown>
   );
@@ -366,7 +370,7 @@ function DemoWithOnClickMenuItem() {
     <Dropdown droplist={dropList} trigger="click" position="bl">
       <Button type="text">
         Click
-        <IconDown />
+        <DownOutlined />
       </Button>
     </Dropdown>
   );
@@ -390,7 +394,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const dropList = (
   <Menu>
     <Menu.ItemGroup title="Beijing">
@@ -415,7 +419,7 @@ function App() {
         triggerProps={{ autoAlignPopupWidth: true }}
       >
         <Button type="text">
-          Group Menu <IconDown />
+          Group Menu <DownOutlined />
         </Button>
       </Dropdown>
     </div>
@@ -471,7 +475,7 @@ export default App;
 
 ```tsx
 import { Dropdown, Menu, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconDown, IconLocation } from '@arco-design/web-react/icon';
+import { DownOutlined, MapOutlined } from '@easyv/react-icons';
 const iconStyle = {
   marginRight: 8,
   fontSize: 16,
@@ -480,15 +484,15 @@ const iconStyle = {
 const dropList = (
   <Menu>
     <Menu.Item key="1">
-      <IconLocation style={iconStyle} />
+      <MapOutlined style={iconStyle} />
       Beijing
     </Menu.Item>
     <Menu.Item key="2">
-      <IconLocation style={iconStyle} />
+      <MapOutlined style={iconStyle} />
       Shanghai
     </Menu.Item>
     <Menu.Item key="3">
-      <IconLocation style={iconStyle} />
+      <MapOutlined style={iconStyle} />
       Guangzhou
     </Menu.Item>
   </Menu>
@@ -499,7 +503,7 @@ function App() {
     <div className="dropdown-demo">
       <Dropdown droplist={dropList} trigger="click" position="bl">
         <Button type="text">
-          Click me <IconDown />
+          Click me <DownOutlined />
         </Button>
       </Dropdown>
     </div>

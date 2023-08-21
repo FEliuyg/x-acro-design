@@ -34,7 +34,9 @@ export { default as Form } from './Form';
 export type { FormInstance } from './Form';
 
 export { default as Grid } from './Grid';
+
 export { default as Image } from './Image';
+export type { ImageProps } from './Image';
 
 export { default as InputNumber } from './InputNumber';
 export type { InputNumberProps } from './InputNumber';

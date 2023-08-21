@@ -6,8 +6,6 @@
 
 需要查看图片的时候，简单的设置 `src` 属性，就能获得一个有预览图片功能的组件。
 
-`src` property to get a component with picture preview function.
-
 ```tsx
 import { Image } from '@xiaoyaoliu/x-arco-design';
 
@@ -27,8 +25,6 @@ export default App;
 ## 显示
 
 通过设置 `title` 和 `description` 可以将图片的标题和描述显示在图片内部或者底部，显示的位置通过 `footerPosition` 控制。
-
-`title` and `description`, the title and description of the picture can be displayed inside or at the bottom of the picture. The display position is controlled by `footerPosition`.
 
 ```tsx
 import { Image, Space } from '@xiaoyaoliu/x-arco-design';
@@ -66,18 +62,18 @@ export default App;
 
 额外操作通过 `actions` 设置，默认情况下水平排列，如果您的操作按钮比较多，我们也提供了 `simple` 模式将按钮收入一个下拉框中，但是需要注意的是在 `simple` 模式下，描述将不显示。
 
-`actions` and arranged horizontally by default. If you have more operation buttons, we also provide the `simple` mode to put the buttons in a drop-down box. Note that in the `simple` mode, the description will be unable to display.
-
 ```tsx
 import React from 'react';
 import { Image, Tooltip, Space } from '@xiaoyaoliu/x-arco-design';
+import type { ImageProps } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconEye,
-  IconDownload,
-  IconInfoCircle,
-} from '@arco-design/web-react/icon';
+  EyeOutlined,
+  DownloadOutlined,
+  InfoCircleOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
 
-function DemoImage(props) {
+function DemoImage(props: ImageProps) {
   const [visible, setVisible] = React.useState(false);
   return (
     <Image
@@ -92,7 +88,7 @@ function DemoImage(props) {
             setVisible(true);
           }}
         >
-          <IconEye />
+          <EyeOutlined />
         </button>,
         <button
           key="2"
@@ -101,11 +97,11 @@ function DemoImage(props) {
             console.log('download');
           }}
         >
-          <IconDownload />
+          <DownloadOutlined />
         </button>,
         <Tooltip key="3" content="A user’s avatar">
           <button className="image-demo-action-item">
-            <IconInfoCircle />
+            <InfoCircleOutlined />
           </button>
         </Tooltip>,
       ]}
@@ -159,30 +155,6 @@ function App() {
 export default App;
 ```
 
-```css
-.image-demo-action-item {
-  height: 22px;
-  width: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: unset;
-  background: unset;
-  color: inherit;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.image-demo-action-item:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-
-.image-demo-props table:nth-of-type(2) thead th:last-child,
-.image-demo-props table:nth-of-type(3) thead th:last-child {
-  width: 20%;
-}
-```
-
 ## 错误状态
 
 当加载图片失败的时候显示的内容。
@@ -211,16 +183,13 @@ export default App;
 
 默认情况下，加载效果是不显示的，可通过设置 `loader=true` 显示默认加载效果。如果默认加载效果不符合需求。还可以通过 `loaderClassName` 自行设置加载样式。
 
-`loader=true`. If the default loading effect does not meet the requirements, you can also set the loading style through `loaderClassName`.
-
-Loading
-
 ```tsx
 import React from 'react';
 import { Image, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
-  const [timestamp, setTimestamp] = React.useState('');
+  const [timestamp, setTimestamp] = React.useState<number | ''>('');
   return (
     <div>
       <div>
@@ -258,41 +227,16 @@ function App() {
 export default App;
 ```
 
-```css
-.image-demo-loader-animate {
-  background: linear-gradient(
-    -60deg,
-    var(--color-fill-2) 25%,
-    var(--color-neutral-3) 40%,
-    var(--color-fill-3) 55%
-  );
-  background-size: 400% 100%;
-  animation: image-demo-loader-circle 1.5s cubic-bezier(0.34, 0.69, 0.1, 1) infinite;
-}
-
-@keyframes image-demo-loader-circle {
-  0% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0 50%;
-  }
-}
-```
-
 ## 渐进加载
 
 大图可通过给 `loader` 传递一个小一些的图片，让其在原图未被加载成功时显示，以此来模拟渐进加载。
-
-`loader` to display it when the original image is not successfully loaded to simulate progressive loading.
 
 ```tsx
 import React from 'react';
 import { Image, Button } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [timestamp, setTimestamp] = React.useState('');
+  const [timestamp, setTimestamp] = React.useState<number | ''>('');
   return (
     <div>
       <div>
@@ -331,11 +275,9 @@ export default App;
 
 通过设置 `actionsLayout` 可以调整预览控制条中功能按钮的顺序，同时可以过滤功能按钮，只有在 actionsLayout 中的按钮才会出现。其中 `extra` 代表 `actions` 中的按钮，而且 `actions` 中的 `key` 也支持单独拿出来排序。
 
-`actionLayout`. Among them, `extra` represents the buttons in `actions`, and the `key` in `actions` also supports separate sorting.
-
 ```tsx
-import { Image, Tooltip, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconDownload, IconInfoCircle } from '@arco-design/web-react/icon';
+import { Image, Tooltip } from '@xiaoyaoliu/x-arco-design';
+import { DownloadOutlined, InfoCircleOutlined } from '@easyv/react-icons';
 
 function App() {
   return (
@@ -346,12 +288,12 @@ function App() {
         actions: [
           {
             key: 'download',
-            content: <IconDownload />,
+            content: <DownloadOutlined />,
             name: 'Download',
           },
           {
             key: 'info',
-            content: <IconInfoCircle />,
+            content: <InfoCircleOutlined />,
             name: 'Info',
             getContainer: (action) => {
               return <Tooltip content="A user’s avatar">{action}</Tooltip>;
@@ -371,8 +313,6 @@ export default App;
 ## 多图预览
 
 用 `<Image.PreviewGroup>` 包裹 `<Image>` 组件即可进行多图预览。
-
-`<Image.PreviewGroup>` to wrap the `<Image>` component to preview multiple images.
 
 ```tsx
 import { Image, Space } from '@xiaoyaoliu/x-arco-design';
@@ -411,8 +351,6 @@ export default App;
 
 `Image.Preview` 可单独使用，需要配置 `src`，并控制 `visible`。
 
-`Image.Preview` can be used alone, you need to set `src` and control `visible`.
-
 ```tsx
 import React from 'react';
 import { Image, Button } from '@xiaoyaoliu/x-arco-design';
@@ -439,8 +377,6 @@ export default App;
 ## 单独使用多图预览组件
 
 `Image.PreviewGroup` 可单独使用，需通过 `visible` 和 `onVisibleChange` 控制显隐。在图片的展示上分为两种场景，一是通过 `defaultCurrent` 指定第一张展示的图片；二是通过 `current` 和 `onChange` 以受控的方式控制当前显示的是第几张图片。
-
-`Image.PreviewGroup` can be used alone, with `visible` and `onVisibleChange` to control its visibility. The image display is divided into two scenes. One is to specify the first image to be displayed by `defaultCurrent`. The other one is to control which image is currently displayed by `current` and `onChange`.
 
 ```tsx
 import React from 'react';
@@ -475,13 +411,11 @@ export default App;
 
 可以通过 `getPopupContainer` 指定预览挂载的父级节点。
 
-`getPopupContainer` to specify the parent node where the preview should mount to.
-
 ```tsx
 import React from 'react';
 import { Image } from '@xiaoyaoliu/x-arco-design';
 
-const wrapperStyle = {
+const wrapperStyle: React.CSSProperties = {
   width: '100%',
   height: 400,
   backgroundColor: 'var(--color-fill-2)',
@@ -492,7 +426,7 @@ const wrapperStyle = {
 };
 
 function App() {
-  const ref = React.useRef();
+  const ref = React.useRef<HTMLDivElement>(null!);
   return (
     <div style={wrapperStyle} ref={ref}>
       <Image
@@ -515,12 +449,9 @@ export default App;
 
 设置 `lazyload` 可以开启懒加载，当图片出现在视口才会进行加载。`lazyload` 属性基于 **[IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)** 实现
 
-`slazyload` to enable lazy loading, and the image will only be loaded when it appears in the viewport
-
-The `lazyload` attribute is implemented based on **[IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)**
-
 ```tsx
 import { Image, Space, Skeleton } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 const imageSize = { width: 380, height: 150 };
 const srcList = [
   '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/volcengine-solutions-medical.png~tplv-uwbnlip3yd-png.png',
@@ -549,18 +480,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.image-demo-wrapper {
-  padding: 100px 20px;
-  width: 100%;
-  height: 300px;
-  box-sizing: border-box;
-  background-color: var(--color-fill-1);
-  overflow: auto;
-  align-items: center;
-}
 ```
 
 ## API

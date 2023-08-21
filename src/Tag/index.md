@@ -8,7 +8,7 @@
 
 ```tsx
 import { Tag, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconCheckCircleFill } from '@arco-design/web-react/icon';
+import { CheckCircleFilled } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
       <Tag>Default</Tag>
       <Tag>Tag 1</Tag>
       <Tag>Tag 2</Tag>
-      <Tag icon={<IconCheckCircleFill />}>Complete</Tag>
+      <Tag icon={<CheckCircleFilled />}>Complete</Tag>
     </Space>
   );
 };
@@ -28,12 +28,10 @@ export default App;
 
 可设置 `closable` 属性控制标签是否可关闭，可关闭标签可通过 `onClose` 事件执行一些关闭后操作。也可通过 `visible` 属性控制标签的显示隐藏。
 
-`closable` attribute can be set to control whether the label can be closed, and the closed label can perform some post-closing operations through the `onClose` event. You can also control the display and hide of the label through the `visible` property.
-
 ```tsx
 import { useState } from 'react';
-import { Tag, Button, Switch, Typography } from '@xiaoyaoliu/x-arco-design';
-import { IconStar } from '@arco-design/web-react/icon';
+import { Tag, Switch, Typography } from '@xiaoyaoliu/x-arco-design';
+import { StarOutlined } from '@easyv/react-icons';
 
 function App() {
   const [visible, setVisible] = useState(true);
@@ -52,7 +50,7 @@ function App() {
       >
         Tag
       </Tag>
-      <Tag icon={<IconStar />} closable visible={visible} onClose={onClose}>
+      <Tag icon={<StarOutlined />} closable visible={visible} onClose={onClose}>
         Tag
       </Tag>
       <div style={{ marginTop: 24 }}>
@@ -74,8 +72,6 @@ export default App;
 ## 可选中
 
 通过参数 `checkable`，可以实现点击选中的效果。
-
-`checkable`, the effect of clicking and selecting can be achieved.
 
 ```tsx
 import { Tag, Space } from '@xiaoyaoliu/x-arco-design';
@@ -100,8 +96,6 @@ export default App;
 ## 多色标签
 
 我们提供多种预设色彩的标签样式，通过 `color` 设置不同颜色。如果预设值不能满足你的需求，`color` 字段也可以设置自定义色值。
-
-`color`. If the preset value cannot meet your needs, you can also set a custom color value in the `color` field.
 
 ```tsx
 import { Tag } from '@xiaoyaoliu/x-arco-design';
@@ -173,8 +167,9 @@ export default App;
 
 ```tsx
 import { useState } from 'react';
-import { Tag, Button, Input, Message, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
+import { Tag, Input, Space } from '@xiaoyaoliu/x-arco-design';
+import { PlusOutlined } from '@easyv/react-icons';
+import './demo.css';
 
 function App() {
   const [tags, setTags] = useState(['Tag 1', 'Tag 2', 'Tag 3']);
@@ -191,7 +186,7 @@ function App() {
     setShowInput(false);
   }
 
-  function removeTag(removeTag) {
+  function removeTag(removeTag: string) {
     const newTags = tags.filter((tag) => tag !== removeTag);
     setTags(newTags);
   }
@@ -217,7 +212,7 @@ function App() {
         />
       ) : (
         <Tag
-          icon={<IconPlus />}
+          icon={<PlusOutlined />}
           style={{
             width: 84,
             backgroundColor: 'var(--color-fill-2)',
@@ -243,12 +238,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.add-tag:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
 ```
 
 ## 不同尺寸
@@ -284,8 +273,6 @@ export default App;
 
 如果 `onClose` 返回一个 `Promise`，可以异步关闭标签，并且在未关闭时展示加载效果。
 
-`onClose` returns a `Promise`, the tag can be closed asynchronously and the loading effect will be displayed when it is not closed.
-
 ```tsx
 import { Tag, Message } from '@xiaoyaoliu/x-arco-design';
 
@@ -297,7 +284,7 @@ const App = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             if (Math.random() >= 0.5) {
-              resolve();
+              resolve('');
             } else {
               Message.error('Close failed');
               reject();
@@ -323,25 +310,25 @@ export default App;
 ```tsx
 import { Tag, Space } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconGitlab,
-  IconTwitter,
-  IconGithub,
-  IconFacebook,
-} from '@arco-design/web-react/icon';
+  GitlabOutlined,
+  TwitterOutlined,
+  GithubOutlined,
+  FacebookOutlined,
+} from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
-      <Tag color="gray" icon={<IconGithub />}>
+      <Tag color="gray" icon={<GithubOutlined />}>
         Github
       </Tag>
-      <Tag color="orangered" icon={<IconGitlab />}>
-        Gitlab
+      <Tag color="orangered" icon={<GitlabOutlined />}>
+        GitlabOutlined
       </Tag>
-      <Tag color="blue" icon={<IconTwitter />}>
+      <Tag color="blue" icon={<TwitterOutlined />}>
         Twitter
       </Tag>
-      <Tag color="arcoblue" icon={<IconFacebook />}>
+      <Tag color="arcoblue" icon={<FacebookOutlined />}>
         Facebook
       </Tag>
     </Space>
@@ -354,8 +341,6 @@ export default App;
 ## 带边框的标签
 
 通过参数 `bordered`，可以显示带边框的标签。
-
-`bordered` to display a bordered tag.
 
 ```tsx
 import { Tag, Space } from '@xiaoyaoliu/x-arco-design';

@@ -10,7 +10,8 @@
       "@@/*": [".dumi/tmp/*"],
       "@xiaoyaoliu/x-arco-design": ["src"],
       "@xiaoyaoliu/x-arco-design/*": ["src/*", "*"]
-    }
+    },
+    "noImplicitAny": false
   },
   "include": [".dumi/**/*", ".dumirc.ts", "src/**/*", "backup/Button"]
 }

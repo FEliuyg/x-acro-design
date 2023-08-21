@@ -20,7 +20,17 @@ export { default as Checkbox } from './Checkbox';
 export { default as Collapse } from './Collapse';
 export { default as Comment } from './Comment';
 export { default as ConfigProvider } from './ConfigProvider';
+
 export { default as DatePicker } from './DatePicker';
+export type {
+  DatePickerProps,
+  YearPickerProps,
+  MonthPickerProps,
+  QuarterPickerProps,
+  WeekPickerProps,
+  RangePickerProps,
+} from './DatePicker';
+
 export { default as Descriptions } from './Descriptions';
 export { default as Divider } from './Divider';
 

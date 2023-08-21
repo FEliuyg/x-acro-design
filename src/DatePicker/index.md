@@ -34,7 +34,7 @@ const App = () => {
         />
         <DatePicker.RangePicker
           status="error"
-          placeholder="warning status"
+          placeholder={['warning status']}
           style={{ width: 250 }}
         />
       </Space>
@@ -47,7 +47,7 @@ const App = () => {
         />
         <DatePicker.RangePicker
           status="warning"
-          placeholder="warning status"
+          placeholder={['warning status']}
           style={{ width: 250 }}
         />
       </Space>
@@ -62,19 +62,17 @@ export default App;
 
 通过 `prefix` 属性设置前缀
 
-`prefix` property
-
 ```tsx
 import { DatePicker, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconInfoCircle } from '@arco-design/web-react/icon';
+import { InfoCircleOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space>
-      <DatePicker style={{ width: 200 }} prefix={<IconInfoCircle />} />
+      <DatePicker style={{ width: 200 }} prefix={<InfoCircleOutlined />} />
       <DatePicker.RangePicker
         style={{ width: 350 }}
-        prefix={<IconInfoCircle />}
+        prefix={<InfoCircleOutlined />}
       />
     </Space>
   );
@@ -146,8 +144,6 @@ export default App;
 
 使用 `showTime` 可以使用带时间的日期选择。
 
-`showTime` to select a date with time.
-
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
 const { RangePicker } = DatePicker;
@@ -214,6 +210,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { DatePicker, Radio, Space } from '@xiaoyaoliu/x-arco-design';
+import type { RangePickerProps } from '@xiaoyaoliu/x-arco-design';
 const { RangePicker } = DatePicker;
 
 function onSelect(dateString, date) {
@@ -225,7 +222,9 @@ function onChange(dateString, date) {
 }
 
 function App() {
-  const [value, setValue] = useState('date');
+  const [value, setValue] = useState<RangePickerProps['mode'] | 'date time'>(
+    'date',
+  );
   const mode = value === 'date time' ? 'date' : value;
   const style =
     value === 'date time'
@@ -347,15 +346,13 @@ export default App;
 
 使用 `disabledDate` 可以禁用某些日期，`2.5.0` 开始支持 `disabledTime` 禁用时间，需要配合 `showTime` 使用。
 
-`disabledDate` to disable specified dates. `2.5.0` starts to support `disabledTime` to disable time, which needs to be used with `showTime`.
-
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
 import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
 function range(start, end) {
-  const result = [];
+  const result: number[] = [];
 
   for (let i = start; i < end; i++) {
     result.push(i);
@@ -417,8 +414,6 @@ export default App;
 ## 预设时间快捷选择
 
 使用 `shortcuts` 可以预设时间快捷选择。
-
-`shortcuts` to preset time for quick selection.
 
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
@@ -501,8 +496,6 @@ export default App;
 
 使用 `shortcutsPlacementLeft` 可以将预设时间快捷选择放到左边。
 
-`shortcutsPlacementLeft` to place the shortcuts to the left.
-
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
 import dayjs from 'dayjs';
@@ -578,8 +571,6 @@ export default App;
 
 根据选择的值来控制选取的范围，使用 `onSelect` 配合 `disabledDate` 来实现。如果设置了 `showTime` 需要将比较维度转化为 `day`。
 
-`onSelect` and `disabledDate`. If `showTime` is set, the comparison dimension needs to be converted to `day`.
-
 ```tsx
 import { useState } from 'react';
 import { DatePicker, Space } from '@xiaoyaoliu/x-arco-design';
@@ -587,8 +578,8 @@ import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
 function App() {
-  const [dates, setDates] = useState([]);
-  const [timeDates, setTimeDates] = useState([]);
+  const [dates, setDates] = useState<dayjs.Dayjs[]>([]);
+  const [timeDates, setTimeDates] = useState<dayjs.Dayjs[]>([]);
 
   return (
     <Space size={24} direction="vertical">
@@ -652,16 +643,15 @@ export default App;
 
 设置 `size` 可以使用四种尺寸（`mini` `small` `default` `large`）的输入框。高度分别对应 24px、32px、36px、40px。
 
-`size` can use four sizes (`mini` `small` `default` `large`). The height corresponds to 24px, 32px, 36px, 40px.
-
 ```tsx
 import React from 'react';
 import { Radio, DatePicker } from '@xiaoyaoliu/x-arco-design';
+import type { DatePickerProps } from '@xiaoyaoliu/x-arco-design';
 
 const RadioGroup = Radio.Group;
 
 class App extends React.Component {
-  state = {
+  state: { size: DatePickerProps['size'] } = {
     size: 'default',
   };
   handleChange = (size) => {
@@ -733,7 +723,6 @@ export default App;
 
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
-import dayjs from 'dayjs';
 
 const App = () => {
   return (
@@ -751,7 +740,7 @@ const App = () => {
       />
       <br />
       <DatePicker.RangePicker
-        defaultValue={[undefined, '2020-08-08']}
+        defaultValue={['', '2020-08-08']}
         disabled={[false, true]}
         style={{ width: 300, marginBottom: 20 }}
       />
@@ -772,8 +761,6 @@ export default App;
 ## 定制日期单元格
 
 利用 `dateRender` 可以定制日期单元格。
-
-`dateRender` to customize date cells.
 
 ```tsx
 import { DatePicker } from '@xiaoyaoliu/x-arco-design';
@@ -810,18 +797,16 @@ export default App;
 
 `value` 和 `onChange` 应该一起使用。
 
-`value` and `onChange` should be used together,
-
 ```tsx
 import { useState, useEffect } from 'react';
 import { DatePicker, Space } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [value, setValue] = useState();
-  const [valueRange, setValueRange] = useState();
+  const [value, setValue] = useState<string>();
+  const [valueRange, setValueRange] = useState<string[]>();
   useEffect(() => {
-    setValue(Date.now());
-    setValueRange([Date.now(), Date.now()]);
+    setValue('' + Date.now());
+    setValueRange(['' + Date.now(), '' + Date.now()]);
   }, []);
   return (
     <Space>
@@ -853,8 +838,8 @@ import { useState } from 'react';
 import { DatePicker, Button, Space } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [value, setValue] = useState();
-  const [rangeValue, setRangeValue] = useState();
+  const [value, setValue] = useState<string>();
+  const [rangeValue, setRangeValue] = useState<string[]>();
   return (
     <Space>
       <DatePicker
@@ -886,13 +871,13 @@ export default App;
 
 ```tsx
 import { useState } from 'react';
-import { DatePicker, Button } from '@xiaoyaoliu/x-arco-design';
+import { DatePicker } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [value, setValue] = useState();
-  const [pickerValue, setPickerValue] = useState();
-  const [rangeValue, setRangeValue] = useState();
-  const [rangePickerValue, setRangePickerValue] = useState();
+  const [value, setValue] = useState<string>();
+  const [pickerValue, setPickerValue] = useState<string>();
+  const [rangeValue, setRangeValue] = useState<string[]>();
+  const [rangePickerValue, setRangePickerValue] = useState<string[]>();
   return (
     <div>
       <DatePicker
@@ -924,10 +909,6 @@ export default App;
 
 **注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
 
-`utcOffset` to set the UTC time.
-
-**Note: When using UTC or time zonetime, use timestamp or Date object when passing value. Strings cannot represent unique time, which will cause trouble.**
-
 ```tsx
 import { useState } from 'react';
 import {
@@ -938,8 +919,7 @@ import {
   Alert,
   Tag,
 } from '@xiaoyaoliu/x-arco-design';
-const utcList = [];
-const utcLength = 25;
+const utcList: { label: string; value: number }[] = [];
 let uo = -12;
 
 for (let i = 0; i < 25; i++) {
@@ -1043,10 +1023,6 @@ export default App;
 通过 `timezone` 字段设置时区，如果设置了 `utcOffset`，以 `utcOffset` 为准。
 
 **注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
-
-`timezone` to set timezone, if set the `utcOffset`, `utcOffset` takes effect.
-
-**Note: When using UTC or time zonetime, use timestamp or Date object when passing value. Strings cannot represent unique time, which will cause trouble.**
 
 ```tsx
 import { useState } from 'react';
@@ -1183,50 +1159,46 @@ export default App;
 
 ### Picker Props
 
-| 参数名                                                   | 描述                                                             | 类型                                                                                                       | 默认值    | 版本              |
-| -------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- | ----------------- |
-| allowClear                                               | 允许清除                                                         | boolean                                                                                                    | `true`    | -                 |
-| editable                                                 | 是否可输入。                                                     | boolean                                                                                                    | `true`    | -                 |
-| error                                                    | 是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代) | boolean                                                                                                    | `-`       | -                 |
-| hideNotInViewDates                                       | 面板隐藏不在当前时间范围的灰色日期                               | boolean                                                                                                    | `-`       | 2.20.0            |
-| popupVisible                                             | 指定弹框打开或者关闭状态。                                       | boolean                                                                                                    | `-`       | -                 |
-| open                                                     | 指定弹框打开或者关闭状态。                                       | boolean                                                                                                    | `-`       | -                 |
-| shortcutsPlacementLeft                                   | 预设范围选择放在面板左侧，用于大量预设时间的场景。               | boolean                                                                                                    | `-`       | -                 |
-| unmountOnExit                                            | 是否在隐藏的时候销毁 DOM 结构                                    | boolean                                                                                                    | `-`       | -                 |
-| utcOffset                                                | 设置时区偏移，如果需要 utc 时间则设置为 0。                      | number                                                                                                     | `-`       | -                 |
-| timezone                                                 | 设置时区, 如果设置了 `utcOffset`，则以 `utcOffset` 为准。        | string                                                                                                     | `-`       | -                 |
-| position                                                 | 弹出的框的位置                                                   | 'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br'                                                          | `-`       | -                 |
-| size                                                     | 日期选择器的尺寸                                                 | 'mini' \| 'small' \| 'default' \| 'large'                                                                  | `default` | -                 |
-| status                                                   | 状态                                                             | 'error' \| 'warning'                                                                                       | `-`       | 2.45.0            |
-| extra                                                    | 额外的页脚                                                       | ReactNode                                                                                                  | `-`       | -                 |
-| renderExtraFooter                                        | 额外的页脚                                                       | ReactNode                                                                                                  | `-`       | -                 |
-| prefix                                                   | 前缀                                                             | () => ReactNode                                                                                            | `-`       | -                 |
-| separator                                                | 范围选择器输入框内的分割符号                                     | ReactNode                                                                                                  | `-`       | -                 |
-| triggerElement                                           | 触发元素。                                                       | ReactNode                                                                                                  | `-`       | 2.9.0             |
-| className                                                | 节点类名                                                         | string \| string[]                                                                                         | `-`       | -                 |
-| dayStartOfWeek                                           | 每周的第一天开始于周几，0 - 周日，1 - 周一，以此类推。           | 0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6                                                                            | `-`       | 2 - 6 in `2.20.0` |
-| defaultPickerValue                                       | 默认面板显示的日期                                               | [CalendarValue](#calendarvalue)                                                                            | `-`       | -                 |
-| disabled                                                 | 是否禁用                                                         | boolean \| boolean[]                                                                                       | `-`       | -                 |
-| icons                                                    | 日历翻页的图标配置。                                             | {prev?: ReactNode;prevDouble?: ReactNode;next?: ReactNode;nextDouble?: ReactNode;inputSuffix?: ReactNode;} | `-`       | 2.20.0            |
-| prevIcon/nextIcon/superNextIcon/superPrevIcon/suffixIcon | 日历翻页的图标配置。                                             | React.ReactNode                                                                                            | `-`       | 2.20.0            |
-| locale                                                   | 国际化配置                                                       | Record&lt;string, any&gt;                                                                                  | `-`       | -                 |
-| pickerValue                                              | 面板显示的日期。                                                 | [CalendarValue](#calendarvalue)                                                                            | `-`       | 2.9.0             |
-| placeholder                                              | 提示文案                                                         | string \| string[]                                                                                         | `-`       | -                 |
-| shortcuts                                                | 预设时间范围快捷选择                                             | [ShortcutType](#shortcuttype)[]                                                                            | `-`       | -                 |
-| style                                                    | 节点样式                                                         | CSSProperties                                                                                              | `-`       | -                 |
-| triggerProps                                             | 可以传入 `Trigger` 组件的参数。                                  | Partial&lt;[TriggerProps](trigger#trigger)&gt;                                                             | `-`       | -                 |
-| dateRender                                               | 自定义日期单元格的内容。                                         | (currentDate: Dayjs) => ReactNode                                                                          | `-`       | -                 |
-| disabledDate                                             | 不可选取的日期                                                   | (current: Dayjs) => boolean                                                                                | `-`       | -                 |
-| getPopupContainer                                        | 弹出框挂载的父节点                                               | (node: HTMLElement) => Element                                                                             | `bl`      | -                 |
-| onChange                                                 | 日历组件值发生改变时的回调                                       | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
-| onClear                                                  | 点击清除按钮后的回调                                             | () => void                                                                                                 | `-`       | -                 |
-| onOk                                                     | 点击确认按钮的回调                                               | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
-| onPickerValueChange                                      | 面板日期改变的回调。                                             | (dateString: string, value: Dayjs) => void                                                                 | `-`       | 2.9.0             |
-| onSelect                                                 | 选中日期发生改变但组件值未改变时的回调                           | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
-| onSelectShortcut                                         | 点击快捷选择时的回调。                                           | (shortcut: [ShortcutType](#shortcuttype)) => void                                                          | `-`       | -                 |
-| onVisibleChange                                          | 打开或关闭时的回调                                               | (visible?: boolean) => void                                                                                | `-`       | -                 |
-| onOpenChange                                             | 打开或关闭时的回调                                               | (visible?: boolean) => void                                                                                | `-`       | -                 |
-| panelRender                                              | 自定义渲染面板                                                   | (panelNode: ReactNode) => ReactNode                                                                        | `-`       | 2.34.0            |
+| 参数名                 | 描述                                                             | 类型                                                                                                       | 默认值    | 版本              |
+| ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- | ----------------- |
+| allowClear             | 允许清除                                                         | boolean                                                                                                    | `true`    | -                 |
+| editable               | 是否可输入。                                                     | boolean                                                                                                    | `true`    | -                 |
+| error                  | 是否是错误状态。(废弃，下个大版本移除，使用 status='error' 替代) | boolean                                                                                                    | `-`       | -                 |
+| hideNotInViewDates     | 面板隐藏不在当前时间范围的灰色日期                               | boolean                                                                                                    | `-`       | 2.20.0            |
+| popupVisible           | 指定弹框打开或者关闭状态。                                       | boolean                                                                                                    | `-`       | -                 |
+| shortcutsPlacementLeft | 预设范围选择放在面板左侧，用于大量预设时间的场景。               | boolean                                                                                                    | `-`       | -                 |
+| unmountOnExit          | 是否在隐藏的时候销毁 DOM 结构                                    | boolean                                                                                                    | `-`       | -                 |
+| utcOffset              | 设置时区偏移，如果需要 utc 时间则设置为 0。                      | number                                                                                                     | `-`       | -                 |
+| timezone               | 设置时区, 如果设置了 `utcOffset`，则以 `utcOffset` 为准。        | string                                                                                                     | `-`       | -                 |
+| position               | 弹出的框的位置                                                   | 'top' \| 'tl' \| 'tr' \| 'bottom' \| 'bl' \| 'br'                                                          | `-`       | -                 |
+| size                   | 日期选择器的尺寸                                                 | 'mini' \| 'small' \| 'default' \| 'large'                                                                  | `default` | -                 |
+| status                 | 状态                                                             | 'error' \| 'warning'                                                                                       | `-`       | 2.45.0            |
+| extra                  | 额外的页脚                                                       | ReactNode                                                                                                  | `-`       | -                 |
+| prefix                 | 前缀                                                             | () => ReactNode                                                                                            | `-`       | -                 |
+| separator              | 范围选择器输入框内的分割符号                                     | ReactNode                                                                                                  | `-`       | -                 |
+| triggerElement         | 触发元素。                                                       | ReactNode                                                                                                  | `-`       | 2.9.0             |
+| className              | 节点类名                                                         | string \| string[]                                                                                         | `-`       | -                 |
+| dayStartOfWeek         | 每周的第一天开始于周几，0 - 周日，1 - 周一，以此类推。           | 0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6                                                                            | `-`       | 2 - 6 in `2.20.0` |
+| defaultPickerValue     | 默认面板显示的日期                                               | [CalendarValue](#calendarvalue)                                                                            | `-`       | -                 |
+| disabled               | 是否禁用                                                         | boolean \| boolean[]                                                                                       | `-`       | -                 |
+| icons                  | 日历翻页的图标配置。                                             | {prev?: ReactNode;prevDouble?: ReactNode;next?: ReactNode;nextDouble?: ReactNode;inputSuffix?: ReactNode;} | `-`       | 2.20.0            |
+| locale                 | 国际化配置                                                       | Record&lt;string, any&gt;                                                                                  | `-`       | -                 |
+| pickerValue            | 面板显示的日期。                                                 | [CalendarValue](#calendarvalue)                                                                            | `-`       | 2.9.0             |
+| placeholder            | 提示文案                                                         | string \| string[]                                                                                         | `-`       | -                 |
+| shortcuts              | 预设时间范围快捷选择                                             | [ShortcutType](#shortcuttype)[]                                                                            | `-`       | -                 |
+| style                  | 节点样式                                                         | CSSProperties                                                                                              | `-`       | -                 |
+| triggerProps           | 可以传入 `Trigger` 组件的参数。                                  | Partial&lt;[TriggerProps](trigger#trigger)&gt;                                                             | `-`       | -                 |
+| dateRender             | 自定义日期单元格的内容。                                         | (currentDate: Dayjs) => ReactNode                                                                          | `-`       | -                 |
+| disabledDate           | 不可选取的日期                                                   | (current: Dayjs) => boolean                                                                                | `-`       | -                 |
+| getPopupContainer      | 弹出框挂载的父节点                                               | (node: HTMLElement) => Element                                                                             | `bl`      | -                 |
+| onChange               | 日历组件值发生改变时的回调                                       | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
+| onClear                | 点击清除按钮后的回调                                             | () => void                                                                                                 | `-`       | -                 |
+| onOk                   | 点击确认按钮的回调                                               | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
+| onPickerValueChange    | 面板日期改变的回调。                                             | (dateString: string, value: Dayjs) => void                                                                 | `-`       | 2.9.0             |
+| onSelect               | 选中日期发生改变但组件值未改变时的回调                           | (dateString: string, date: Dayjs) => void                                                                  | `-`       | -                 |
+| onSelectShortcut       | 点击快捷选择时的回调。                                           | (shortcut: [ShortcutType](#shortcuttype)) => void                                                          | `-`       | -                 |
+| onVisibleChange        | 打开或关闭时的回调                                               | (visible?: boolean) => void                                                                                | `-`       | -                 |
+| panelRender            | 自定义渲染面板                                                   | (panelNode: ReactNode) => ReactNode                                                                        | `-`       | 2.34.0            |
 
 ### DatePicker
 

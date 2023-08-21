@@ -7,9 +7,10 @@
 最简单的使用。
 
 ```tsx
+import React from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -44,14 +45,15 @@ export default App;
 通过自定义的 title, 可以给页签加 icon。
 
 ```tsx
+import React from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconCalendar,
-  IconClockCircle,
-  IconUser,
-} from '@arco-design/web-react/icon';
+  CalendarOutlined,
+  ClockCircleOutlined,
+  UserOutlined,
+} from '@easyv/react-icons';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -63,7 +65,7 @@ const App = () => {
         key="1"
         title={
           <span>
-            <IconCalendar style={{ marginRight: 6 }} />
+            <CalendarOutlined style={{ marginRight: 6 }} />
             Tab 1
           </span>
         }
@@ -76,7 +78,7 @@ const App = () => {
         key="2"
         title={
           <span>
-            <IconClockCircle style={{ marginRight: 6 }} />
+            <ClockCircleOutlined style={{ marginRight: 6 }} />
             Tab 2
           </span>
         }
@@ -90,7 +92,7 @@ const App = () => {
         key="3"
         title={
           <span>
-            <IconUser style={{ marginRight: 6 }} />
+            <UserOutlined style={{ marginRight: 6 }} />
             Tab 3
           </span>
         }
@@ -110,19 +112,19 @@ export default App;
 
 通过 `tabPosition` 设置位置。
 
-`tabPosition`.
-
 ```tsx
+import React from 'react';
 import { useState } from 'react';
 import { Tabs, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
+import type { TabsProps } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
 
 function App() {
-  const [position, setPosition] = useState('top');
+  const [position, setPosition] = useState<TabsProps['tabPosition']>('top');
   return (
     <div>
       <Radio.Group
@@ -162,19 +164,19 @@ export default App;
 
 使用 `type` 属性设置不同类型的页签。
 
-`type` to set the type of the tab.
-
 ```tsx
+import React from 'react';
 import { useState } from 'react';
 import { Tabs, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
+import type { TabsProps } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
 
 function App() {
-  const [type, setType] = useState('line');
+  const [type, setType] = useState<TabsProps['type']>('line');
   return (
     <div>
       <Radio.Group
@@ -224,12 +226,11 @@ export default App;
 
 通过 `extra` 可以在页签的右侧添加额外内容。
 
-`extra`.
-
 ```tsx
+import React from 'react';
 import { Tabs, Button, Typography } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -270,14 +271,12 @@ export default App;
 
 动态增减页签。仅在 `type=card | card-gutter`的时候生效。
 
-`type=card | card-gutter`.
-
 ```tsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
 let count = 5;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -343,13 +342,11 @@ export default App;
 
 通过 `activeTab` 开启受控模式。
 
-`activeTab`.
-
 ```tsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -385,9 +382,10 @@ export default App;
 组件可以嵌套使用。
 
 ```tsx
+import React from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -433,20 +431,20 @@ export default App;
 
 使用 `size` 属性设置不同尺寸的页签。
 
-`Size` to set the size of the tab.
-
 ```tsx
+import React from 'react';
 import { useState } from 'react';
 import { Tabs, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
+import type { TabsProps } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
 
 function App() {
-  const [type, setType] = useState('line');
-  const [size, setSize] = useState('default');
+  const [type, setType] = useState<TabsProps['type']>('line');
+  const [size, setSize] = useState<TabsProps['size']>('default');
   return (
     <div>
       <span style={{ marginRight: 20 }}>Size:</span>
@@ -510,13 +508,12 @@ export default App;
 
 使用 `react-sticky` 实现选项卡头部吸顶效果。
 
-`react-sticky` to fix the tab head to the top.
-
 ```tsx
+import React from 'react';
 import { Tabs, Typography } from '@xiaoyaoliu/x-arco-design';
 import { StickyContainer, Sticky } from 'react-sticky';
 const TabPane = Tabs.TabPane;
-const style = {
+const style: React.CSSProperties = {
   textAlign: 'center',
   marginTop: 20,
 };
@@ -569,8 +566,6 @@ export default App;
 ## 可拖拽页签
 
 通过 `react-dnd` 可以实现页签的拖拽。
-
-`react-dnd` to realize the drag and drop of tabs.
 
 ```tsx
 import React, { useRef, useState } from 'react';
@@ -703,6 +698,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tabs, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { TabsProps } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
 const paneStyle = {
   width: '100%',
@@ -717,7 +713,8 @@ const tabs = [...new Array(30)].map((x, i) => ({
 }));
 
 function App() {
-  const [direction, setDirection] = useState('horizontal');
+  const [direction, setDirection] =
+    useState<TabsProps['direction']>('horizontal');
   return (
     <div>
       <Radio.Group
@@ -753,6 +750,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tabs, Radio, Space } from '@xiaoyaoliu/x-arco-design';
+import type { TabsProps } from '@xiaoyaoliu/x-arco-design';
 const TabPane = Tabs.TabPane;
 const paneStyle = {
   width: '100%',
@@ -767,8 +765,9 @@ const tabs = [...new Array(30)].map((x, i) => ({
 }));
 
 function App() {
-  const [direction, setDirection] = useState('horizontal');
-  const [position, setPosition] = useState('auto');
+  const [direction, setDirection] =
+    useState<TabsProps['direction']>('horizontal');
+  const [position, setPosition] = useState<TabsProps['scrollPosition']>('auto');
   return (
     <div>
       <Space direction="vertical" style={{ marginBottom: 40 }}>

@@ -89,6 +89,8 @@ export { default as Table } from './Table';
 export type { TableProps, TableColumnProps } from './Table';
 
 export { default as Tabs } from './Tabs';
+export type { TabsProps } from './Tabs';
+
 export { default as Timeline } from './Timeline';
 export { default as TimePicker } from './TimePicker';
 export { default as Tooltip } from './Tooltip';

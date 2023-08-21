@@ -7,16 +7,15 @@
 头像的基础使用。如果头像是文字的话，会自动调节字体大小，来适应头像框。
 
 ```tsx
-import { Avatar, Typography, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconUser } from '@arco-design/web-react/icon';
-const { Text } = Typography;
+import { Avatar, Space } from '@xiaoyaoliu/x-arco-design';
+import { UserOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
       <Avatar>A</Avatar>
       <Avatar style={{ backgroundColor: '#3370ff' }}>
-        <IconUser />
+        <UserOutlined />
       </Avatar>
       <Avatar style={{ backgroundColor: '#14a9f8' }}>Arco</Avatar>
       <Avatar style={{ backgroundColor: '#00d0b6' }}>Design</Avatar>
@@ -36,8 +35,6 @@ export default App;
 ## 大小和形状
 
 通过设置 `size` 字段，可以调节头像的大小，默认大小为 `40px`。设置 `shape` 字段，可以设置头像是圆形 (circle) 还是正方形 (square)。
-
-`size` to set the size of the avatar, which defaults to `40px`. Two `shape`s are available for the avatar: `circle` and `square`.
 
 ```tsx
 import { Avatar, Space } from '@xiaoyaoliu/x-arco-design';
@@ -76,8 +73,6 @@ export default App;
 
 使用 `Avatar.Group` 可以使用头像组功能，可通过 `size` 指定头像的大小。
 
-`Avatar.Group` to group a list of avatars. `size` can be used to specify the size of each avatar.
-
 ```tsx
 import { Avatar } from '@xiaoyaoliu/x-arco-design';
 const AvatarGroup = Avatar.Group;
@@ -111,22 +106,15 @@ export default App;
 
 可以通过 `triggerIcon` `triggerType` 来定制交互按钮，类型有 `mask (遮罩)` 和 `button (按钮)` 两种，通过 `onClick` 参数来添加回调。
 
-`triggerIcon` and `triggerType`. Two types are available: `mask` and `button`. Callbacks can be added through the `onClick` parameter.
-
 ```tsx
 import { Avatar, Message, Space } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconUser,
-  IconCamera,
-  IconEdit,
-  IconClose,
-} from '@arco-design/web-react/icon';
+import { UserOutlined, CameraOutlined, EditOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space size="large">
       <Avatar
-        triggerIcon={<IconCamera />}
+        triggerIcon={<CameraOutlined />}
         triggerIconStyle={{
           color: '#3491FA',
         }}
@@ -139,21 +127,21 @@ const App = () => {
         A
       </Avatar>
       <Avatar
-        triggerIcon={<IconEdit />}
+        triggerIcon={<EditOutlined />}
         onClick={() => Message.info('Upload...')}
         style={{ backgroundColor: '#14C9C9' }}
       >
-        <IconUser />
+        <UserOutlined />
       </Avatar>
       <Avatar
         shape="square"
-        triggerIcon={<IconEdit />}
+        triggerIcon={<EditOutlined />}
         onClick={() => Message.info('Upload...')}
         style={{ backgroundColor: '#FFC72E' }}
       >
-        <IconUser />
+        <UserOutlined />
       </Avatar>
-      <Avatar triggerIcon={<IconCamera />} triggerType="mask">
+      <Avatar triggerIcon={<CameraOutlined />} triggerType="mask">
         <img
           alt="avatar"
           src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"

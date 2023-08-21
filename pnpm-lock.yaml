@@ -14,11 +14,11 @@ dependencies:
 
 devDependencies:
   '@arco-design/web-react':
-    specifier: 2.51.2
-    version: 2.51.2(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 2.52.0
+    version: 2.52.0(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
   '@arco-themes/react-dtable':
     specifier: 0.0.29
-    version: 0.0.29(@arco-design/web-react@2.51.2)
+    version: 0.0.29(@arco-design/web-react@2.52.0)
   '@commitlint/cli':
     specifier: ^17.1.2
     version: 17.6.6
@@ -144,8 +144,8 @@ packages:
       color: 3.2.1
     dev: true
 
-  /@arco-design/web-react@2.51.2(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-y5KSzHOocetQ967TupTvPAdNSs8bUCOeadfBzQ+DQYBHrlSKQY3/3jFQ7a+NIAsN9BQQUQx0LNNiJD2bw6cEoQ==}
+  /@arco-design/web-react@2.52.0(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-c5DkPUj6F9fTaUqwKz0mYhYcoVLbCcC9VDt/hJammc94qVk9tFsiGhISSan4nhDQVIql5oWqlmdjE7eJqBDiLQ==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
@@ -169,12 +169,12 @@ packages:
       - '@types/react'
     dev: true
 
-  /@arco-themes/react-dtable@0.0.29(@arco-design/web-react@2.51.2):
+  /@arco-themes/react-dtable@0.0.29(@arco-design/web-react@2.52.0):
     resolution: {integrity: sha512-MW7taw8kUh5UiGrzS8K+8Y4Uac9NZ/sGEX3wBzSz4vGflmaS0sgdRkg1VlSTB7A4L+PAeNUn1WYMBvZVoK/AMw==}
     peerDependencies:
       '@arco-design/web-react': ^2.51.2
     dependencies:
-      '@arco-design/web-react': 2.51.2(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      '@arco-design/web-react': 2.52.0(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /@babel/cli@7.22.6(@babel/core@7.22.5):

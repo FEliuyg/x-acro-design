@@ -85,12 +85,12 @@ export default App;
 import { useState } from 'react';
 import { Menu, Button } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconMenuFold,
-  IconMenuUnfold,
-  IconApps,
-  IconBug,
-  IconBulb,
-} from '@arco-design/web-react/icon';
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  LayoutGridOutlined,
+  BugOutlined,
+  BulbOutlined,
+} from '@easyv/react-icons';
 import './demo.css';
 
 const MenuItem = Menu.Item;
@@ -110,7 +110,7 @@ function App() {
         type="primary"
         onClick={() => setCollapse(!collapse)}
       >
-        {collapse ? <IconMenuUnfold /> : <IconMenuFold />}
+        {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
         style={{ width: 200, borderRadius: 4 }}
@@ -123,7 +123,7 @@ function App() {
           key="0"
           title={
             <>
-              <IconApps /> Navigation 1
+              <LayoutGridOutlined /> Navigation 1
             </>
           }
         >
@@ -136,7 +136,7 @@ function App() {
           key="1"
           title={
             <>
-              <IconBug /> Navigation 2
+              <BugOutlined /> Navigation 2
             </>
           }
         >
@@ -148,7 +148,7 @@ function App() {
           key="2"
           title={
             <>
-              <IconBulb /> Navigation 3
+              <BulbOutlined /> Navigation 3
             </>
           }
         >
@@ -169,7 +169,11 @@ export default App;
 
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
-import { IconApps, IconBug, IconBulb } from '@arco-design/web-react/icon';
+import {
+  LayoutGridOutlined,
+  BugOutlined,
+  BulbOutlined,
+} from '@easyv/react-icons';
 import './demo.css';
 
 const MenuItem = Menu.Item;
@@ -189,7 +193,7 @@ const App = () => {
           key="0"
           title={
             <>
-              <IconApps /> Navigation 1
+              <LayoutGridOutlined /> Navigation 1
             </>
           }
         >
@@ -203,7 +207,7 @@ const App = () => {
           key="1"
           title={
             <>
-              <IconBug /> Navigation 2
+              <BugOutlined /> Navigation 2
             </>
           }
         >
@@ -215,7 +219,7 @@ const App = () => {
           key="2"
           title={
             <>
-              <IconBulb /> Navigation 3
+              <BulbOutlined /> Navigation 3
             </>
           }
         >
@@ -243,7 +247,11 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Menu, Slider } from '@xiaoyaoliu/x-arco-design';
-import { IconApps, IconBug, IconBulb } from '@arco-design/web-react/icon';
+import {
+  LayoutGridOutlined,
+  BugOutlined,
+  BulbOutlined,
+} from '@easyv/react-icons';
 import './demo.css';
 
 const MenuItem = Menu.Item;
@@ -275,7 +283,7 @@ function App() {
           key="0"
           title={
             <>
-              <IconApps /> Navigation 1
+              <LayoutGridOutlined /> Navigation 1
             </>
           }
         >
@@ -289,7 +297,7 @@ function App() {
           key="1"
           title={
             <>
-              <IconBug /> Navigation 2
+              <BugOutlined /> Navigation 2
             </>
           }
         >
@@ -301,7 +309,7 @@ function App() {
           key="2"
           title={
             <>
-              <IconBulb /> Navigation 3
+              <BulbOutlined /> Navigation 3
             </>
           }
         >
@@ -324,12 +332,12 @@ export default App;
 ```tsx
 import { Menu } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconApps,
-  IconSafe,
-  IconBulb,
-  IconRobot,
-  IconFire,
-} from '@arco-design/web-react/icon';
+  LayoutGridOutlined,
+  SafetyOutlined,
+  BulbOutlined,
+  BotOutlined,
+  FireOutlined,
+} from '@easyv/react-icons';
 import './demo.css';
 
 const MenuItem = Menu.Item;
@@ -340,14 +348,14 @@ const App = () => {
     <div className="menu-demo-round" style={{ height: 600 }}>
       <Menu style={{ width: 200 }} mode="pop" hasCollapseButton>
         <MenuItem key="0">
-          <IconApps />
+          <LayoutGridOutlined />
           Navigation 1
         </MenuItem>
         <SubMenu
           key="1"
           title={
             <>
-              <IconRobot />
+              <BotOutlined />
               Navigation 2
             </>
           }
@@ -360,7 +368,7 @@ const App = () => {
           key="2"
           title={
             <>
-              <IconBulb />
+              <BulbOutlined />
               Navigation 3
             </>
           }
@@ -369,11 +377,11 @@ const App = () => {
           <MenuItem key="2_1">Chengdu</MenuItem>
         </SubMenu>
         <MenuItem key="3">
-          <IconSafe />
+          <SafetyOutlined />
           Navigation 4
         </MenuItem>
         <MenuItem key="4">
-          <IconFire />
+          <FireOutlined />
           Navigation 5
         </MenuItem>
       </Menu>
@@ -392,11 +400,11 @@ export default App;
 import { useState } from 'react';
 import { Menu, Trigger } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconMessage,
-  IconClose,
-  IconBug,
-  IconBulb,
-} from '@arco-design/web-react/icon';
+  MessageOutlined,
+  CloseOutlined,
+  BugOutlined,
+  BulbOutlined,
+} from '@easyv/react-icons';
 import './demo.css';
 
 const MenuItem = Menu.Item;
@@ -411,11 +419,11 @@ function App() {
         hasCollapseButton
       >
         <MenuItem key="1">
-          <IconBug />
+          <BugOutlined />
           Bugs
         </MenuItem>
         <MenuItem key="2">
-          <IconBulb />
+          <BulbOutlined />
           Ideas
         </MenuItem>
       </Menu>
@@ -438,7 +446,7 @@ function App() {
             popupVisibleOne ? 'button-trigger-active' : ''
           }`}
         >
-          {popupVisibleOne ? <IconClose /> : <IconMessage />}
+          {popupVisibleOne ? <CloseOutlined /> : <MessageOutlined />}
         </div>
       </Trigger>
 
@@ -454,7 +462,7 @@ function App() {
             popupVisibleTwo ? 'button-trigger-active' : ''
           }`}
         >
-          {popupVisibleTwo ? <IconClose /> : <IconMessage />}
+          {popupVisibleTwo ? <CloseOutlined /> : <MessageOutlined />}
         </div>
       </Trigger>
     </div>

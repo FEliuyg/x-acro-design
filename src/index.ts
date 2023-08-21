@@ -101,7 +101,9 @@ export { default as TreeSelect } from './TreeSelect';
 export { default as Trigger } from './Trigger';
 
 export { default as Typography } from './Typography';
+
 export { default as Upload } from './Upload';
+export type { UploadProps, UploadInstance } from './Upload';
 
 export { default as Input } from './Input';
 export type { InputProps, InputSearchProps, RefInputType } from './Input';

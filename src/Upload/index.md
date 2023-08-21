@@ -32,10 +32,12 @@ export default App;
 ```tsx
 import React from 'react';
 import { Upload, Progress } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus, IconEdit } from '@arco-design/web-react/icon';
+import type { UploadProps } from '@xiaoyaoliu/x-arco-design';
+import { PlusOutlined, EditOutlined } from '@easyv/react-icons';
 
 function App() {
-  const [file, setFile] = React.useState();
+  const [file, setFile] =
+    React.useState<Parameters<Required<UploadProps>['onProgress']>[0]>();
   const cs = `arco-upload-list-item${
     file && file.status === 'error' ? ' is-error' : ''
   }`;
@@ -48,7 +50,7 @@ function App() {
         onChange={(_, currentFile) => {
           setFile({
             ...currentFile,
-            url: URL.createObjectURL(currentFile.originFile),
+            url: URL.createObjectURL(currentFile.originFile!),
           });
         }}
         onProgress={(currentFile) => {
@@ -60,26 +62,28 @@ function App() {
             <div className="arco-upload-list-item-picture custom-upload-avatar">
               <img src={file.url} />
               <div className="arco-upload-list-item-picture-mask">
-                <IconEdit />
+                <EditOutlined />
               </div>
-              {file.status === 'uploading' && file.percent < 100 && (
-                <Progress
-                  percent={file.percent}
-                  type="circle"
-                  size="mini"
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translateX(-50%) translateY(-50%)',
-                  }}
-                />
-              )}
+              {file.status === 'uploading' &&
+                file.percent !== undefined &&
+                file.percent < 100 && (
+                  <Progress
+                    percent={file.percent}
+                    type="circle"
+                    size="mini"
+                    style={{
+                      position: 'absolute',
+                      left: '50%',
+                      top: '50%',
+                      transform: 'translateX(-50%) translateY(-50%)',
+                    }}
+                  />
+                )}
             </div>
           ) : (
             <div className="arco-upload-trigger-picture">
               <div className="arco-upload-trigger-picture-text">
-                <IconPlus />
+                <PlusOutlined />
                 <div style={{ marginTop: 10, fontWeight: 600 }}>Upload</div>
               </div>
             </div>
@@ -98,8 +102,9 @@ export default App;
 默认的文件上传列表
 
 ```tsx
-import { Upload, Radio, Modal } from '@xiaoyaoliu/x-arco-design';
-const defaultFileList = [
+import { Upload } from '@xiaoyaoliu/x-arco-design';
+import type { UploadProps } from '@xiaoyaoliu/x-arco-design';
+const defaultFileList: UploadProps['defaultFileList'] = [
   {
     uid: '-1',
     name: 'ice.png',
@@ -109,7 +114,7 @@ const defaultFileList = [
     status: 'error',
     uid: '-2',
     percent: 0,
-    response: '上传错误提示',
+    response: new Error('上传错误提示'),
     name: 'cat.png',
     url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
   },
@@ -136,10 +141,6 @@ export default App;
 点击图片预览按钮时，可以`onPreview`中进行预览逻辑。
 
 可以通过 `imagePreview` 属性启用内置的图片预览。（`imagePreview` 属性在 `2.41.0` 支持）
-
-`onPreview` will be executed when user click preview icon.
-
-The built-in image preview can be enabled via the `imagePreview` property. (The `imagePreview` property is supported in `2.41.0`)
 
 ```tsx
 import { Upload, Message } from '@xiaoyaoliu/x-arco-design';
@@ -244,7 +245,7 @@ export default App;
 图片列表样式
 
 ```tsx
-import { Upload, Radio } from '@xiaoyaoliu/x-arco-design';
+import { Upload } from '@xiaoyaoliu/x-arco-design';
 const defaultFileList = [
   {
     uid: '-3',
@@ -273,22 +274,23 @@ export default App;
 
 设置 `autoUpload` 为 `false`时候，可以通过调用 `submit`方法进行手动上传。`submit` 只会上传处于 `fileList` 中的文件。
 
-`autoUpload` equals `false`, files will not be uploaded automatically after being selected. You can submit them by `uploadRef.submit` method.`submit` will only upload files that are in `fileList`.
-
 ```tsx
 import React from 'react';
 import { Upload, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import type { UploadProps, UploadInstance } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const uploadRef = React.useRef();
+  const uploadRef = React.useRef<UploadInstance>(null);
   const [disabled, setDisabled] = React.useState(false);
-  const [fileList, setFileList] = React.useState([]);
+  const [fileList, setFileList] = React.useState<
+    Parameters<Required<UploadProps>['onProgress']>[0][]
+  >([]);
 
-  const onSubmit = (e, isFirst) => {
+  const onSubmit = (e, isFirst?: boolean) => {
     e.stopPropagation();
     const file = isFirst
       ? fileList.filter((x) => x.status === 'init')[0]
-      : null;
+      : undefined;
     uploadRef.current && uploadRef.current.submit(file);
   };
 
@@ -297,7 +299,7 @@ function App() {
     setDisabled(!files.some((x) => x.status === 'init'));
   };
 
-  const onProgress = (file) => {
+  const onProgress: UploadProps['onProgress'] = (file) => {
     setFileList((files) => {
       return files.map((x) => (x.uid === file.uid ? file : x));
     });
@@ -371,7 +373,7 @@ export default App;
 `beforeUpload` 会在每一个文件上传之前执行。如果返回 false 或者 Promise.reject， 那么将会取消当前文件的上传。
 
 ```tsx
-import React, { useState, CSSProperties } from 'react';
+import React, { useState } from 'react';
 import {
   Upload,
   Button,
@@ -381,15 +383,19 @@ import {
   Slider,
 } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconMinus,
-  IconPlus,
-  IconRotateLeft,
-  IconUpload,
-} from '@arco-design/web-react/icon';
+  MinusOutlined,
+  PlusOutlined,
+  RotateLeftOutlined,
+} from '@easyv/react-icons';
 import EasyCropper from 'react-easy-crop';
+import './demo.css';
 
-async function _getCroppedImg(url, pixelCrop, rotation = 0) {
-  const image = await new Promise((resolve, reject) => {
+async function _getCroppedImg(
+  url,
+  pixelCrop,
+  rotation = 0,
+): Promise<Blob | null> {
+  const image: HTMLImageElement = await new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener('load', () => resolve(image));
     image.addEventListener('error', (error) => reject(error));
@@ -441,7 +447,13 @@ const Cropper = (props) => {
   });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(undefined);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<
+    | {
+        width: number;
+        height: number;
+      }
+    | undefined
+  >(undefined);
 
   const url = React.useMemo(() => {
     return URL.createObjectURL(file);
@@ -486,7 +498,7 @@ const Cropper = (props) => {
             marginRight: 12,
           }}
         >
-          <IconMinus
+          <MinusOutlined
             style={{ marginRight: 10 }}
             onClick={() => {
               setZoom(Math.max(1, zoom - 0.1));
@@ -497,19 +509,21 @@ const Cropper = (props) => {
             step={0.1}
             value={zoom}
             onChange={(v) => {
-              setZoom(v);
+              if (typeof v === 'number') {
+                setZoom(v);
+              }
             }}
             min={0.8}
             max={3}
           />
-          <IconPlus
+          <PlusOutlined
             style={{ marginLeft: 10 }}
             onClick={() => {
               setZoom(Math.min(3, zoom + 0.1));
             }}
           />
         </Grid.Row>
-        <IconRotateLeft
+        <RotateLeftOutlined
           onClick={() => {
             setRotation(rotation - 90);
           }}
@@ -560,7 +574,6 @@ function App() {
                 modal.close();
               },
               simple: false,
-              width: 500,
               content: (
                 <Cropper
                   file={file}
@@ -585,75 +598,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.reactEasyCrop_Container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  user-select: none;
-  touch-action: none;
-  cursor: move;
-}
-
-.reactEasyCrop_Image,
-.reactEasyCrop_Video {
-  max-width: 100%;
-  max-height: 100%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  will-change: transform; /* this improves performances and prevent painting issues on iOS Chrome */
-}
-
-.reactEasyCrop_CropArea {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-sizing: border-box;
-  box-shadow: 0 0 0 9999em;
-  color: rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-
-.reactEasyCrop_CropAreaRound {
-  border-radius: 50%;
-}
-
-.reactEasyCrop_CropAreaGrid::before {
-  content: ' ';
-  box-sizing: border-box;
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  top: 0;
-  bottom: 0;
-  left: 33.33%;
-  right: 33.33%;
-  border-top: 0;
-  border-bottom: 0;
-}
-
-.reactEasyCrop_CropAreaGrid::after {
-  content: ' ';
-  box-sizing: border-box;
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  top: 33.33%;
-  bottom: 33.33%;
-  left: 0;
-  right: 0;
-  border-left: 0;
-  border-right: 0;
-}
 ```
 
 ## 移除前校验
@@ -708,6 +652,7 @@ export default App;
 
 ```tsx
 import { Upload, Message } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
   return (
@@ -731,7 +676,6 @@ export default App;
 
 ```tsx
 import { Upload } from '@xiaoyaoliu/x-arco-design';
-import { IconLink } from '@arco-design/web-react/icon';
 
 const App = () => {
   return (
@@ -758,38 +702,24 @@ const App = () => {
 export default App;
 ```
 
-```css
-.upload-demo-trigger .trigger {
-  background-color: var(--color-fill-2);
-  color: var(--color-text-1);
-  border: 1px dashed var(--color-fill-4);
-  height: 158px;
-  width: 380px;
-  border-radius: 2;
-  line-height: 158px;
-  text-align: center;
-}
-```
-
 ## 自定义图标
 
 `showUploadList` 字段可以设置图标。
 
-`showUploadList` can be an object to customize `previewIcon`, `removeIcon`, `fileIcon`, `reuploadIcon`, `cancelIcon`, `startIcon`, `errorIcon` and `fileName`.
-
 ```tsx
 import React from 'react';
 import { Upload, Radio, Typography, Message } from '@xiaoyaoliu/x-arco-design';
+import type { UploadProps } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconFileAudio,
-  IconClose,
-  IconFaceFrownFill,
-  IconUpload,
-  IconEye,
-} from '@arco-design/web-react/icon';
+  AudioOutlined,
+  CloseOutlined,
+  FrownFilled,
+  UploadOutlined,
+} from '@easyv/react-icons';
 
 function App() {
-  const [listType, setListtype] = React.useState('text');
+  const [listType, setListtype] =
+    React.useState<UploadProps['listType']>('text');
   return (
     <div>
       <Typography.Text>Type:</Typography.Text> &emsp;
@@ -804,12 +734,12 @@ function App() {
         <Upload
           showUploadList={{
             // Please dont remove this comment
-            reuploadIcon: <IconUpload />,
-            cancelIcon: <IconClose />,
-            fileIcon: <IconFileAudio />,
-            removeIcon: <IconClose />,
+            reuploadIcon: <UploadOutlined />,
+            cancelIcon: <CloseOutlined />,
+            fileIcon: <AudioOutlined />,
+            removeIcon: <CloseOutlined />,
             previewIcon: null,
-            errorIcon: <IconFaceFrownFill />,
+            errorIcon: <FrownFilled />,
             fileName: (file) => {
               return (
                 <a
@@ -855,7 +785,7 @@ export default App;
 
 ```tsx
 import { Upload, Card, Modal } from '@xiaoyaoliu/x-arco-design';
-import { IconEye, IconDelete } from '@arco-design/web-react/icon';
+import { EyeOutlined, DeleteOutlined } from '@easyv/react-icons';
 
 function App() {
   const renderUploadList = (filesList, props) => (
@@ -881,10 +811,10 @@ function App() {
                   });
                 }}
               >
-                <IconEye style={{ fontSize: 12 }} />
+                <EyeOutlined style={{ fontSize: 12 }} />
               </div>,
               <div>
-                <IconDelete
+                <DeleteOutlined
                   style={{ fontSize: 12 }}
                   onClick={() => {
                     props.onRemove(file);
@@ -934,9 +864,10 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Upload } from '@xiaoyaoliu/x-arco-design';
+import type { UploadProps } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState<UploadProps['fileList']>([]);
   return (
     <Upload
       fileList={fileList}
@@ -963,14 +894,14 @@ function App() {
 
         xhr.onload = function onload() {
           if (xhr.status < 200 || xhr.status >= 300) {
-            return onError(xhr.responseText);
+            return onError(xhr);
           }
 
-          onSuccess(xhr.responseText, xhr);
+          onSuccess(xhr);
         };
 
         const formData = new FormData();
-        formData.append(name || 'file', file);
+        formData.append('file', file);
         xhr.open('post', '//upload-z2.qbox.me/', true);
         xhr.send(formData);
         return {
@@ -990,14 +921,16 @@ export default App;
 
 `progressProps` 字段可以自定义进度条属性。
 
-`progressProps` for customize progress bar.
-
 ```tsx
 import React from 'react';
-import { Upload, Radio, Button } from '@xiaoyaoliu/x-arco-design';
+import { Upload, Button } from '@xiaoyaoliu/x-arco-design';
+import type { UploadProps } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
-  const [fileList, setFileList] = React.useState([
+  const [fileList, setFileList] = React.useState<
+    Required<UploadProps>['fileList']
+  >([
     {
       status: 'init',
       uid: '-2',
@@ -1013,6 +946,7 @@ function App() {
       url: '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
     },
   ]);
+
   return (
     <div className="custom-upload-progress">
       <Upload
@@ -1056,47 +990,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.custom-upload-progress .arco-upload-list-item-text-content {
-  flex-wrap: wrap;
-}
-
-.custom-upload-progress .arco-upload-list-start-icon,
-.custom-upload-progress .arco-upload-list-cancel-icon {
-  right: 0;
-  left: unset;
-  top: -22px;
-  transform: none;
-}
-
-.custom-upload-progress .arco-upload-list-rtl .arco-upload-list-start-icon,
-.custom-upload-progress .arco-upload-list-rtl .arco-upload-list-cancel-icon {
-  right: unset;
-  left: 0;
-}
-
-.custom-upload-progress .arco-upload-list-status {
-  display: block;
-}
-
-.custom-upload-progress .arco-upload-list-progress {
-  display: block;
-  height: 0;
-  margin-top: 0;
-  transition: all 0.2s ease;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.custom-upload-progress
-  .arco-upload-list-item-uploading
-  .arco-upload-list-progress {
-  margin-top: 8px;
-  opacity: 1;
-  height: 16px;
-}
 ```
 
 ## 文件夹上传

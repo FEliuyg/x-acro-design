@@ -38,8 +38,6 @@ export default App;
 
 `labelInValue` 为 `true` 时，`value` 格式为： `{ label: string, value: string }`。
 
-`labelInValue` is `true`, the format of `value` is: `{ label: string, value: string }`.
-
 ```tsx
 import React from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
@@ -113,8 +111,6 @@ export default App;
 
 单选下通过 `renderFormat` 可自定义渲染展示
 
-`renderFormat`
-
 ```tsx
 import React from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
@@ -153,9 +149,15 @@ const App = () => {
   return (
     <TreeSelect
       renderFormat={(nodeProps, value) => {
+        if (!nodeProps) {
+          return null;
+        }
+
         return (
           <span>
-            <IconStar /> {nodeProps.title || value}
+            <IconStar />{' '}
+            {nodeProps.title ||
+              (typeof value === 'string' ? value : value.label)}
           </span>
         );
       }}
@@ -175,8 +177,6 @@ export default App;
 ## 前置标签
 
 通过 `addBefore` 设置前置标签 (`2.41.0`)
-
-`addBefore` to add elements before the select box. (`2.41.0`)
 
 ```tsx
 import { TreeSelect, Space } from '@xiaoyaoliu/x-arco-design';
@@ -233,8 +233,6 @@ export default App;
 ## 通过数据生成树结构
 
 通过传入 `treeData` 数据生成树结构。
-
-`treeData`.
 
 ```tsx
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
@@ -350,8 +348,6 @@ export default App;
 
 可以通过 `loadMore` 进行动态加载。此时可设置 `isLeaf` 来标示叶子节点。
 
-`loadMore`. At this time, `isLeaf` can be set to indicate leaf nodes.
-
 ```tsx
 import { useState } from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
@@ -411,7 +407,7 @@ function App() {
       setTimeout(() => {
         dataRef.children = children;
         setTreeData([...treeData]);
-        resolve();
+        resolve('');
       }, 1000);
     });
   };
@@ -440,8 +436,6 @@ export default App;
 ## 搜索
 
 设置 `showSearch=true` 启用搜索功能。动态加载时候只能在已加载数据中进行搜索。默认的关键字搜索是从`value`字段匹配。也可以传入 `filterTreeNode`自定义过滤方式。
-
-`showSearch=true` to enable the search function. You can only search in the loaded data during dynamic loading. The default keyword search is to match from the `value` field. You can also pass in `filterTreeNode` to customize the filtering method.
 
 ```tsx
 import React from 'react';
@@ -559,14 +553,12 @@ export default App;
 
 当传入 `onSearch` 为函数时，启用自定义搜索，可以从远程加载数据。
 
-`onSearch` is a function, and data can be loaded remotely.
-
 ```tsx
 import React from 'react';
 import { TreeSelect, Spin } from '@xiaoyaoliu/x-arco-design';
-import { IconCalendar } from '@arco-design/web-react/icon';
+import type { TreeSelectProps } from '@xiaoyaoliu/x-arco-design';
 
-const TreeData = [
+const TreeData: Required<TreeSelectProps>['treeData'] = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -616,10 +608,13 @@ const TreeData = [
 ];
 
 function searchData(inputValue) {
-  const loop = (data) => {
-    const result = [];
+  const loop = (data: typeof TreeData) => {
+    const result: typeof TreeData = [];
     data.forEach((item) => {
-      if (item.title.toLowerCase().indexOf(inputValue.toLowerCase()) > -1) {
+      if (
+        item.title &&
+        `${item.title}`.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      ) {
         result.push({ ...item });
       } else if (item.children) {
         const filterData = loop(item.children);
@@ -668,16 +663,15 @@ export default App;
 
 设置 `size` 可以使用四种尺寸（small, default, large, huge）的选择器。高度分别对应 24px、32px、36px、40px。
 
-`size`. The height corresponds to 24px, 32px, 36px, 40px.
-
 ```tsx
 import { useState } from 'react';
 import { TreeSelect, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { TreeSelectProps } from '@xiaoyaoliu/x-arco-design';
 const TreeNode = TreeSelect.Node;
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<TreeSelectProps['size']>('default');
   return (
     <div>
       <RadioGroup
@@ -713,8 +707,6 @@ export default App;
 ## 自定义显示
 
 设置 `triggerElement` 可以自定义显示。
-
-`triggerElement` to customize the display.
 
 ```tsx
 import { useState } from 'react';
@@ -838,8 +830,6 @@ export default App;
 
 可以通过设置 `treeCheckable` 属性开启复选框勾选。
 
-`treeCheckable` property can display checkbox.
-
 ```tsx
 import { TreeSelect, Checkbox } from '@xiaoyaoliu/x-arco-design';
 import { useState } from 'react';
@@ -934,8 +924,6 @@ export default App;
 ## 定制回填方式
 
 可以通过`treeCheckStrategy`属性定制回填方式。
-
-`treeCheckStrategy` property.
 
 ```tsx
 import { TreeSelect, Radio } from '@xiaoyaoliu/x-arco-design';
@@ -1050,11 +1038,10 @@ export default App;
 
 使用 `dropdownRender` 对下拉菜单进行自由扩展。
 
-`dropdownRender` to freely expand the drop-down menu.
-
 ```tsx
 import { useState } from 'react';
 import { TreeSelect, Divider, Input, Button } from '@xiaoyaoliu/x-arco-design';
+import type { TreeSelectProps } from '@xiaoyaoliu/x-arco-design';
 import { IconPlus } from '@arco-design/web-react/icon';
 
 const defaultTreeData = [
@@ -1086,7 +1073,8 @@ const defaultTreeData = [
 ];
 
 function App() {
-  const [treeData, setTreeData] = useState(defaultTreeData);
+  const [treeData, setTreeData] =
+    useState<Required<TreeSelectProps>['treeData']>(defaultTreeData);
   const [inputValue, setInputValue] = useState('');
 
   const addItem = () => {
@@ -1190,8 +1178,6 @@ export default App;
 
 通过 `fieldNames` 字段可以自定义 TreeData 的字段名。
 
-`treeData` by `fieldNames`.
-
 ```tsx
 import { useState } from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
@@ -1250,7 +1236,7 @@ function App() {
     <div>
       <TreeSelect
         style={{ width: 300 }}
-        defaultSelectedKeys={['0-0-1']}
+        defaultValue={['0-1-1']}
         treeData={treeData}
         fieldNames={{
           key: 'value',
@@ -1269,18 +1255,21 @@ export default App;
 
 通过指定 `treeProps.virtualListProps` 来开启虚拟列表，在大量数据时获得高性能表现。
 
-`treeProps.virtualListProps` to turn on the virtual list, high performance can be obtained when a large amount of data is used.
-
 ```tsx
 import React from 'react';
-import { Tree, Button, TreeSelect, Select } from '@xiaoyaoliu/x-arco-design';
+import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
+import type { TreeSelectProps } from '@xiaoyaoliu/x-arco-design';
 
 function loop(path = '0', level = 2) {
-  const list = [];
+  const list: TreeSelectProps['treeData'] = [];
 
   for (let i = 0; i < 10; i += 1) {
     const key = `${path}-${i}`;
-    const treeNode = {
+    const treeNode: {
+      key: string;
+      title: string;
+      children?: TreeSelectProps['treeData'];
+    } = {
       title: key,
       key,
     };
@@ -1320,8 +1309,6 @@ export default App;
 ## 拖拽排序
 
 多选时，指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
-
-`dragToSort` property to allow sort the entered values by dragging.
 
 ```tsx
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';

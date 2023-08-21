@@ -96,7 +96,9 @@ export { default as TimePicker } from './TimePicker';
 export { default as Tooltip } from './Tooltip';
 export { default as Transfer } from './Transfer';
 export { default as Tree } from './Tree';
+
 export { default as TreeSelect } from './TreeSelect';
+export type { TreeSelectProps } from './TreeSelect';
 
 export { default as Trigger } from './Trigger';
 

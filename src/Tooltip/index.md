@@ -116,7 +116,7 @@ export default App;
 ## 受控模式
 
 通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。
-具体 onVisibleChange 的触发时机可查看[Trigger](/react/components/trigger#受控用法)组件文档
+具体 onVisibleChange 的触发时机可查看[Trigger](/components/trigger#受控用法)组件文档
 
 ```tsx
 import React from 'react';

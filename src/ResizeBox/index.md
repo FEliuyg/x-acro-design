@@ -193,9 +193,9 @@ export default App;
 
 ## 在布局中使用
 
-[Layout](/react/components/ResizeBox) 组件中集成了 `ResizeBox` 组件，可以在 Layout 中使用可伸缩的侧边栏。
+[Layout](/components/ResizeBox) 组件中集成了 `ResizeBox` 组件，可以在 Layout 中使用可伸缩的侧边栏。
 
-`ResizeBox` component is integrated in the [Layout](/react/components/ResizeBox) component, so a scalable sidebar can be used in the layout.
+`ResizeBox` component is integrated in the [Layout](/components/ResizeBox) component, so a scalable sidebar can be used in the layout.
 
 ```tsx
 import { Layout } from '@xiaoyaoliu/x-arco-design';

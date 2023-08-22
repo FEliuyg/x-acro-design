@@ -1139,7 +1139,7 @@ export default App;
 ## 控制下拉框的展开收起
 
 默认展开下拉框。通过 popupVisible 和 onVisibleChange 控制下拉框的展开和收起。
-例如以下 demo，在鼠标移出下拉框和弹出框的时候触发 onVisibleChange，参数为 false，收起下拉框。 具体 onVisibleChange 的触发事件可查看[Trigger](/react/components/trigger)组件文档
+例如以下 demo，在鼠标移出下拉框和弹出框的时候触发 onVisibleChange，参数为 false，收起下拉框。 具体 onVisibleChange 的触发事件可查看[Trigger](/components/trigger)组件文档
 
 ```tsx
 import React from 'react';
@@ -1394,7 +1394,7 @@ export default App;
 | showSearch          | 使单选模式可搜索，传入 `{ retainInputValue: true }` 在搜索框聚焦时保留现有内容传入 `{ retainInputValueWhileSelect: true }` 在多选选择时保留输入框内容。 | boolean \| { retainInputValue?: boolean; retainInputValueWhileSelect?: boolean }                                                                            | `-`                 | -                             |
 | style               | 节点样式                                                                                                                                                | CSSProperties                                                                                                                                               | `-`                 | -                             |
 | treeData            | 数据                                                                                                                                                    | [TreeSelectDataType](#treeselectdatatype)[]                                                                                                                 | `-`                 | -                             |
-| treeProps           | 可以接受所有 [Tree](/react/components/tree) 组件的参数                                                                                                  | Partial&lt;[TreeProps](tree#tree)&gt;                                                                                                                       | `-`                 | -                             |
+| treeProps           | 可以接受所有 [Tree](/components/tree) 组件的参数                                                                                                        | Partial&lt;[TreeProps](tree#tree)&gt;                                                                                                                       | `-`                 | -                             |
 | triggerProps        | 可以接受所有 Trigger 组件的参数                                                                                                                         | Partial&lt;[TriggerProps](trigger#trigger)&gt;                                                                                                              | `-`                 | -                             |
 | value               | 选中值                                                                                                                                                  | \| string\| string[]\| { label: ReactNode; value: string; disabled?: boolean }\| { label: ReactNode; value: string; disabled?: boolean }[]                  | `-`                 | -                             |
 | dropdownRender      | 自定义下拉框展示                                                                                                                                        | (dom: ReactNode) => ReactNode                                                                                                                               | `-`                 | 2.3.0                         |

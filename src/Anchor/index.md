@@ -84,9 +84,7 @@ export default App;
 
 示例中的锚点将会出现在页面右侧。
 
-当设置 `affix` 为 `true` 时，锚点组件将会嵌套在[固钉](/react/components/affix)组件内。通过 `affixStyle` 属性可以设置 `Affix` 组件的样式。
-
-`affix=true` to wrap the anchor within [Affix](/react/components/affix) component. `affixStyle` can be used to set the style of `Affix` component.
+当设置 `affix` 为 `true` 时，锚点组件将会嵌套在[固钉](/components/affix)组件内。通过 `affixStyle` 属性可以设置 `Affix` 组件的样式。
 
 ```tsx
 import { Anchor } from '@xiaoyaoliu/x-arco-design';
@@ -172,7 +170,7 @@ export default App;
 
 | 参数名          | 描述                                                                                                                                              | 类型                                                | 默认值  | 版本   |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------- | ------ |
-| affix           | 是否固定。当设置为 `true`时，锚点组件将会嵌套在[固钉](/react/components/affix) 组件内                                                             | boolean                                             | `true`  | -      |
+| affix           | 是否固定。当设置为 `true`时，锚点组件将会嵌套在[固钉](/components/affix) 组件内                                                                   | boolean                                             | `true`  | -      |
 | animation       | 是否平滑滚动                                                                                                                                      | boolean                                             | `true`  | -      |
 | hash            | 是否改变 hash，设置为 `false` 点击锚点不会改变页面 hash。                                                                                         | boolean                                             | `true`  | -      |
 | lineless        | 没有左侧轴线的样式。                                                                                                                              | boolean                                             | `-`     | -      |

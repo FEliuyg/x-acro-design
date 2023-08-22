@@ -213,14 +213,14 @@ export default App;
 
 ### PageHeader
 
-| 参数名     | 描述                                                                          | 类型                                     | 默认值 |
-| ---------- | ----------------------------------------------------------------------------- | ---------------------------------------- | ------ |
-| extra      | 展示额外内容                                                                  | ReactNode                                | `-`    |
-| footer     | 底部内容                                                                      | ReactNode                                | `-`    |
-| subTitle   | 次级标题                                                                      | ReactNode                                | `-`    |
-| title      | 主标题                                                                        | ReactNode                                | `-`    |
-| backIcon   | 返回图标，设置为 `false` 时会隐藏图标                                         | ReactNode \| boolean                     | `-`    |
-| breadcrumb | 面包屑，接受面包屑的所有属性, [BreadcrumbProps](/react/components/breadcrumb) | [BreadcrumbProps](breadcrumb#breadcrumb) | `-`    |
-| className  | 节点类名                                                                      | string \| string[]                       | `-`    |
-| style      | 节点样式                                                                      | CSSProperties                            | `-`    |
-| onBack     | 点击返回图标的回调                                                            | (e: MouseEvent) => void                  | `-`    |
+| 参数名     | 描述                                                                    | 类型                                     | 默认值 |
+| ---------- | ----------------------------------------------------------------------- | ---------------------------------------- | ------ |
+| extra      | 展示额外内容                                                            | ReactNode                                | `-`    |
+| footer     | 底部内容                                                                | ReactNode                                | `-`    |
+| subTitle   | 次级标题                                                                | ReactNode                                | `-`    |
+| title      | 主标题                                                                  | ReactNode                                | `-`    |
+| backIcon   | 返回图标，设置为 `false` 时会隐藏图标                                   | ReactNode \| boolean                     | `-`    |
+| breadcrumb | 面包屑，接受面包屑的所有属性, [BreadcrumbProps](/components/breadcrumb) | [BreadcrumbProps](breadcrumb#breadcrumb) | `-`    |
+| className  | 节点类名                                                                | string \| string[]                       | `-`    |
+| style      | 节点样式                                                                | CSSProperties                            | `-`    |
+| onBack     | 点击返回图标的回调                                                      | (e: MouseEvent) => void                  | `-`    |

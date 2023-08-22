@@ -168,7 +168,7 @@ export default App;
 
 ## 浮层内关闭
 
-控制浮层显示。更多示例可查看 [Trigger](/react/components/trigger)组件。
+控制浮层显示。更多示例可查看 [Trigger](/components/trigger)组件。
 
 ```tsx
 import React from 'react';

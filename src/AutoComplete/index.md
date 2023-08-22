@@ -335,8 +335,8 @@ export type AvailableVirtualListProps = Pick<
 
 ### AutoComplete.Option
 
-同 `Select.Option`, 参考 [Select 文档](/react/components/select) 。
+同 `Select.Option`, 参考 [Select 文档](/components/select) 。
 
 ### AutoComplete.OptGroup
 
-同 `Select.OptGroup`, 参考 [Select 文档](/react/components/select) 。
+同 `Select.OptGroup`, 参考 [Select 文档](/components/select) 。

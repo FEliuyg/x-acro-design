@@ -306,7 +306,7 @@ export default App;
 
 ## 隐藏菜单
 
-通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。具体 `onVisibleChange` 的触发时机可查看[Trigger](/react/components/trigger#受控用法)组件文档。
+通过 `popupVisible` 和 `onVisibleChange` 控制下拉框的展开和收起。具体 `onVisibleChange` 的触发时机可查看[Trigger](/components/trigger#受控用法)组件文档。
 如果 `droplist` 是 `Menu`，可以通过在 `onClickMenuItem` 中返回 `false` 来避免菜单自动隐藏。
 
 ```tsx

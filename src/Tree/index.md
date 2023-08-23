@@ -39,10 +39,8 @@ export default App;
 ```
 
 ```tsx
-import { useState } from 'react';
 import { Tree } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+const treeData = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -91,7 +89,6 @@ const TreeData = [
 ];
 
 function App() {
-  const [treeData, setTreeData] = useState(TreeData);
   return (
     <div>
       <Tree defaultSelectedKeys={['0-0-1']} treeData={treeData}></Tree>
@@ -136,8 +133,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Checkbox, Typography } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+const treeData = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -187,7 +183,7 @@ const TreeData = [
 ];
 
 function App() {
-  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [checked, setChecked] = useState(true);
   return (
     <div>
@@ -212,7 +208,7 @@ function App() {
           console.log(value, extra);
           setSelectedKeys(value);
         }}
-        treeData={TreeData}
+        treeData={treeData}
       ></Tree>
     </div>
   );
@@ -228,8 +224,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Checkbox } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+const treeData = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -301,10 +296,10 @@ function App() {
         checkStrictly={checkStrictly}
         checkable
         checkedKeys={checkedKeys}
-        onCheck={(value, extra) => {
+        onCheck={(value) => {
           setCheckedKeys(value);
         }}
-        treeData={TreeData}
+        treeData={treeData}
       ></Tree>
     </div>
   );
@@ -320,8 +315,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Button } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+const treeData = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -369,9 +363,9 @@ function App() {
     '0-1-2',
   ];
   const allExpandedKeys = ['0-0', '0-1', '0-0-2'];
-  const [selectedKeys, setSelectedKeys] = useState([]);
-  const [checkedKeys, setCheckedKeys] = useState([]);
-  const [expandedKeys, setExpandedKeys] = useState(allExpandedKeys);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
+  const [expandedKeys, setExpandedKeys] = useState<string[]>(allExpandedKeys);
   return (
     <div>
       <Button.Group style={{ marginBottom: 20 }}>
@@ -399,17 +393,17 @@ function App() {
         expandedKeys={expandedKeys}
         onSelect={(keys, extra) => {
           console.log(keys, extra);
-          setSelectedKeys(keys, extra);
+          setSelectedKeys(keys);
         }}
         onCheck={(keys, extra) => {
           console.log(keys, extra);
-          setCheckedKeys(keys, extra);
+          setCheckedKeys(keys);
         }}
         onExpand={(keys, extra) => {
           console.log(keys, extra);
-          setExpandedKeys(keys, extra);
+          setExpandedKeys(keys);
         }}
-        treeData={TreeData}
+        treeData={treeData}
       ></Tree>
     </div>
   );
@@ -425,8 +419,8 @@ export default App;
 ```tsx
 import React from 'react';
 import { Tree } from '@xiaoyaoliu/x-arco-design';
+import type { TreeProps } from '@xiaoyaoliu/x-arco-design';
 
-const TreeNode = Tree.Node;
 const defaultTreeData = [
   {
     title: 'Trunk 0-0',
@@ -447,9 +441,13 @@ const defaultTreeData = [
 function App() {
   const [treeData, setTreeData] = React.useState(defaultTreeData);
 
-  const loadMore = (treeNode) => {
+  const loadMore: TreeProps['loadMore'] = (treeNode) => {
     return new Promise((resolve) => {
       setTimeout(() => {
+        if (!treeNode.props.dataRef) {
+          return null;
+        }
+
         treeNode.props.dataRef.children = [
           {
             title: `leaf`,
@@ -484,7 +482,6 @@ import { useState } from 'react';
 import { Tree, Checkbox } from '@xiaoyaoliu/x-arco-design';
 import './demo.css';
 
-const TreeNode = Tree.Node;
 const TreeData = [
   {
     title: 'Trunk 0-0',
@@ -537,7 +534,6 @@ const TreeData = [
 
 function App() {
   const [treeData, setTreeData] = useState(TreeData);
-  const [checkedKeys, setCheckedKeys] = useState([]);
   const [checked, setChecked] = useState(false);
   return (
     <div>
@@ -553,6 +549,9 @@ function App() {
         blockNode
         checkable={checked}
         onDrop={({ dragNode, dropNode, dropPosition }) => {
+          if (dragNode === null || dropNode === null) {
+            return;
+          }
           const loop = (data, key, callback) => {
             data.some((item, index, arr) => {
               if (item.key === key) {
@@ -607,8 +606,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+const treeData = [
   {
     title: 'Trunk 0-0',
     key: '0-0',
@@ -692,7 +690,7 @@ function App() {
         onCheck={(value, extra) => {
           setCheckedKeys(value);
         }}
-        treeData={TreeData}
+        treeData={treeData}
       ></Tree>
     </div>
   );
@@ -708,8 +706,8 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Tree, Switch, Typography } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
-const TreeData = [
+
+const treeData = [
   {
     title: 'Trunk 1',
     key: '0-0',
@@ -785,7 +783,6 @@ const TreeData = [
 ];
 
 function App() {
-  const [treeData, setTreeData] = useState(TreeData);
   const [checked, setChecked] = useState(true);
   return (
     <div>
@@ -812,11 +809,12 @@ export default App;
 ```tsx
 import React from 'react';
 import { Tree, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { TreeProps } from '@xiaoyaoliu/x-arco-design';
 
 const TreeNode = Tree.Node;
 
 function App() {
-  const [size, setSize] = React.useState('default');
+  const [size, setSize] = React.useState<TreeProps['size']>('default');
   return (
     <div>
       <Radio.Group
@@ -850,18 +848,18 @@ export default App;
 
 ```tsx
 import { Tree } from '@xiaoyaoliu/x-arco-design';
-import { IconStar } from '@arco-design/web-react/icon';
+import { StarOutlined } from '@easyv/react-icons';
 const TreeNode = Tree.Node;
 
 function App() {
   return (
     <Tree>
-      <TreeNode icon={<IconStar />} key="node1" title="Trunk">
-        <TreeNode icon={<IconStar />} key="node2" title="Leaf" />
+      <TreeNode icon={<StarOutlined />} key="node1" title="Trunk">
+        <TreeNode icon={<StarOutlined />} key="node2" title="Leaf" />
       </TreeNode>
-      <TreeNode icon={<IconStar />} key="node3" title="Trunk">
-        <TreeNode icon={<IconStar />} key="node4" title="Leaf" />
-        <TreeNode icon={<IconStar />} key="node5" title="Leaf" />
+      <TreeNode icon={<StarOutlined />} key="node3" title="Trunk">
+        <TreeNode icon={<StarOutlined />} key="node4" title="Leaf" />
+        <TreeNode icon={<StarOutlined />} key="node5" title="Leaf" />
       </TreeNode>
     </Tree>
   );
@@ -876,10 +874,8 @@ export default App;
 
 ```tsx
 import { useState } from 'react';
-import { Tree, Checkbox } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
-
-const TreeNode = Tree.Node; // 从treedata 生成 treenode
+import { Tree } from '@xiaoyaoliu/x-arco-design';
+import { PlusOutlined } from '@easyv/react-icons';
 
 const generatorTreeNodes = (treeData) => {
   return treeData.map((item) => {
@@ -948,7 +944,7 @@ function App() {
         checkable
         renderExtra={(node) => {
           return (
-            <IconPlus
+            <PlusOutlined
               style={{
                 position: 'absolute',
                 right: 8,
@@ -957,13 +953,15 @@ function App() {
                 color: '#3370ff',
               }}
               onClick={() => {
-                const dataChildren = node.dataRef.children || [];
-                dataChildren.push({
-                  title: 'new tree node',
-                  key: node._key + '-' + (dataChildren.length + 1),
-                });
-                node.dataRef.children = dataChildren;
-                setTreeData([...treeData]);
+                if (node.dataRef) {
+                  const dataChildren = node.dataRef.children || [];
+                  dataChildren.push({
+                    title: 'new tree node',
+                    key: node._key + '-' + (dataChildren.length + 1),
+                  });
+                  node.dataRef.children = dataChildren;
+                  setTreeData([...treeData]);
+                }
               }}
             />
           );
@@ -984,19 +982,15 @@ export default App;
 
 ```tsx
 import { Tree } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconDown,
-  IconDragArrow,
-  IconDriveFile,
-} from '@arco-design/web-react/icon';
+import { DownOutlined, DragOutlined, FileOutlined } from '@easyv/react-icons';
 const TreeNode = Tree.Node;
 
 function App() {
   return (
     <Tree
       icons={{
-        switcherIcon: <IconDown />,
-        dragIcon: <IconDragArrow />,
+        switcherIcon: <DownOutlined />,
+        dragIcon: <DragOutlined />,
       }}
       showLine
       draggable
@@ -1008,14 +1002,14 @@ function App() {
         <TreeNode
           key="node4"
           icons={{
-            switcherIcon: <IconDriveFile />,
+            switcherIcon: <FileOutlined />,
           }}
           title="Leaf"
         />
         <TreeNode
           key="node5"
           icons={{
-            switcherIcon: <IconDriveFile />,
+            switcherIcon: <FileOutlined />,
           }}
           title="Leaf"
         />
@@ -1034,13 +1028,14 @@ export default App;
 ```tsx
 import React from 'react';
 import { Tree, Button } from '@xiaoyaoliu/x-arco-design';
+import type { TreeProps } from '@xiaoyaoliu/x-arco-design';
 
 function loop(path = '0', level = 2) {
-  const list = [];
+  const list: TreeProps['treeData'] = [];
 
   for (let i = 0; i < 10; i += 1) {
     const key = `${path}-${i}`;
-    const treeNode = {
+    const treeNode: Required<TreeProps>['treeData'][number] = {
       title: key,
       key,
     };
@@ -1058,7 +1053,7 @@ function loop(path = '0', level = 2) {
 const treeData = loop();
 
 function App() {
-  const treeRef = React.useRef();
+  const treeRef = React.useRef<Tree>(null);
   return (
     <div>
       <Button
@@ -1087,7 +1082,8 @@ export default App;
 ```tsx
 import { useState, useEffect } from 'react';
 import { Tree, Input } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = Tree.Node;
+import type { TreeProps } from '@xiaoyaoliu/x-arco-design';
+
 const TreeData = [
   {
     title: 'Trunk 0-0',
@@ -1139,7 +1135,7 @@ const TreeData = [
 
 function searchData(inputValue) {
   const loop = (data) => {
-    const result = [];
+    const result: TreeProps['treeData'] = [];
     data.forEach((item) => {
       if (item.title.toLowerCase().indexOf(inputValue.toLowerCase()) > -1) {
         result.push({ ...item });
@@ -1158,7 +1154,7 @@ function searchData(inputValue) {
 }
 
 function App() {
-  const [treeData, setTreeData] = useState(TreeData);
+  const [treeData, setTreeData] = useState<TreeProps['treeData']>(TreeData);
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
     if (!inputValue) {
@@ -1181,7 +1177,7 @@ function App() {
       <Tree
         treeData={treeData}
         renderTitle={({ title }) => {
-          if (inputValue) {
+          if (inputValue && typeof title === 'string') {
             const index = title.toLowerCase().indexOf(inputValue.toLowerCase());
 
             if (index === -1) {

@@ -275,7 +275,7 @@ export default App;
 
 ```tsx
 import { Table } from '@xiaoyaoliu/x-arco-design';
-import { IconRight, IconDown } from '@arco-design/web-react/icon';
+import { RightOutlined, DownOutlined } from '@easyv/react-icons';
 const columns = [
   {
     title: 'Name',
@@ -342,11 +342,11 @@ function App() {
         icon: ({ expanded, record, ...restProps }) =>
           expanded ? (
             <button {...restProps}>
-              <IconDown />
+              <DownOutlined />
             </button>
           ) : (
             <button {...restProps}>
-              <IconRight />
+              <RightOutlined />
             </button>
           ),
         width: 60,
@@ -935,7 +935,7 @@ export default App;
 import { useRef } from 'react';
 import { Table, Input } from '@xiaoyaoliu/x-arco-design';
 import type { TableProps, RefInputType } from '@xiaoyaoliu/x-arco-design';
-import { IconSearch } from '@arco-design/web-react/icon';
+import { SearchOutlined } from '@easyv/react-icons';
 import './demo.css';
 
 const data = [
@@ -982,7 +982,7 @@ function App() {
     {
       title: 'Name',
       dataIndex: 'name',
-      filterIcon: <IconSearch />,
+      filterIcon: <SearchOutlined />,
       filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
         return (
           <div className="arco-table-custom-filter">
@@ -2620,7 +2620,7 @@ export default App;
 import { useState } from 'react';
 import { Table } from '@xiaoyaoliu/x-arco-design';
 import type { TableProps } from '@xiaoyaoliu/x-arco-design';
-import { IconDragDotVertical } from '@arco-design/web-react/icon';
+import { DragOutlined } from '@easyv/react-icons';
 import {
   SortableContainer,
   SortableElement,
@@ -2702,7 +2702,7 @@ const initialData = [
   },
 ];
 const DragHandle = SortableHandle(() => (
-  <IconDragDotVertical
+  <DragOutlined
     style={{
       cursor: 'move',
       color: '#555',

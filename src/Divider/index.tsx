@@ -1,16 +1,13 @@
-import { Divider, DividerProps } from '@arco-design/web-react';
+import { Divider } from '@arco-design/web-react';
 import classNames from 'classnames';
 import './index.less';
-
-interface XDividerProps extends DividerProps {
-  plain?: boolean;
-}
+import { DividerProps } from './interface';
 
 export default function XDivider({
   plain,
   className,
   ...restProps
-}: XDividerProps) {
+}: DividerProps) {
   return (
     <Divider
       className={classNames(className, { 'arco-divider-plain-text': plain })}
@@ -18,3 +15,5 @@ export default function XDivider({
     />
   );
 }
+
+export type * from './interface';

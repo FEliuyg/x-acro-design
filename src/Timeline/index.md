@@ -54,8 +54,8 @@ export default App;
 自定义节点内容
 
 ```tsx
-import { Switch, Timeline, Grid } from '@xiaoyaoliu/x-arco-design';
-import { IconExclamationCircleFill } from '@arco-design/web-react/icon';
+import { Timeline } from '@xiaoyaoliu/x-arco-design';
+import { ExclamationCircleFilled } from '@easyv/react-icons';
 const TimelineItem = Timeline.Item;
 
 const App = () => {
@@ -68,7 +68,7 @@ const App = () => {
         <TimelineItem label="2018-05-22">The second milestone</TimelineItem>
         <TimelineItem label="2020-06-22" dotColor="#F53F3F">
           The third milestone
-          <IconExclamationCircleFill
+          <ExclamationCircleFilled
             style={{
               color: 'F53F3F',
               fontSize: 12,
@@ -95,11 +95,7 @@ export default App;
 
 ```tsx
 import { Timeline, Space } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconClockCircle,
-  IconCheck,
-  IconExclamationCircleFill,
-} from '@arco-design/web-react/icon';
+import { ClockCircleOutlined, CheckOutlined } from '@easyv/react-icons';
 const TimelineItem = Timeline.Item;
 
 const App = () => {
@@ -112,7 +108,9 @@ const App = () => {
         <TimelineItem label="2020-05-17">The second milestone</TimelineItem>
         <TimelineItem
           label="2020-06-22"
-          dot={<IconClockCircle style={{ fontSize: 12, color: '#F53F3F' }} />}
+          dot={
+            <ClockCircleOutlined style={{ fontSize: 12, color: '#F53F3F' }} />
+          }
         >
           The third milestone
         </TimelineItem>
@@ -125,7 +123,7 @@ const App = () => {
         <TimelineItem
           label="2020-04-12"
           dot={
-            <IconCheck
+            <CheckOutlined
               style={{
                 fontSize: 12,
                 padding: 2,
@@ -141,7 +139,7 @@ const App = () => {
         <TimelineItem
           label="2020-05-17"
           dot={
-            <IconCheck
+            <CheckOutlined
               style={{
                 fontSize: 12,
                 padding: 2,
@@ -239,18 +237,21 @@ export default App;
 
 当任务状态正在发生，还在记录过程中，可用幽灵节点来表示当前的时间节点，通过`pendingDot`定制其轴点。
 
-`pendingDot`.
-
 ```tsx
 import React from 'react';
 import { Timeline, Grid, Checkbox } from '@xiaoyaoliu/x-arco-design';
-import { IconFire } from '@arco-design/web-react/icon';
+import { FireOutlined } from '@easyv/react-icons';
 
 const TimelineItem = Timeline.Item;
 const { Row } = Grid;
 
 function App() {
-  const [pendingProps, setPendingProps] = React.useState({});
+  const [pendingProps, setPendingProps] = React.useState<{
+    direction?: 'horizontal' | 'vertical';
+    reverse?: boolean;
+    pending?: string | boolean;
+    pendingDot?: React.ReactNode;
+  }>({});
   return (
     <div>
       <Row align="center" style={{ marginBottom: 24 }}>
@@ -259,7 +260,7 @@ function App() {
           onChange={(v) => {
             setPendingProps({
               ...pendingProps,
-              direction: v ? 'horizontal' : '',
+              direction: v ? 'horizontal' : 'vertical',
             });
           }}
         >
@@ -295,7 +296,7 @@ function App() {
 
             if (v) {
               newProps.pendingDot = (
-                <IconFire
+                <FireOutlined
                   style={{
                     color: '#e70a0a',
                   }}
@@ -329,8 +330,6 @@ export default App;
 
 设置 `mode=alternate`时将会交替展示内容。同时可以通过设置 `TimelineItem` 的 `positon`属性控制时间轴节点的位置.
 
-`mode=alternate` is set. At the same time, you can control the position of the timeline node by setting the positon property of TimelineItem.
-
 ```tsx
 import { Timeline, Grid } from '@xiaoyaoliu/x-arco-design';
 const TimelineItem = Timeline.Item;
@@ -340,9 +339,7 @@ function Demo({ mode }) {
     <Timeline mode={mode} style={{ flex: 1 }}>
       <TimelineItem label="2017-03-10">The first milestone</TimelineItem>
       <TimelineItem label="2018-05-12">The second milestone</TimelineItem>
-      <TimelineItem label="2020-09-30" position="bottom">
-        The third milestone
-      </TimelineItem>
+      <TimelineItem label="2020-09-30">The third milestone</TimelineItem>
     </Timeline>
   );
 }
@@ -368,14 +365,16 @@ import React from 'react';
 import { Timeline, Grid, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
 
 const TimelineItem = Timeline.Item;
-const { Row, Col } = Grid;
+const { Row } = Grid;
 
 const imageStyle = {
   margin: '0 12px 12px 12px',
 };
 
 function App() {
-  const [mode, setMode] = React.useState('left');
+  const [mode, setMode] = React.useState<'left' | 'right' | 'alternate'>(
+    'left',
+  );
   return (
     <div>
       <Row align="center" style={{ marginBottom: 24 }}>
@@ -462,8 +461,6 @@ export default App;
 
 可以通过 `direction` 设置展示横向时间轴
 
-`direction`
-
 ```tsx
 import React from 'react';
 import { Timeline, Grid, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -476,7 +473,7 @@ const imageStyle = {
 };
 
 function App() {
-  const [mode, setMode] = React.useState('top');
+  const [mode, setMode] = React.useState<'top' | 'bottom' | 'alternate'>('top');
   return (
     <div>
       <Row align="center" style={{ marginBottom: 24 }}>
@@ -558,8 +555,6 @@ export default App;
 
 通过 `labelPosition` 可以设置标签文本的位置。
 
-`labelPosition`.
-
 ```tsx
 import React from 'react';
 import { Timeline, Grid, Radio, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -568,8 +563,10 @@ const TimelineItem = Timeline.Item;
 const { Row, Col } = Grid;
 
 function App() {
-  const [mode, setMode] = React.useState('left');
-  const [pos, setLabelPos] = React.useState('same');
+  const [mode, setMode] = React.useState<'left' | 'right' | 'alternate'>(
+    'left',
+  );
+  const [pos, setLabelPos] = React.useState<'same' | 'relative'>('same');
   return (
     <div>
       <Row align="center">
@@ -621,9 +618,7 @@ function App() {
         >
           The second milestone
         </TimelineItem>
-        <TimelineItem label="2020-09-30" position="bottom">
-          The third milestone
-        </TimelineItem>
+        <TimelineItem label="2020-09-30">The third milestone</TimelineItem>
       </Timeline>
     </div>
   );

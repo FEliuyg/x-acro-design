@@ -41,7 +41,7 @@ export default App;
 ```tsx
 import React from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
-import { IconStar } from '@arco-design/web-react/icon';
+import { StarOutlined } from '@easyv/react-icons';
 
 const treeData = [
   {
@@ -75,7 +75,7 @@ const App = () => {
     value: 'node2',
     label: (
       <span>
-        <IconStar /> Leaf
+        <StarOutlined /> Leaf
       </span>
     ),
   });
@@ -92,7 +92,7 @@ const App = () => {
                 value: v.value,
                 label: (
                   <span>
-                    <IconStar /> {v.label}
+                    <StarOutlined /> {v.label}
                   </span>
                 ),
               }
@@ -114,7 +114,7 @@ export default App;
 ```tsx
 import React from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
-import { IconStar } from '@arco-design/web-react/icon';
+import { StarOutlined } from '@easyv/react-icons';
 
 const treeData = [
   {
@@ -155,7 +155,7 @@ const App = () => {
 
         return (
           <span>
-            <IconStar />{' '}
+            <StarOutlined />{' '}
             {nodeProps.title ||
               (typeof value === 'string' ? value : value.label)}
           </span>
@@ -236,11 +236,11 @@ export default App;
 
 ```tsx
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
-import { IconCalendar } from '@arco-design/web-react/icon';
+import { CalendarOutlined } from '@easyv/react-icons';
 const treeData = [
   {
     key: 'node1',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     title: 'Trunk',
     disabled: true,
     children: [
@@ -253,7 +253,7 @@ const treeData = [
   {
     key: 'node3',
     title: 'Trunk2',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     children: [
       {
         key: 'node4',
@@ -287,12 +287,12 @@ export default App;
 ```tsx
 import React from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
-import { IconCalendar } from '@arco-design/web-react/icon';
+import { CalendarOutlined } from '@easyv/react-icons';
 
 const treeData = [
   {
     key: 'node1',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     title: 'Trunk',
     children: [
       {
@@ -304,7 +304,7 @@ const treeData = [
   {
     key: 'node3',
     title: 'Trunk2',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     children: [
       {
         key: 'node4',
@@ -440,7 +440,7 @@ export default App;
 ```tsx
 import React from 'react';
 import { TreeSelect, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconCalendar } from '@arco-design/web-react/icon';
+import { CalendarOutlined } from '@easyv/react-icons';
 
 const treeData = [
   {
@@ -752,12 +752,12 @@ export default DemoTreeSelect;
 ```tsx
 import React from 'react';
 import { TreeSelect, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconCalendar } from '@arco-design/web-react/icon';
+import { CalendarOutlined } from '@easyv/react-icons';
 
 const treeData = [
   {
     key: 'node1',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     title: 'Trunk',
     children: [
       {
@@ -769,7 +769,7 @@ const treeData = [
   {
     key: 'node3',
     title: 'Trunk2',
-    icon: <IconCalendar />,
+    icon: <CalendarOutlined />,
     children: [
       {
         key: 'node4',
@@ -1042,7 +1042,7 @@ export default App;
 import { useState } from 'react';
 import { TreeSelect, Divider, Input, Button } from '@xiaoyaoliu/x-arco-design';
 import type { TreeSelectProps } from '@xiaoyaoliu/x-arco-design';
-import { IconPlus } from '@arco-design/web-react/icon';
+import { PlusOutlined } from '@easyv/react-icons';
 
 const defaultTreeData = [
   {
@@ -1122,7 +1122,7 @@ function App() {
                 size="mini"
                 onClick={addItem}
               >
-                <IconPlus />
+                <PlusOutlined />
                 Add item
               </Button>
             </div>
@@ -1181,8 +1181,8 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { TreeSelect } from '@xiaoyaoliu/x-arco-design';
-const TreeNode = TreeSelect.Node;
-const TreeData = [
+
+const treeData = [
   {
     label: 'Trunk 0-0',
     value: '0-0',
@@ -1231,7 +1231,6 @@ const TreeData = [
 ];
 
 function App() {
-  const [treeData, setTreeData] = useState(TreeData);
   return (
     <div>
       <TreeSelect

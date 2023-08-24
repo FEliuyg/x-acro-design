@@ -31,7 +31,7 @@ export default App;
 
 ```tsx
 import { Breadcrumb, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconRight } from '@arco-design/web-react/icon';
+import { RightOutlined } from '@easyv/react-icons';
 const BreadcrumbItem = Breadcrumb.Item;
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
         <BreadcrumbItem>Channel</BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
       </Breadcrumb>
-      <Breadcrumb separator={<IconRight />}>
+      <Breadcrumb separator={<RightOutlined />}>
         <BreadcrumbItem>Home</BreadcrumbItem>
         <BreadcrumbItem>Channel</BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
@@ -93,7 +93,7 @@ export default App;
 
 ```tsx
 import { Breadcrumb, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconHome } from '@arco-design/web-react/icon';
+import { HomeOutlined } from '@easyv/react-icons';
 const BreadcrumbItem = Breadcrumb.Item;
 
 const App = () => {
@@ -101,14 +101,14 @@ const App = () => {
     <Space size={40}>
       <Breadcrumb>
         <BreadcrumbItem>
-          <IconHome />
+          <HomeOutlined />
         </BreadcrumbItem>
         <BreadcrumbItem>Channel</BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
       </Breadcrumb>
       <Breadcrumb style={{ fontSize: 12 }}>
         <BreadcrumbItem>
-          <IconHome />
+          <HomeOutlined />
         </BreadcrumbItem>
         <BreadcrumbItem>Channel</BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
@@ -123,8 +123,6 @@ export default App;
 ## 带有下拉菜单
 
 通过 `droplist` 或者 `routes` 来指定下拉菜单。
-
-`droplist` or `routes` to specify the drop-down menu.
 
 ```tsx
 import { Breadcrumb, Menu } from '@xiaoyaoliu/x-arco-design';
@@ -181,8 +179,6 @@ export default App;
 ## 显示省略
 
 通过 `maxCount` 来指定最多渲染的面包屑数量，超出的部分将显示为省略号。
-
-`maxCount` to set the maximum number of breadcrumbs to render. The rest will be displayed as an ellipsis.
 
 ```tsx
 import { Breadcrumb } from '@xiaoyaoliu/x-arco-design';

@@ -6,8 +6,6 @@
 
 当需要突出某个或某组数字或展示带描述的统计类数据时使用。
 
-`Statistics` when you need to highlight a certain number or group of numbers or display statistical data with descriptions.
-
 ```tsx
 import { Statistic } from '@xiaoyaoliu/x-arco-design';
 
@@ -34,7 +32,7 @@ export default App;
 
 ```tsx
 import { Statistic } from '@xiaoyaoliu/x-arco-design';
-import { IconArrowRise, IconArrowFall } from '@arco-design/web-react/icon';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -42,20 +40,20 @@ const App = () => {
       <Statistic
         title="New Users"
         value={192393}
-        suffix={<IconArrowRise style={{ color: '#ee4d38' }} />}
+        suffix={<ArrowUpOutlined style={{ color: '#ee4d38' }} />}
         style={{ marginRight: 60, marginBottom: 20 }}
       />
       <Statistic
         title="Active Users"
         value={934230}
-        suffix={<IconArrowFall style={{ color: '#0fbf60' }} />}
+        suffix={<ArrowDownOutlined style={{ color: '#0fbf60' }} />}
         style={{ marginRight: 60, marginBottom: 20 }}
       />
       <Statistic
         title="User Growth Rate"
         value={50.32}
         precision={2}
-        prefix={<IconArrowRise style={{ color: '#ee4d38' }} />}
+        prefix={<ArrowUpOutlined style={{ color: '#ee4d38' }} />}
         suffix="%"
         styleValue={{ color: '#ee4d38' }}
         style={{ marginRight: 60, marginBottom: 20 }}
@@ -73,67 +71,63 @@ export default App;
 如果你设置了 `countUp`，那么在组件 mount 之后，会执行动效。
 如果你想自己控制动效，也可以通过 `ref` 拿到实例，执行 `ins.countUp()` 即可。
 
-`Statistic`, you can make some interesting effects. For example, the value slowly becomes larger, making the display of the value more visual.
-If you set `countUp`, the animation will be executed after the component is mounted.
-If you want to control the animation by yourself, you can also get the instance through `ref` and execute `ins.countUp()`.
-
 ```tsx
-import React from 'react';
+import React, { useRef } from 'react';
 import { Statistic, Grid, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconArrowRise, IconArrowFall } from '@arco-design/web-react/icon';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@easyv/react-icons';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-class App extends React.Component {
-  render() {
-    return (
-      <Row>
-        <Col span={4}>
-          <Statistic
-            ref={(ref) => (this.refGrowth = ref)}
-            title="User Growth Rate"
-            value={50.32}
-            precision={2}
-            prefix={<IconArrowRise />}
-            suffix="%"
-            countUp
-            styleValue={{ color: '#0fbf60' }}
-          />
-          <Button
-            onClick={() => {
-              this.refGrowth.countUp();
-            }}
-            style={{ display: 'block', marginTop: 10 }}
-            type="primary"
-          >
-            Start
-          </Button>
-        </Col>
-        <Col span={4}>
-          <Statistic
-            ref={(ref) => (this.refBugs = ref)}
-            title="Population Growth Rate"
-            value={2.59}
-            precision={2}
-            prefix={<IconArrowFall />}
-            suffix="%"
-            countUp
-            styleValue={{ color: '#ee4d38' }}
-          />
-          <Button
-            onClick={() => {
-              this.refBugs.countUp();
-            }}
-            style={{ display: 'block', marginTop: 10 }}
-            type="primary"
-          >
-            Start
-          </Button>
-        </Col>
-      </Row>
-    );
-  }
+function App() {
+  const refGrowth = useRef<any>(null!);
+  const refBugs = useRef<any>(null!);
+  return (
+    <Row>
+      <Col span={4}>
+        <Statistic
+          ref={refGrowth}
+          title="User Growth Rate"
+          value={50.32}
+          precision={2}
+          prefix={<ArrowUpOutlined />}
+          suffix="%"
+          countUp
+          styleValue={{ color: '#0fbf60' }}
+        />
+        <Button
+          onClick={() => {
+            refGrowth.current.countUp();
+          }}
+          style={{ display: 'block', marginTop: 10 }}
+          type="primary"
+        >
+          Start
+        </Button>
+      </Col>
+      <Col span={4}>
+        <Statistic
+          ref={refBugs}
+          title="Population Growth Rate"
+          value={2.59}
+          precision={2}
+          prefix={<ArrowDownOutlined />}
+          suffix="%"
+          countUp
+          styleValue={{ color: '#ee4d38' }}
+        />
+        <Button
+          onClick={() => {
+            refBugs.current.countUp();
+          }}
+          style={{ display: 'block', marginTop: 10 }}
+          type="primary"
+        >
+          Start
+        </Button>
+      </Col>
+    </Row>
+  );
 }
 
 export default App;
@@ -142,8 +136,6 @@ export default App;
 ## 计时组件
 
 倒计时组件。可以通过 `now` 来传入 `Date.now()`，用于修复初始值显示的小误差问题。
-
-`now` to correct the initialization time.
 
 ```tsx
 import React from 'react';
@@ -236,8 +228,6 @@ export default App;
 
 时间显示。通过 [dayjs](https://github.com/iamkun/dayjs) 来进行时间格式化，`format` 即 dayjs 的 format。
 
-`format` is the format of dayjs.
-
 ```tsx
 import { Statistic, Grid } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -259,8 +249,6 @@ export default App;
 ## 加载中
 
 通过 `loading` 可以控制是否显示加载中状态。
-
-`loading`.
 
 ```tsx
 import { useState } from 'react';

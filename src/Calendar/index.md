@@ -41,9 +41,10 @@ export default App;
 使用 `dateInnerContent` 可以将自定义元素追加到日历单元格中，可以用来实现日历待办事项等展示。
 
 ```tsx
+import React from 'react';
 import { Calendar, Badge } from '@xiaoyaoliu/x-arco-design';
-import dayjs from 'dayjs';
-const badgeStyle = {
+
+const badgeStyle: React.CSSProperties = {
   width: '100%',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
@@ -110,8 +111,6 @@ export default App;
 ## 卡片日历
 
 设置 `panel=true`，可以使用卡片日历。
-
-`panel=true` to display date in card format.
 
 ```tsx
 import { Calendar, Space } from '@xiaoyaoliu/x-arco-design';

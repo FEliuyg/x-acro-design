@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { AutoComplete } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<string[]>([]);
 
   const handleSearch = (inputValue) => {
     setData(
@@ -38,15 +38,13 @@ export default App;
 
 可以传入 `AutoComplete.Option` 作为组件的 `children`，而非使用 `data`。
 
-`AutoComplete.Option` as the `children` of the component instead of using `data`.
-
 ```tsx
 import { useState } from 'react';
 import { AutoComplete } from '@xiaoyaoliu/x-arco-design';
 const { Option } = AutoComplete;
 
 function App() {
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<string[]>([]);
 
   const handleSearch = (inputValue) => {
     setOptions(
@@ -84,7 +82,7 @@ import { AutoComplete, Input } from '@xiaoyaoliu/x-arco-design';
 const { TextArea } = Input;
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<string[]>([]);
 
   const handleSearch = (inputValue) => {
     setData(
@@ -112,8 +110,6 @@ export default App;
 
 使用 `strict=true` 来指明在匹配时严格区分大小写。
 
-`strict=true` to enable case-sensitive matching for options.
-
 ```tsx
 import { AutoComplete } from '@xiaoyaoliu/x-arco-design';
 const data = ['beijing', 'beihai', 'baoding'];
@@ -137,8 +133,6 @@ export default App;
 ## 复杂用法
 
 这个示例展示了：`1. 添加Tooltip`, `2. 自定义显示`, `3. 对值进行操控`。
-
-`1. Add Tooltip`, `2. Custom display`, `3. Manipulate values`.
 
 ```tsx
 import { useState } from 'react';
@@ -181,12 +175,12 @@ export default App;
 根据查询结果补全输入内容（确定类目）。
 
 ```tsx
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { AutoComplete, Input } from '@xiaoyaoliu/x-arco-design';
 const { OptGroup, Option } = AutoComplete;
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ReactNode[]>([]);
 
   const handleSearch = (inputValue) => {
     if (inputValue) {
@@ -230,12 +224,12 @@ export default App;
 根据查询结果补全输入内容（不确定类目）。
 
 ```tsx
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { AutoComplete, Input } from '@xiaoyaoliu/x-arco-design';
 const { Option } = AutoComplete;
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ReactNode[]>([]);
 
   const handleSearch = (inputValue) => {
     if (inputValue) {

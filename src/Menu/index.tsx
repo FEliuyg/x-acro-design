@@ -1,18 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Menu } from '@arco-design/web-react';
-import type { MenuProps } from '@arco-design/web-react';
+import type { MenuProps } from './interface';
 import { DownOutlined, RightOutlined } from '@easyv/react-icons';
 import './index.less';
-import { forwardRef } from 'react';
-
-type XMenuProps = React.ForwardRefExoticComponent<
-  MenuProps & React.RefAttributes<unknown>
-> & {
-  Item: typeof Menu.Item;
-  ItemGroup: typeof Menu.ItemGroup;
-  SubMenu: typeof Menu.SubMenu;
-  __ARCO_MENU__: boolean;
-};
 
 const XMenu = forwardRef((props: MenuProps, ref) => {
   return (
@@ -25,7 +15,7 @@ const XMenu = forwardRef((props: MenuProps, ref) => {
       }}
     />
   );
-}) as XMenuProps;
+}) as typeof Menu;
 
 XMenu.Item = Menu.Item;
 XMenu.SubMenu = Menu.SubMenu;

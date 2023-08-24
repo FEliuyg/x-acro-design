@@ -162,8 +162,8 @@ import {
   Upload,
   DatePicker,
   Modal,
-  FormInstance,
 } from '@xiaoyaoliu/x-arco-design';
+import type { FormProps, FormInstance } from '@xiaoyaoliu/x-arco-design';
 const FormItem = Form.Item;
 const cascaderOptions = [
   {
@@ -221,7 +221,7 @@ const noLabelLayout = {
 };
 
 function App() {
-  const formRef = useRef<FormInstance>();
+  const formRef = useRef<FormInstance>(null!);
   const [size, setSize] = useState<'mini' | 'small' | 'default' | 'large'>(
     'default',
   );
@@ -231,10 +231,7 @@ function App() {
     });
   }, []);
 
-  const onValuesChange = (
-    changeValue: Partial<any>,
-    values: Partial<any>[],
-  ) => {
+  const onValuesChange: FormProps['onValuesChange'] = (changeValue, values) => {
     console.log('onValuesChange: ', changeValue, values);
   };
 
@@ -501,66 +498,55 @@ export default App;
 ```tsx
 import React from 'react';
 import { Form, Input, InputNumber, Message } from '@xiaoyaoliu/x-arco-design';
+import type { FormInstance } from '@xiaoyaoliu/x-arco-design';
 
 const FormItem = Form.Item;
 const FormControl = Form.Control;
 
-class App extends React.Component {
-  onSubmit = () => {
-    this.form
-      .validate()
-      .then((values) => {
-        Message.info('提交成功！');
-        console.log('Values: ', values);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        console.log(error.errors);
-      });
-  };
-  onValuesChange = (value, allValues) => {
+function App() {
+  const formRef = React.useRef<FormInstance>(null!);
+
+  const onValuesChange = (value, allValues) => {
     console.log(value, allValues);
   };
 
-  render() {
-    return (
-      <Form
-        ref={(ref) => (this.form = ref)}
-        autoComplete="off"
-        style={{ maxWidth: 650 }}
-        onValuesChange={this.onValuesChange}
+  return (
+    <Form
+      ref={formRef}
+      autoComplete="off"
+      style={{ maxWidth: 650 }}
+      onValuesChange={onValuesChange}
+    >
+      <FormItem
+        label="姓名"
+        required
+        extra="请输入长度在 1 - 10 的名字，注意不要使用特殊符号。"
       >
-        <FormItem
-          label="姓名"
-          required
-          extra="请输入长度在 1 - 10 的名字，注意不要使用特殊符号。"
+        <FormControl
+          field="name"
+          rules={[
+            {
+              required: true,
+            },
+            {
+              maxLength: 10,
+              message: '最多可以输入十个字!',
+            },
+          ]}
         >
-          <FormControl
-            field="name"
-            rules={[
-              {
-                required: true,
-              },
-              {
-                maxLength: 10,
-                message: '最多可以输入十个字!',
-              },
-            ]}
-          >
-            <Input placeholder="please enter..." />
-          </FormControl>
-        </FormItem>
-        <FormItem label="数字" required>
-          <FormControl
-            field="number"
-            rules={[{ type: 'number', required: true }]}
-          >
-            <InputNumber placeholder="请输入数字" />
-          </FormControl>
-        </FormItem>
-      </Form>
-    );
-  }
+          <Input placeholder="please enter..." />
+        </FormControl>
+      </FormItem>
+      <FormItem label="数字" required>
+        <FormControl
+          field="number"
+          rules={[{ type: 'number', required: true }]}
+        >
+          <InputNumber placeholder="请输入数字" />
+        </FormControl>
+      </FormItem>
+    </Form>
+  );
 }
 
 export default App;
@@ -706,10 +692,10 @@ export default App;
 
 ```tsx
 import React from 'react';
-import { Form, Input, Button, Modal } from '@xiaoyaoliu/x-arco-design';
+import { Form, Input } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [values, setValues] = React.useState();
+  const [values, setValues] = React.useState<Record<string, any>>({});
   return (
     <div>
       <Form
@@ -773,16 +759,15 @@ import {
   Button,
   Grid,
   Select,
-  InputNumber,
   Tooltip,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
-import { IconExclamationCircle } from '@arco-design/web-react/icon';
+import { FormInstance } from '@xiaoyaoliu/x-arco-design';
+import { ExclamationCircleOutlined } from '@easyv/react-icons';
 import { useRef, useState } from 'react';
 
 function App() {
-  const formRef = useRef();
-  const [values, setValues] = useState({});
+  const formRef = useRef<FormInstance>(null!);
   return (
     <div>
       <Form
@@ -825,7 +810,7 @@ function App() {
               />
             </Form.Item>
             <Tooltip content="必须填写哦">
-              <IconExclamationCircle
+              <ExclamationCircleOutlined
                 style={{ margin: '0 8px', color: 'rgb(var(--arcoblue-6))' }}
               />
             </Tooltip>
@@ -963,10 +948,10 @@ export default App;
 import { useRef, useState } from 'react';
 import { Form, Input, Button, Grid, Space } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconArrowRise,
-  IconArrowFall,
-  IconDelete,
-} from '@arco-design/web-react/icon';
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+  DeleteOutlined,
+} from '@easyv/react-icons';
 
 function App() {
   const [form] = Form.useForm();
@@ -999,7 +984,7 @@ function App() {
             rules={[
               {
                 validator(v, cb) {
-                  if (v?.length < 2) {
+                  if (!v?.length || v?.length < 2) {
                     return cb('必须超过两条');
                   }
                   return cb();
@@ -1030,7 +1015,7 @@ function App() {
                         </Form.Item>
 
                         <Button
-                          icon={<IconDelete />}
+                          icon={<DeleteOutlined />}
                           shape="circle"
                           status="danger"
                           style={{
@@ -1044,7 +1029,11 @@ function App() {
                             move(index, index > 0 ? index - 1 : index + 1)
                           }
                         >
-                          {index > 0 ? <IconArrowRise /> : <IconArrowFall />}
+                          {index > 0 ? (
+                            <ArrowUpOutlined />
+                          ) : (
+                            <ArrowDownOutlined />
+                          )}
                         </Button>
                       </Grid.Row>
                     );
@@ -1111,16 +1100,13 @@ export default App;
 通过`Form.List`管理数组类型的表单结构。可以通过对 `field` 进行一些处理，实现动态增减复杂类型的表单项
 
 ```tsx
-import { useRef, useState } from 'react';
-import { Form, Space, Input, Button, Grid } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconArrowRise,
-  IconArrowFall,
-  IconDelete,
-} from '@arco-design/web-react/icon';
+import { useRef } from 'react';
+import { Form, Space, Input, Button } from '@xiaoyaoliu/x-arco-design';
+import type { FormInstance } from '@xiaoyaoliu/x-arco-design';
+import { DeleteOutlined } from '@easyv/react-icons';
 
 function App() {
-  const formRef = useRef();
+  const formRef = useRef<FormInstance>(null!);
   return (
     <div>
       <Form
@@ -1163,7 +1149,7 @@ function App() {
                             <Input />
                           </Form.Item>
                           <Button
-                            icon={<IconDelete />}
+                            icon={<DeleteOutlined />}
                             shape="circle"
                             status="danger"
                             onClick={() => remove(index)}
@@ -1201,6 +1187,7 @@ export default App;
 ```tsx
 import { useRef, useState, useEffect } from 'react';
 import { Form, Input, Select, Typography } from '@xiaoyaoliu/x-arco-design';
+import type { FormInstance } from '@xiaoyaoliu/x-arco-design';
 
 function CustomInput(props) {
   const value = props.value || {};
@@ -1232,7 +1219,7 @@ function CustomInput(props) {
 }
 
 function App() {
-  const formRef = useRef();
+  const formRef = useRef<FormInstance>(null!);
   const [values, setValues] = useState({});
   return (
     <div>
@@ -1286,12 +1273,11 @@ const FormItem = Form.Item;
 
 const App = () => {
   return (
-    <Form style={{ width: 600 }}>
+    <Form style={{ width: 600 }} autoComplete="off">
       <FormItem
         label="Number"
         extra="Please enter number"
         field="number"
-        autoComplete="off"
         rules={[{ required: true, message: 'Please enter number' }]}
         normalize={(value) => {
           if (value) {
@@ -1319,7 +1305,7 @@ const App = () => {
           return value && value.begin ? [value.begin, value.end] : [];
         }}
       >
-        <DatePicker.RangePicker placeholder="please enter..." />
+        <DatePicker.RangePicker placeholder={['please enter...']} />
       </FormItem>
       <FormItem wrapperCol={{ offset: 5 }}>
         <Button type="primary" htmlType="submit">
@@ -1430,6 +1416,7 @@ import {
   DatePicker,
   Modal,
 } from '@xiaoyaoliu/x-arco-design';
+import { FormInstance, FormProps } from '@xiaoyaoliu/x-arco-design';
 const FormItem = Form.Item;
 const cascaderOptions = [
   {
@@ -1487,8 +1474,8 @@ const noLabelLayout = {
 };
 
 function App() {
-  const formRef = useRef();
-  const [size, setSize] = useState('default');
+  const formRef = useRef<FormInstance>(null!);
+  const [size, setSize] = useState<FormProps['size']>('default');
   useEffect(() => {
     formRef.current.setFieldsValue({
       rate: 5,
@@ -1684,7 +1671,7 @@ function App() {
                 title: 'Preview',
                 content: (
                   <img
-                    src={file.url || URL.createObjectURL(file.originFile)}
+                    src={file.url || URL.createObjectURL(file.originFile!)}
                     style={{
                       maxWidth: '100%',
                     }}
@@ -1775,6 +1762,7 @@ import {
   InputNumber,
   DatePicker,
 } from '@xiaoyaoliu/x-arco-design';
+import type { FormInstance } from '@xiaoyaoliu/x-arco-design';
 const FormItem = Form.Item;
 const cascaderOptions = [
   {
@@ -1832,8 +1820,10 @@ const noLabelLayout = {
 };
 
 function App() {
-  const formRef = useRef();
-  const [size, setSize] = useState('default');
+  const formRef = useRef<FormInstance>(null!);
+  const [size, setSize] = useState<'mini' | 'small' | 'default' | 'large'>(
+    'default',
+  );
 
   const onValuesChange = (changeValue, values) => {
     console.log('onValuesChange: ', changeValue, values);
@@ -1940,18 +1930,20 @@ import {
   Select,
   Cascader,
   InputNumber,
-  Grid,
   DatePicker,
   TreeSelect,
   TimePicker,
   Radio,
 } from '@xiaoyaoliu/x-arco-design';
+import type { FormProps } from '@xiaoyaoliu/x-arco-design';
 
 const FormItem = Form.Item;
 
 function App() {
-  const [status, setStatus] = React.useState('error');
-  const [size, setSize] = React.useState('default');
+  const [status, setStatus] = React.useState<
+    'validating' | 'success' | 'error' | 'warning'
+  >('error');
+  const [size, setSize] = React.useState<FormProps['size']>('default');
   return (
     <div style={{ maxWidth: 650 }}>
       <Form
@@ -2016,7 +2008,7 @@ function App() {
             placeholder={['Start Time', 'End Time']}
           />
         </FormItem>
-        <FormItem help="Please select date" validateStatus={status}>
+        <FormItem help="Please select date" validateStatus={status} hasFeedback>
           <Input.Group>
             <DatePicker style={{ width: '48%' }} placeholder="Select date" />
             <span
@@ -2028,11 +2020,7 @@ function App() {
             >
               -
             </span>
-            <TimePicker
-              placeholder="Select time"
-              style={{ width: '48%' }}
-              hasFeedback
-            />
+            <TimePicker placeholder="Select time" style={{ width: '48%' }} />
           </Input.Group>
         </FormItem>
         <FormItem
@@ -2314,11 +2302,12 @@ export default App;
 ```
 
 ```tsx
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Form, Input, Button } from '@xiaoyaoliu/x-arco-design';
+import type { FormInstance } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const formRef = useRef();
+  const formRef = useRef<FormInstance>(null!);
   return (
     <div>
       <Button
@@ -2712,7 +2701,7 @@ const FormItem = Form.Item;
 
 function DemoButton() {
   const { form, disabled, isSubmitting } = Form.useFormContext();
-  const messageRef = useRef(null);
+  const messageRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (isSubmitting) {

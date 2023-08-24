@@ -1,18 +1,13 @@
 import React, { forwardRef } from 'react';
-import { Input, InputProps } from '@arco-design/web-react';
-import { RefInputType } from '@arco-design/web-react/es/Input';
+import { Input } from '@arco-design/web-react';
 import classNames from 'classnames';
-import { InputSearchProps } from '@arco-design/web-react/es/Input';
 import { SearchCircleOutlined } from '@easyv/react-icons';
+import { InputProps, InputSearchProps, RefInputType } from './interface';
 
 import './index.less';
 
-interface XInputProps extends InputProps {
-  bordered?: boolean;
-}
-
 type XInputType = React.ForwardRefExoticComponent<
-  XInputProps & React.RefAttributes<RefInputType>
+  InputProps & React.RefAttributes<RefInputType>
 > & {
   Search: typeof InputSearch;
   TextArea: typeof Input.TextArea;
@@ -20,7 +15,7 @@ type XInputType = React.ForwardRefExoticComponent<
   Group: typeof Input.Group;
 };
 
-const XInput = forwardRef<RefInputType, XInputProps>(
+const XInput = forwardRef<RefInputType, InputProps>(
   ({ bordered = true, className, ...restProps }, ref) => {
     return (
       <Input
@@ -34,11 +29,7 @@ const XInput = forwardRef<RefInputType, XInputProps>(
   },
 ) as XInputType;
 
-interface XInputSearchProps extends InputSearchProps {
-  bordered?: boolean;
-}
-
-const InputSearch = forwardRef<RefInputType, XInputSearchProps>(
+const InputSearch = forwardRef<RefInputType, InputSearchProps>(
   ({ bordered = true, className, onSearch, ...restProps }, ref) => {
     return (
       <Input
@@ -62,8 +53,6 @@ XInput.TextArea = Input.TextArea;
 XInput.Password = Input.Password;
 XInput.Group = Input.Group;
 
-export {
-  XInputProps as InputProps,
-  XInputSearchProps as InputSearchProps,
-  RefInputType,
-};
+export { InputProps, InputSearchProps, RefInputType };
+
+export type * from './interface';

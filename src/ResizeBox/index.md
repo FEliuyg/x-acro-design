@@ -6,8 +6,6 @@
 
 `ResizeBox` 伸缩框组件的基础使用。通过设置 `directions`，可以指定四条边中的哪几条边可以进行伸缩。
 
-`ResizeBox`. By setting `directions`, you can specify which of the four sides can be stretched.
-
 ```tsx
 import { ResizeBox, Divider, Typography } from '@xiaoyaoliu/x-arco-design';
 const { Paragraph } = Typography;
@@ -48,10 +46,10 @@ export default App;
 
 可通过属性 `resizeTriggers` 定制各个方向的伸缩杆的内容。
 
-`resizeTriggers`.
-
 ```tsx
 import { ResizeBox, Divider, Typography } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const { Paragraph } = Typography;
 
 const TriggerContent = function ({ className }) {
@@ -102,50 +100,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.resizebox-demo-custom-trigger {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-bg-2);
-}
-
-.resizebox-demo-custom-trigger::before,
-.resizebox-demo-custom-trigger::after {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border: 1px solid rgb(var(--arcoblue-6));
-}
-
-.resizebox-demo-custom-trigger-line {
-  background-color: rgb(var(--arcoblue-6));
-  flex: 1;
-}
-
-.resizebox-demo-custom-trigger-vertical {
-  flex-direction: column;
-}
-
-.resizebox-demo-custom-trigger-vertical .resizebox-demo-custom-trigger-line {
-  width: 1px;
-  height: 100%;
-}
-
-.resizebox-demo-custom-trigger-horizontal .resizebox-demo-custom-trigger-line {
-  width: 100%;
-  height: 1px;
-}
-```
-
 ## 受控的高宽
 
 `ResizeBox` 的高宽都支持受控，分别对应属性 `width` 和 `height`，通过 `onChange` 得到拖动中的高宽值。
-
-`ResizeBox` can be controlled, corresponding to the attributes `width` and `height`, and the height and width values during dragging can be obtained through `onChange`.
 
 ```tsx
 import React from 'react';
@@ -193,9 +150,7 @@ export default App;
 
 ## 在布局中使用
 
-[Layout](/components/ResizeBox) 组件中集成了 `ResizeBox` 组件，可以在 Layout 中使用可伸缩的侧边栏。
-
-`ResizeBox` component is integrated in the [Layout](/components/ResizeBox) component, so a scalable sidebar can be used in the layout.
+[Layout](/ResizeBox) 组件中集成了 `ResizeBox` 组件，可以在 Layout 中使用可伸缩的侧边栏。
 
 ```tsx
 import { Layout } from '@xiaoyaoliu/x-arco-design';
@@ -235,14 +190,15 @@ export default App;
 
 将一个面板分割成两个可以调整宽度或高度的两部分。用`direction`控制分割方向。
 
-`direction` to control the direction of the split.
-
 ```tsx
 import { useState } from 'react';
 import { ResizeBox, Tag, Space, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { ResizeBoxProps } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [direction, setDirection] = useState('horizontal');
+  const [direction, setDirection] = useState<
+    'horizontal' | 'vertical' | 'horizontal-reverse' | 'vertical-reverse'
+  >('horizontal');
   return (
     <Space direction="vertical" size={20}>
       <Radio.Group
@@ -322,12 +278,12 @@ export default App;
 
 可以通过 `SplitGroup` 进行多个面板分割，同时还支持快速收缩及手动收缩
 
-`SplitGroup`, and it also supports quick collapse and manual drag;
-
 ```tsx
 import { useState } from 'react';
 import { ResizeBox, Typography } from '@xiaoyaoliu/x-arco-design';
-import { IconDoubleLeft, IconDoubleRight } from '@arco-design/web-react/icon';
+import { DoubleLeftOutlined, DoubleRightOutlined } from '@easyv/react-icons';
+import './demo.css';
+
 const { Paragraph, Text } = Typography;
 const panes = [
   {
@@ -345,13 +301,13 @@ const panes = [
     collapsible: {
       prev: {
         // 自定义伸缩杆向前快速收缩触发器
-        icon: <IconDoubleLeft />,
+        icon: <DoubleLeftOutlined />,
         onClick: (_, collapsed, status, activeIndex) => {
           console.log('快速收缩：', collapsed, status, activeIndex);
         },
       },
       next: {
-        icon: <IconDoubleRight />,
+        icon: <DoubleRightOutlined />,
         onClick: (_, collapsed, status, activeIndex) => {
           console.log('快速收缩：', collapsed, status, activeIndex);
         },
@@ -384,7 +340,7 @@ const verticalPanes = [
 ];
 
 const HorizontalSplitGroup = () => {
-  const [offsets, setOffsets] = useState([]);
+  const [offsets, setOffsets] = useState<string[]>([]);
   return (
     <ResizeBox.SplitGroup
       onMoving={(_, sizes) => setOffsets(sizes)}
@@ -447,41 +403,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.resizebox-split-group-demo {
-  border: 1px solid var(--color-neutral-4);
-  height: 400px;
-}
-
-.resizebox-split-group-demo-content {
-  text-align: center;
-  padding: 20px 0;
-  min-width: 130px;
-  overflow-x: auto;
-}
-
-.resizebox-split-group-demo-trigger {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-  height: 100%;
-  width: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.resizebox-split-group-demo-trigger .arco-resizebox-trigger-icon {
-  color: #ffffff;
-}
-
-.resizebox-split-group-demo-horizontal {
-  height: 100%;
-}
-
-.resizebox-split-group-demo-vertical {
-  height: 237px;
-}
 ```
 
 ## API

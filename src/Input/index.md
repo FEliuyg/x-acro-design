@@ -61,10 +61,10 @@ import {
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconClockCircle,
-  IconSearch,
-  IconInfoCircle,
-} from '@arco-design/web-react/icon';
+  ClockCircleOutlined,
+  SearchOutlined,
+  InfoCircleOutlined,
+} from '@easyv/react-icons';
 
 const RadioGroup = Radio.Group;
 const InputSearch = Input.Search;
@@ -132,13 +132,13 @@ class App extends React.Component {
           <Input
             {...props}
             style={{ width: 350, margin: 12 }}
-            prefix={<IconClockCircle />}
+            prefix={<ClockCircleOutlined />}
             placeholder="Please enter something"
           />
           <Input
             {...props}
             style={{ width: 350, margin: 12 }}
-            suffix={<IconInfoCircle />}
+            suffix={<InfoCircleOutlined />}
             placeholder="Please enter something"
           />
         </div>
@@ -161,9 +161,9 @@ class App extends React.Component {
             {...props}
             style={{ width: 350, margin: 12 }}
             addBefore="+86"
-            addAfter={<IconSearch />}
-            prefix={<IconClockCircle />}
-            suffix={<IconInfoCircle />}
+            addAfter={<SearchOutlined />}
+            prefix={<ClockCircleOutlined />}
+            suffix={<InfoCircleOutlined />}
             allowClear
             placeholder="Please enter something"
           />
@@ -211,11 +211,6 @@ export default App;
 
 ```tsx
 import { Input, Select, Space } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconClockCircle,
-  IconSearch,
-  IconInfoCircle,
-} from '@arco-design/web-react/icon';
 
 const App = () => {
   return (
@@ -268,10 +263,10 @@ export default App;
 ```tsx
 import { Input, Space } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconUser,
-  IconSearch,
-  IconInfoCircle,
-} from '@arco-design/web-react/icon';
+  UserOutlined,
+  SearchOutlined,
+  InfoCircleOutlined,
+} from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -279,29 +274,29 @@ const App = () => {
       <Space wrap>
         <Input
           style={{ width: 350 }}
-          prefix={<IconUser />}
+          prefix={<UserOutlined />}
           placeholder="Please enter"
         />
         <Input
           allowClear
           style={{ width: 350 }}
-          suffix={<IconInfoCircle />}
+          suffix={<InfoCircleOutlined />}
           placeholder="Please enter"
         />
       </Space>
       <Space wrap>
         <Input
           style={{ width: 350 }}
-          prefix={<IconUser />}
-          suffix={<IconInfoCircle />}
+          prefix={<UserOutlined />}
+          suffix={<InfoCircleOutlined />}
           placeholder="Please enter"
         />
         <Input
           style={{ width: 350 }}
           addBefore="+86"
-          addAfter={<IconSearch />}
-          prefix={<IconUser />}
-          suffix={<IconInfoCircle />}
+          addAfter={<SearchOutlined />}
+          prefix={<UserOutlined />}
+          suffix={<InfoCircleOutlined />}
           allowClear
           placeholder="Please enter"
         />
@@ -342,7 +337,7 @@ export default App;
 
 ```tsx
 import { Input, Grid, Select, DatePicker } from '@xiaoyaoliu/x-arco-design';
-import { IconMinus } from '@arco-design/web-react/icon';
+import { MinusOutlined } from '@easyv/react-icons';
 const InputSearch = Input.Search;
 
 const App = () => {
@@ -432,7 +427,7 @@ const App = () => {
               value="010"
               readOnly
             />
-            <IconMinus style={{ color: 'var(--color-text-1)' }} />
+            <MinusOutlined style={{ color: 'var(--color-text-1)' }} />
             <Input
               style={{ width: '60%', marginLeft: 8 }}
               defaultValue="8899887"

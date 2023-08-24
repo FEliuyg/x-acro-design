@@ -6,31 +6,28 @@
 
 一个基本的评论组件，带有作者、头像、时间和操作。
 
-## en-US
-
-A basic comment component with author, avatar, time and actions.
-
 ```tsx
 import React from 'react';
 import { Comment, Avatar } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHeart,
-  IconMessage,
-  IconStar,
-  IconStarFill,
-  IconHeartFill,
-} from '@arco-design/web-react/icon';
+  HeartOutlined,
+  MessageOutlined,
+  StarOutlined,
+  StarFilled,
+  HeartFilled,
+} from '@easyv/react-icons';
+import './demo.css';
 
 const App = () => {
-  const [like, setLike] = React.useState();
-  const [star, setStar] = React.useState();
+  const [like, setLike] = React.useState<boolean>(false);
+  const [star, setStar] = React.useState<boolean>(false);
   const actions = [
     <button
       className="custom-comment-action"
       key="heart"
       onClick={() => setLike(!like)}
     >
-      {like ? <IconHeartFill style={{ color: '#f53f3f' }} /> : <IconHeart />}
+      {like ? <HeartFilled style={{ color: '#f53f3f' }} /> : <HeartOutlined />}
       {83 + (like ? 1 : 0)}
     </button>,
     <button
@@ -38,11 +35,11 @@ const App = () => {
       key="star"
       onClick={() => setStar(!star)}
     >
-      {star ? <IconStarFill style={{ color: '#ffb400' }} /> : <IconStar />}
+      {star ? <StarFilled style={{ color: '#ffb400' }} /> : <StarOutlined />}
       {3 + (star ? 1 : 0)}
     </button>,
     <button className="custom-comment-action" key="reply">
-      <IconMessage /> Reply
+      <MessageOutlined /> Reply
     </button>,
   ];
   return (
@@ -66,28 +63,6 @@ const App = () => {
 export default App;
 ```
 
-```css
-.custom-comment-action {
-  padding: 0 4px;
-  line-height: 24px;
-  border-radius: 2px;
-  background: transparent;
-  transition: all 0.1s ease;
-  color: var(--color-text-1);
-  cursor: pointer;
-  display: inline-block;
-  border: none;
-}
-
-.custom-comment-action:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-comment-action:hover {
-  background: var(--color-fill-3);
-}
-```
-
 ## 对齐
 
 通过 `align` 属性可以设置 `datetime` 和 `actions` 的对齐方式.
@@ -96,12 +71,13 @@ export default App;
 import React from 'react';
 import { Comment, Avatar } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHeartFill,
-  IconMessage,
-  IconStarFill,
-  IconHeart,
-  IconStar,
-} from '@arco-design/web-react/icon';
+  HeartFilled,
+  MessageOutlined,
+  StarFilled,
+  HeartOutlined,
+  StarOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
 
 const App = () => {
   const [like, setLike] = React.useState(true);
@@ -112,7 +88,7 @@ const App = () => {
       key="heart"
       onClick={() => setLike(!like)}
     >
-      {like ? <IconHeartFill style={{ color: '#f53f3f' }} /> : <IconHeart />}
+      {like ? <HeartFilled style={{ color: '#f53f3f' }} /> : <HeartOutlined />}
       {83 + (like ? 1 : 0)}
     </button>,
     <button
@@ -120,11 +96,11 @@ const App = () => {
       key="star"
       onClick={() => setStar(!star)}
     >
-      {star ? <IconStarFill style={{ color: '#ffb400' }} /> : <IconStar />}
+      {star ? <StarFilled style={{ color: '#ffb400' }} /> : <StarOutlined />}
       {3 + (star ? 1 : 0)}
     </button>,
     <button className="custom-comment-action" key="reply">
-      <IconMessage /> Reply
+      <MessageOutlined /> Reply
     </button>,
   ];
   return (
@@ -156,44 +132,19 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.custom-comment-action {
-  padding: 0 4px;
-  line-height: 24px;
-  border-radius: 2px;
-  background: transparent;
-  transition: all 0.1s ease;
-  color: var(--color-text-1);
-  cursor: pointer;
-  display: inline-block;
-  border: none;
-}
-
-.custom-comment-action:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-comment-action:hover {
-  background: var(--color-fill-3);
-}
-```
-
 ## 嵌套评论
 
 Comments 组件可以嵌套。
 
-## en-US
-
-Comments can be nested.
-
 ```tsx
-import { Comment, Avatar } from '@xiaoyaoliu/x-arco-design';
-import { IconHeart, IconMessage, IconStar } from '@arco-design/web-react/icon';
+import { Comment } from '@xiaoyaoliu/x-arco-design';
+import { MessageOutlined } from '@easyv/react-icons';
+import './demo.css';
 
 const App = () => {
   const actions = (
     <span className="custom-comment-action">
-      <IconMessage /> Reply
+      <MessageOutlined /> Reply
     </span>
   );
   return (
@@ -233,23 +184,6 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.custom-comment-action {
-  padding: 0 4px;
-  line-height: 24px;
-  border-radius: 2px;
-  background: transparent;
-  transition: all 0.1s ease;
-  color: var(--color-text-1);
-  cursor: pointer;
-  display: inline-block;
-}
-
-.custom-comment-action:hover {
-  background: var(--color-fill-3);
-}
-```
-
 ## 配合 List 使用
 
 配合 List 组件展现评论列表。
@@ -258,16 +192,17 @@ export default App;
 import React from 'react';
 import { Comment, List } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHeart,
-  IconMessage,
-  IconHeartFill,
-  IconStarFill,
-  IconStar,
-} from '@arco-design/web-react/icon';
+  HeartOutlined,
+  MessageOutlined,
+  HeartFilled,
+  StarFilled,
+  StarOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
 
 const App = () => {
-  const [likes, setLikes] = React.useState([]);
-  const [stars, setStars] = React.useState([]);
+  const [likes, setLikes] = React.useState<number[]>([]);
+  const [stars, setStars] = React.useState<number[]>([]);
   const data = [
     {
       id: 1,
@@ -292,7 +227,7 @@ const App = () => {
   ];
   return (
     <List bordered={false} header={<span>2 comments</span>}>
-      {data.map((item, index) => {
+      {data.map((item) => {
         const like = likes.indexOf(item.id) > -1;
         const star = stars.indexOf(item.id) > -1;
         return (
@@ -315,9 +250,9 @@ const App = () => {
                   }
                 >
                   {like ? (
-                    <IconHeartFill style={{ color: '#f53f3f' }} />
+                    <HeartFilled style={{ color: '#f53f3f' }} />
                   ) : (
-                    <IconHeart />
+                    <HeartOutlined />
                   )}
                   {item.like + (like ? 1 : 0)}
                 </button>,
@@ -333,14 +268,14 @@ const App = () => {
                   }
                 >
                   {star ? (
-                    <IconStarFill style={{ color: '#ffb400' }} />
+                    <StarFilled style={{ color: '#ffb400' }} />
                   ) : (
-                    <IconStar />
+                    <StarOutlined />
                   )}
                   {item.star + (star ? 1 : 0)}
                 </button>,
                 <button className="custom-comment-action" key="reply">
-                  <IconMessage /> Reply
+                  <MessageOutlined /> Reply
                 </button>,
               ]}
             />
@@ -354,39 +289,14 @@ const App = () => {
 export default App;
 ```
 
-```css:silent
-.custom-comment-action {
-  padding: 0 4px;
-  line-height: 24px;
-  border-radius: 2px;
-  background: transparent;
-  transition: all 0.1s ease;
-  color: var(--color-text-1);
-  cursor: pointer;
-  display: inline-block;
-  border: none;
-}
-
-.custom-comment-action:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--color-primary-light-3);
-}
-
-.custom-comment-action:hover {
-  background: var(--color-fill-3);
-}
-```
-
 ## 回复框
 
 实现一个评论回复框。
 
-## en-US
-
-Display as a reply editor.
-
 ```tsx
-import { Comment, Avatar, Button, Input } from '@xiaoyaoliu/x-arco-design';
-import { IconMessage } from '@arco-design/web-react/icon';
+import { Comment, Button, Input } from '@xiaoyaoliu/x-arco-design';
+import { MessageOutlined } from '@easyv/react-icons';
+import './demo.css';
 
 const App = () => {
   return (
@@ -394,7 +304,7 @@ const App = () => {
       align="right"
       actions={
         <span className="custom-comment-action">
-          <IconMessage /> Reply
+          <MessageOutlined /> Reply
         </span>
       }
       author="Balzac"
@@ -431,23 +341,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.custom-comment-action {
-  padding: 0 4px;
-  line-height: 24px;
-  border-radius: 2px;
-  background: transparent;
-  transition: all 0.1s ease;
-  color: var(--color-text-1);
-  cursor: pointer;
-  display: inline-block;
-}
-
-.custom-comment-action:hover {
-  background: var(--color-fill-3);
-}
 ```
 
 ## API

@@ -231,12 +231,12 @@ export default App;
 
 ```tsx
 import { Checkbox } from '@xiaoyaoliu/x-arco-design';
-import { IconAt } from '@arco-design/web-react/icon';
+import { AppleOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <div>
-      <Checkbox icon={<IconAt />}>Checkbox</Checkbox>
+      <Checkbox icon={<AppleOutlined />}>Checkbox</Checkbox>
     </div>
   );
 };
@@ -247,8 +247,6 @@ export default App;
 ## 自定义节点内容
 
 可以通过传入函数类型的 `children` 来自定义渲染节点内容( `v2.29.0`)。
-
-`v2.29.0`)。.
 
 ```tsx
 import { Checkbox, Tag, Space, Typography } from '@xiaoyaoliu/x-arco-design';

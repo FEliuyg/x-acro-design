@@ -12,7 +12,17 @@ import { Slider } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
   const [value, setValue] = useState(30);
-  return <Slider value={value} onChange={setValue} style={{ width: 200 }} />;
+  return (
+    <Slider
+      value={value}
+      onChange={(value) => {
+        if (typeof value === 'number') {
+          setValue(value);
+        }
+      }}
+      style={{ width: 200 }}
+    />
+  );
 }
 
 export default App;
@@ -40,8 +50,6 @@ export default App;
 ## 设置步长
 
 传入 `step` 设置步长。 默认步长为 1。建议设置值能够被 `max-min` 整除，否则会出现可选最大值小于 `max` 的情况。当设置 `showTicks` 为 `true` 的时候，可显示 step 的刻度线。
-
-`step` to set the step size. The default step size is 1. It is recommended that the setting value can be divisible by `max-min`, otherwise the maximum value that can be selected is less than `max`. When `showTicks` is set to `true`, the ticks of step can be displayed.
 
 ```tsx
 import { useState } from 'react';
@@ -103,8 +111,6 @@ export default App;
 
 设置 `range = true` 即可开启范围选择，此时 `value` 为数组。
 
-`range = true` to enable range selection, at this time `value` is an array.
-
 ```tsx
 import { useState } from 'react';
 import { Slider } from '@xiaoyaoliu/x-arco-design';
@@ -113,7 +119,15 @@ function App() {
   const [value, setValue] = useState([0, 50]);
   return (
     <div style={{ width: 200 }}>
-      <Slider range value={value} onChange={setValue} />
+      <Slider
+        range
+        value={value}
+        onChange={(value) => {
+          if (Array.isArray(value)) {
+            setValue(value);
+          }
+        }}
+      />
     </div>
   );
 }
@@ -125,12 +139,9 @@ export default App;
 
 可以通过传入 `marks` 添加标签文本。当设置 `onlyMarkValue` 的时候，只可以选择节点值。此时`step`会被忽略。
 
-`marks`. When setting `onlyMarkValue`, only node value can be selected. At this time, `step` will be ignored.
-
 ```tsx
 import React from 'react';
 import { Slider } from '@xiaoyaoliu/x-arco-design';
-import { IconClockCircle } from '@arco-design/web-react/icon';
 
 class App extends React.Component {
   render() {
@@ -173,12 +184,6 @@ export default App;
 当 `showInput` 传入 `InputNumberProps` 时，`min`、`max`、`step` 属性会以 `SliderProps` 为先。
 
 **分段输入条设置的分段步长对 InputNumber 无效**
-
-`showInput` is set to true, the input box will be displayed. But when setting `onlyMarkValue` to `true`, the input box will never be displayed.
-
-When `showInput` is passed `InputNumberProps`, the `min`, `max`, `step` properties will be preceded by `SliderProps`.
-
-**The segment step size set by the segment input bar is invalid for InputNumber**
 
 ```tsx
 import { Slider, Space } from '@xiaoyaoliu/x-arco-design';
@@ -232,7 +237,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Slider, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconSound, IconMute } from '@arco-design/web-react/icon';
+import { SoundOutlined, AudioMutedOutlined } from '@easyv/react-icons';
 
 function App() {
   const [value, setValue] = useState(10);
@@ -250,14 +255,22 @@ function App() {
         />
       </Space>
       <Space>
-        <IconMute
+        <AudioMutedOutlined
           style={{
             fontSize: 16,
             color: value > 0 ? 'var(--color-text-4)' : 'var(--color-text-1)',
           }}
         />
-        <Slider value={value} onChange={setValue} style={{ width: 200 }} />
-        <IconSound
+        <Slider
+          value={value}
+          onChange={(value) => {
+            if (typeof value === 'number') {
+              setValue(value);
+            }
+          }}
+          style={{ width: 200 }}
+        />
+        <SoundOutlined
           style={{
             fontSize: 16,
             color: value === 0 ? 'var(--color-text-4)' : 'var(--color-text-1)',
@@ -275,12 +288,10 @@ export default App;
 
 设置 `vertical` 为 `true`，将会显示竖直的滑动条
 
-`vertical={true}`.
-
 ```tsx
 import { useState } from 'react';
 import { Slider, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconSound, IconMute } from '@arco-design/web-react/icon';
+import { SoundOutlined, AudioMutedOutlined } from '@easyv/react-icons';
 
 function App() {
   const [value, setValue] = useState(10);
@@ -293,12 +304,24 @@ function App() {
           display: 'inline-block',
         }}
       >
-        <Slider value={value} onChange={setValue} vertical />
+        <Slider
+          value={value}
+          onChange={(value) => {
+            if (typeof value === 'number') {
+              setValue(value);
+            }
+          }}
+          vertical
+        />
         {value ? (
-          <IconSound style={{ fontSize: 16, color: 'var(--color-text-1)' }} />
+          <SoundOutlined
+            style={{ fontSize: 16, color: 'var(--color-text-1)' }}
+          />
         ) : null}
         {!value ? (
-          <IconMute style={{ fontSize: 16, color: 'var(--color-text-1)' }} />
+          <AudioMutedOutlined
+            style={{ fontSize: 16, color: 'var(--color-text-1)' }}
+          />
         ) : null}
       </div>
       <Slider
@@ -319,6 +342,8 @@ function App() {
 export default App;
 ```
 
+## 控制 tooltip 的展示
+
 ```tsx
 import { Slider, Space } from '@xiaoyaoliu/x-arco-design';
 
@@ -328,11 +353,10 @@ function App() {
       <Slider
         defaultValue={20}
         tooltipVisible={true}
-        style={{ marginBottom: 80 }}
         onAfterChange={(value) => {
           console.log(value);
         }}
-        style={{ width: 200, marginRight: 100 }}
+        style={{ width: 200, marginBottom: 80, marginRight: 100 }}
       />
       <Slider
         range
@@ -353,8 +377,6 @@ export default App;
 ## 自定义提示
 
 使用 `formatterTooltip` 可以格式化 Tooltip 的内容。
-
-`formatterTooltip` to format the content of Tooltip.
 
 ```tsx
 import { Slider } from '@xiaoyaoliu/x-arco-design';
@@ -377,8 +399,6 @@ export default App;
 ## 范围刻度可拖拽
 
 通过设置 `range.draggableBar` 为 `true`, 让范围刻度可以拖拽。
-
-`range.draggableBar` to `true`, the range scale can be dragged.
 
 ```tsx
 import { Slider } from '@xiaoyaoliu/x-arco-design';
@@ -403,8 +423,6 @@ export default App;
 
 通过 `min` 和 `max` 设置可选范围。
 
-`min` and `max`.
-
 ```tsx
 import { useState } from 'react';
 import { Slider, InputNumber, Space } from '@xiaoyaoliu/x-arco-design';
@@ -424,7 +442,11 @@ function App() {
         value={value}
         min={min}
         max={max}
-        onChange={(val) => setValue(val)}
+        onChange={(val) => {
+          if (typeof val === 'number') {
+            setValue(val);
+          }
+        }}
         style={{ width: 200 }}
       />
       <InputNumber
@@ -443,12 +465,9 @@ export default App;
 
 设置 `reverse={true}` ，可以交换滑动条的起点和终点。
 
-`reverse={true}` to swap the start and end points of the slider.
-
 ```tsx
 import { useState } from 'react';
 import { Slider, Switch, Typography, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconSound, IconMute } from '@arco-design/web-react/icon';
 
 function App() {
   const [reverse, setReverse] = useState(true);
@@ -486,10 +505,6 @@ export default App;
 
 **注意：会优先将空间分配给传入了 `width`的区间, 剩下的将会按照区间长度分配剩余的空间。**
 
-`marks`, the `Slider` is actually divided into multiple intervals, and you can pass in `getIntervalConfig` to set the width and step size of each interval.
-
-** Note: The space will be allocated first to the interval passed in `width`, and the rest will be allocated the remaining space according to the length of the interval. **
-
 ```tsx
 import { useState } from 'react';
 import { Slider, Switch, Form, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -515,7 +530,7 @@ function App() {
         style={{ margin: '20px' }}
         layout="inline"
         onValuesChange={(_, values) => {
-          setConfig(values);
+          setConfig(values as typeof defaultConfig);
         }}
       >
         {Object.keys(defaultConfig).map((key) => (

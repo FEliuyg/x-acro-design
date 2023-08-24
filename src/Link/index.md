@@ -27,8 +27,6 @@ export default App;
 
 失败、警告、成功等其他状态下操作，可出现不同样式的链接。
 
-`error`, `success`, `warning`.
-
 ```tsx
 import { Link } from '@xiaoyaoliu/x-arco-design';
 
@@ -72,7 +70,7 @@ export default App;
 
 ```tsx
 import { Link, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconEdit } from '@arco-design/web-react/icon';
+import { EditOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -86,10 +84,10 @@ const App = () => {
         </Link>
       </Space>
       <Space size="large">
-        <Link href="#" icon={<IconEdit />}>
+        <Link href="#" icon={<EditOutlined />}>
           Hyperlinks
         </Link>
-        <Link href="#" icon={<IconEdit />} disabled>
+        <Link href="#" icon={<EditOutlined />} disabled>
           Hyperlinks
         </Link>
       </Space>
@@ -103,8 +101,6 @@ export default App;
 ## 悬浮状态样式
 
 可以通过 `hoverable` 属性设置是否在悬浮状态时隐藏底色。
-
-`hoverable` property to set whether to hide the background color of the Link component when it is hovering.
 
 ```tsx
 import { Link, Space } from '@xiaoyaoliu/x-arco-design';
@@ -129,7 +125,7 @@ export default App;
 
 ```tsx
 import { Link, Dropdown, Menu, Divider } from '@xiaoyaoliu/x-arco-design';
-import { IconDown } from '@arco-design/web-react/icon';
+import { DownOutlined } from '@easyv/react-icons';
 const Droplist = (
   <Menu>
     <Menu.Item key="1">Beijing</Menu.Item>
@@ -147,14 +143,14 @@ const App = () => {
       <Dropdown droplist={Droplist} position="bl">
         <Link style={{ marginRight: 40 }}>
           City
-          <IconDown style={{ fontSize: 12, marginLeft: 6 }} />
+          <DownOutlined style={{ fontSize: 12, marginLeft: 6 }} />
         </Link>
       </Dropdown>
 
       <Dropdown droplist={Droplist} position="bl" disabled>
         <Link>
           City
-          <IconDown style={{ fontSize: 12, marginLeft: 6 }} />
+          <DownOutlined style={{ fontSize: 12, marginLeft: 6 }} />
         </Link>
       </Dropdown>
     </div>

@@ -1,30 +1,24 @@
 import React from 'react';
+import { DatePicker } from '@arco-design/web-react';
+import classNames from 'classnames';
 import {
-  DatePicker,
   DatePickerProps,
   YearPickerProps,
   MonthPickerProps,
-  WeekPickerProps,
   QuarterPickerProps,
+  WeekPickerProps,
   RangePickerProps,
-} from '@arco-design/web-react';
-import classNames from 'classnames';
+} from './interface';
 import './index.less';
 
 const { YearPicker, MonthPicker, WeekPicker, RangePicker, QuarterPicker } =
   DatePicker;
 
-interface XPickerProps {
-  bordered?: boolean;
-}
-
-export interface XDatePickerProps extends DatePickerProps, XPickerProps {}
-
 export default function XDatePicker({
   bordered = true,
   className,
   ...restProps
-}: XDatePickerProps) {
+}: DatePickerProps) {
   return (
     <DatePicker
       className={classNames(className, {
@@ -35,13 +29,11 @@ export default function XDatePicker({
   );
 }
 
-interface XYearPickerProps extends YearPickerProps, XPickerProps {}
-
 function XYearPicker({
   bordered = true,
   className,
   ...restProps
-}: XYearPickerProps) {
+}: YearPickerProps) {
   return (
     <YearPicker
       className={classNames(className, {
@@ -52,13 +44,11 @@ function XYearPicker({
   );
 }
 
-interface XMonthPickerProps extends MonthPickerProps, XPickerProps {}
-
 function XMonthPicker({
   bordered = true,
   className,
   ...restProps
-}: XMonthPickerProps) {
+}: MonthPickerProps) {
   return (
     <MonthPicker
       className={classNames(className, {
@@ -69,14 +59,12 @@ function XMonthPicker({
   );
 }
 
-interface XWeekPickerProps extends WeekPickerProps, XPickerProps {}
-
 function XWeekPicker({
   bordered = true,
   className,
 
   ...restProps
-}: XWeekPickerProps) {
+}: WeekPickerProps) {
   return (
     <WeekPicker
       className={classNames(className, {
@@ -87,15 +75,13 @@ function XWeekPicker({
   );
 }
 
-interface XQuarterPickerProps extends QuarterPickerProps, XPickerProps {}
-
 function XQuarterPicker({
   bordered = true,
 
   className,
 
   ...restProps
-}: XQuarterPickerProps) {
+}: QuarterPickerProps) {
   return (
     <QuarterPicker
       className={classNames(className, {
@@ -106,13 +92,11 @@ function XQuarterPicker({
   );
 }
 
-interface XRangePickerProps extends RangePickerProps, XPickerProps {}
-
 function XRangePicker({
   bordered = true,
   className,
   ...restProps
-}: XRangePickerProps) {
+}: RangePickerProps) {
   return (
     <RangePicker
       className={classNames(className, {
@@ -129,11 +113,4 @@ XDatePicker.WeekPicker = XWeekPicker;
 XDatePicker.QuarterPicker = XQuarterPicker;
 XDatePicker.RangePicker = XRangePicker;
 
-export {
-  XDatePickerProps as DatePickerProps,
-  XYearPickerProps as YearPickerProps,
-  XMonthPickerProps as MonthPickerProps,
-  XWeekPickerProps as WeekPickerProps,
-  XQuarterPickerProps as QuarterPickerProps,
-  XRangePickerProps as RangePickerProps,
-};
+export type * from './interface';

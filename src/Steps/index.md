@@ -39,8 +39,6 @@ export default App;
 
 通过`size`属性可以设置展示小型步骤条
 
-`size`
-
 ```tsx
 import { Steps, Divider } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
@@ -78,8 +76,6 @@ export default App;
 
 使用 `description` 可以添加描述信息。
 
-`description` to add description information.
-
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
@@ -101,32 +97,30 @@ export default App;
 
 指定`icon`可以自定义图标显示。
 
-`icon` to customize the icon of the node.
-
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHome,
-  IconLoading,
-  IconThumbUp,
-} from '@arco-design/web-react/icon';
+  HomeOutlined,
+  LoadingOutlined,
+  LikeOutlined,
+} from '@easyv/react-icons';
 const Step = Steps.Step;
 
 const App = () => {
   return (
     <Steps current={2}>
       <Step
-        icon={<IconHome />}
+        icon={<HomeOutlined />}
         title="Succeeded"
         description="This is a description"
       />
       <Step
-        icon={<IconLoading />}
+        icon={<LoadingOutlined />}
         title="Processing"
         description="This is a description"
       />
       <Step
-        icon={<IconThumbUp />}
+        icon={<LikeOutlined />}
         title="Pending"
         description="This is a description"
       />
@@ -140,8 +134,6 @@ export default App;
 ## 标签放置位置
 
 标签描述文字放置的位置，默认 `horizontal` 水平放在图标右侧，可选 `vertical` 放在图标下方。
-
-`horizontal` is placed on the right side of the icon, and the optional `vertical` is placed below the icon.
 
 ```tsx
 import { Steps, Divider } from '@xiaoyaoliu/x-arco-design';
@@ -180,8 +172,6 @@ export default App;
 
 通过指定参数 `status` 来指定错误状态。
 
-`status`.
-
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
@@ -207,8 +197,6 @@ export default App;
 
 使用 `lineless` 可以使用无连接线模式。
 
-`lineless` to hide the connection line.
-
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
@@ -233,7 +221,7 @@ export default App;
 ```tsx
 import { useState, useRef } from 'react';
 import { Steps, Button, Divider } from '@xiaoyaoliu/x-arco-design';
-import { IconLeft, IconRight } from '@arco-design/web-react/icon';
+import { LeftOutlined, RightOutlined } from '@easyv/react-icons';
 const Step = Steps.Step;
 
 function App() {
@@ -259,7 +247,7 @@ function App() {
             onClick={() => setCurrent(current - 1)}
             style={{ paddingLeft: 8 }}
           >
-            <IconLeft />
+            <LeftOutlined />
             Back
           </Button>
           <Button
@@ -269,7 +257,7 @@ function App() {
             type="primary"
           >
             Next
-            <IconRight />
+            <RightOutlined />
           </Button>
         </div>
       </div>
@@ -312,8 +300,6 @@ export default App;
 
 指定 `type: 'arrow'`， 可以使用箭头类型的步骤条。**注意**：仅支持水平步骤条。
 
-`type:'arrow'`, you can use arrow type step bar. **Note**: Only horizontal step bar are supported.
-
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
 const Step = Steps.Step;
@@ -334,8 +320,6 @@ export default App;
 ## 迷你箭头步骤条
 
 指定 `type: 'arrow', size: 'small'`， 可以使用迷你箭头类型的步骤条。仅支持水平步骤条。`description` 会被忽略。
-
-`type:'arrow', size:'small'`, you can use mini-arrow type step bar. However, only horizontal step bar are supported. And `description` will be ignored.
 
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
@@ -376,12 +360,10 @@ export default App;
 
 通过改变 `current` 参数，可以跳转到不同的步骤。
 
-`current` parameter.
-
 ```tsx
 import { useState } from 'react';
 import { Steps, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconLeft, IconRight } from '@arco-design/web-react/icon';
+import { LeftOutlined, RightOutlined } from '@easyv/react-icons';
 const Step = Steps.Step;
 
 function App() {
@@ -407,7 +389,7 @@ function App() {
             onClick={() => setCurrent(current - 1)}
             style={{ paddingLeft: 8 }}
           >
-            <IconLeft />
+            <LeftOutlined />
             Back
           </Button>
           <Button
@@ -417,7 +399,7 @@ function App() {
             type="primary"
           >
             Next
-            <IconRight />
+            <RightOutlined />
           </Button>
         </div>
       </div>
@@ -447,9 +429,6 @@ export default App;
 
 指定 `type: 'dot'`， 可以使用点状的步骤条。
 **注意**：水平步骤条的标签只可位于其下方，竖直步骤条的标签只可位于其右侧；
-
-`type: 'dot'`, you can use dotted step bar.
-**Note**: The label of the horizontal step bar can only be located below it, and the label of the vertical step bar can only be located to the right of it
 
 ```tsx
 import { Steps } from '@xiaoyaoliu/x-arco-design';
@@ -484,12 +463,10 @@ export default App;
 
 通过设置 `customDot` 可以自定义节点，可以给节点添加弹出或任意自定义操作。
 
-`customDot`, and you can add pop-up or any custom operation to the node.
-
 ```tsx
 import { useState } from 'react';
 import { Button, Steps, Popover } from '@xiaoyaoliu/x-arco-design';
-import { IconLeft, IconRight } from '@arco-design/web-react/icon';
+import { LeftOutlined, RightOutlined } from '@easyv/react-icons';
 const Step = Steps.Step;
 
 function App() {
@@ -524,7 +501,7 @@ function App() {
           onClick={() => setCurrent(current - 1)}
           style={{ paddingLeft: 8 }}
         >
-          <IconLeft />
+          <LeftOutlined />
           Back
         </Button>
         <Button
@@ -534,7 +511,7 @@ function App() {
           type="primary"
         >
           Next
-          <IconRight />
+          <RightOutlined />
         </Button>
       </div>
     </div>
@@ -548,8 +525,6 @@ export default App;
 
 设置 `onChange` 之后，步骤条支持点击切换步骤。
 
-`onChange`, the step bar supports clicking to switch steps.
-
 ```tsx
 import { useState } from 'react';
 import { Steps } from '@xiaoyaoliu/x-arco-design';
@@ -560,7 +535,7 @@ function App() {
   return (
     <div>
       <Steps
-        arrow
+        type="arrow"
         current={current}
         onChange={setCurrent}
         style={{ marginBottom: 20 }}

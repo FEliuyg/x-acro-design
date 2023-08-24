@@ -15,7 +15,7 @@ const App = () => {
       <BackTop
         visibleHeight={30}
         style={{ position: 'absolute' }}
-        target={() => document.getElementById('custom_backtop0')}
+        target={() => document.getElementById('custom_backtop0')!}
       />
       <Typography.Paragraph>
         The button will appear in the bottom corner of the scrolling area
@@ -63,7 +63,7 @@ const App = () => {
       <BackTop
         style={{ position: 'absolute' }}
         visibleHeight={30}
-        target={() => document.getElementById('custom_backtop')}
+        target={() => document.getElementById('custom_backtop')!}
       >
         <Button type="primary" iconOnly style={{ width: 40, height: 40 }}>
           UP
@@ -104,19 +104,18 @@ export default App;
 
 当然，我们提供了更丰富的功能可供使用，你可以通过指定 `easing` 和 `duration` 来指定滚动到顶部的过度效果和滚动时间。
 
-`easing` and `duration`.
-
 ```tsx
 import { useState } from 'react';
 import {
   BackTop,
-  Button,
   Select,
   Input,
   Typography,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
-import { IconCaretUp } from '@arco-design/web-react/icon';
+import { CaretUpOutlined } from '@easyv/react-icons';
+import './demo.css';
+
 const { Paragraph, Text } = Typography;
 const easingTypes = [
   'linear',
@@ -142,7 +141,7 @@ const easingTypes = [
 
 function App() {
   const [easing, setEasing] = useState('linear');
-  const [duration, setDuration] = useState(200);
+  const [duration, setDuration] = useState('200');
   return (
     <div>
       <Space size={10} style={{ margin: 12 }}>
@@ -169,14 +168,14 @@ function App() {
       <div style={{ position: 'relative' }}>
         <BackTop
           easing={easing}
-          duration={duration}
+          duration={+duration}
           style={{
             position: 'absolute',
             right: 60,
             bottom: 60,
           }}
           visibleHeight={30}
-          target={() => document.getElementById('custom_backtop2')}
+          target={() => document.getElementById('custom_backtop2')!}
         >
           <div
             className="custom-backtop"
@@ -184,7 +183,7 @@ function App() {
             role="button"
             aria-label="scroll to top"
           >
-            <IconCaretUp />
+            <CaretUpOutlined />
             <br />
             TOP
           </div>
@@ -222,31 +221,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.custom-backtop {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: var(--color-fill-2);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 12px;
-  color: #86909c;
-  transition: all 0.1s ease;
-}
-
-.custom-backtop:hover {
-  background: var(--color-fill-3);
-}
-
-.custom-backtop:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
 ```
 
 ## API

@@ -35,9 +35,6 @@ export default App;
 可以通过 `autoPlay` 设置是否自动切换。
 可设置 `moveSpeed`, `timingFunc` 实现不同切换幻灯片效果。
 
-`autoPlay`.
-Set `moveSpeed`, `timingFunc` to achieve different switching slide effects.
-
 ```tsx
 import { Carousel } from '@xiaoyaoliu/x-arco-design';
 const imageSrc = [
@@ -71,10 +68,9 @@ export default App;
 
 可以指定指示器类型：`dot` | `line` | `slider` 和位置 `left` | `right` | `top` | `bottom` | `outer`。
 
-`dot` | `line` | `slider` and position `left` | `right` | `top` | `bottom` | `outer`.
-
 ```tsx
 import { Carousel, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { CarouselProps } from '@xiaoyaoliu/x-arco-design';
 import { useState } from 'react';
 const RadioGroup = Radio.Group;
 const imageSrc = [
@@ -85,8 +81,10 @@ const imageSrc = [
 ];
 
 function App() {
-  const [indicatorType, setIndicatorType] = useState('dot');
-  const [indicatorPosition, setIndicatorPosition] = useState('bottom');
+  const [indicatorType, setIndicatorType] =
+    useState<CarouselProps['indicatorType']>('dot');
+  const [indicatorPosition, setIndicatorPosition] =
+    useState<CarouselProps['indicatorPosition']>('bottom');
   return (
     <>
       <RadioGroup
@@ -143,8 +141,6 @@ export default App;
 
 默认情况下，`direction` 为 `horizontal`。通过设置 `direction` 为 `vertical` 来使用垂直方向切换。
 
-`direction` is `horizontal`. Use the vertical direction switch by setting `direction` to `vertical`.
-
 ```tsx
 import { Carousel } from '@xiaoyaoliu/x-arco-design';
 const imageSrc = [
@@ -177,8 +173,6 @@ export default App;
 ## 卡片化
 
 当页面宽度方向空间空余，但高度方向空间多余时，可指定 `animation` 为 `card` 使用卡片化风格。
-
-`animation` as `card` to use card style.
 
 ```tsx
 import { Carousel } from '@xiaoyaoliu/x-arco-design';
@@ -214,8 +208,6 @@ export default App;
 
 指定 `animation` 为 `fade` 使用渐隐切换效果。
 
-`animation=fade` to use fade transition effect.
-
 ```tsx
 import { Carousel } from '@xiaoyaoliu/x-arco-design';
 const imageSrc = [
@@ -248,8 +240,6 @@ export default App;
 ## 自定义子元素
 
 因为动画是通过 CSS 实现，所以当使用`自定义组件`作为`Carousel`的子元素时，自定义组件需要支持`style`和`className`两个属性。
-
-`custom component` is used as a child element of `Carousel`, the custom component needs to support `style` and `className`.
 
 ```tsx
 import { Carousel } from '@xiaoyaoliu/x-arco-design';

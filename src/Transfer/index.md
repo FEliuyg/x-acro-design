@@ -31,8 +31,6 @@ export default App;
 
 指定 `showSearch` 来使用带搜索框的穿梭框，可以自定义搜索函数。
 
-`showSearch` to use the Transfer with search box.
-
 ```tsx
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
 
@@ -59,8 +57,6 @@ export default App;
 ## 单向模式
 
 指定 `oneWay` 使用单向模式的穿梭框。
-
-`oneWay` to only allow one-way movement
 
 ```tsx
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
@@ -120,8 +116,6 @@ export default App;
 
 数据量大时，指定 `pagination` 来使用分页。
 
-`pagination` to display the data in pages.
-
 ```tsx
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
 
@@ -148,11 +142,9 @@ export default App;
 
 通过 `render` 自定义渲染每一个项目，可用于渲染复杂数据。
 
-`render`.
-
 ```tsx
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
-import { IconStar } from '@arco-design/web-react/icon';
+import { StarOutlined } from '@easyv/react-icons';
 
 function App() {
   const dataSource = new Array(8).fill(null).map((_, index) => ({
@@ -173,7 +165,7 @@ function App() {
         >
           {item.value}
           {+item.key === 7 ? (
-            <IconStar
+            <StarOutlined
               style={{
                 marginLeft: 4,
                 color: 'rgb(var(--gold-6))',
@@ -197,11 +189,10 @@ export default App;
 
 使用 `Table` 组件作为自定义渲染列表。
 
-`Table` component as a custom rendering list.
-
 ```tsx
 import { useState } from 'react';
 import { Transfer, Table } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const TableTransfer = ({ sourceColumns, targetColumns, ...restProps }) => (
   <Transfer {...restProps}>
@@ -217,7 +208,7 @@ const TableTransfer = ({ sourceColumns, targetColumns, ...restProps }) => (
       return (
         <Table
           style={{
-            pointerEvents: listDisabled ? 'none' : null,
+            pointerEvents: listDisabled ? 'none' : undefined,
             borderRadius: 0,
           }}
           pagination={false}
@@ -235,7 +226,10 @@ const TableTransfer = ({ sourceColumns, targetColumns, ...restProps }) => (
             },
 
             onChange(selectedRowKeys) {
-              onItemSelectAll(selectedRowKeys, true);
+              onItemSelectAll(
+                selectedRowKeys.map((d) => '' + d),
+                true,
+              );
             },
           }}
           onRow={({ key, disabled: itemDisabled }) => ({
@@ -318,29 +312,20 @@ function App() {
 export default App;
 ```
 
-```css
-.transfer-demo-with-table .arco-table-container {
-  border: none !important;
-  border-radius: 0 !important;
-}
-
-.transfer-demo-with-table .arco-table-th {
-  background-color: var(--color-bg-2);
-}
-```
-
 ## 树穿梭框
 
 使用 `Tree` 组件作为自定义渲染列表。
 
-`Tree` component as a custom rendering list.
-
 ```tsx
 import { useState } from 'react';
 import { Transfer, Tree } from '@xiaoyaoliu/x-arco-design';
+import type { TransferProps } from '@xiaoyaoliu/x-arco-design';
 
 const TreeTransfer = ({ dataSource, targetKeys, ...restProps }) => {
-  const generateTreeData = (treeNodes = [], checkedKeys = []) => {
+  const generateTreeData = (
+    treeNodes: any = [],
+    checkedKeys: string[] = [],
+  ) => {
     return treeNodes.map(({ children, ...props }) => ({
       ...props,
       disabled: checkedKeys.includes(props.key),
@@ -348,7 +333,10 @@ const TreeTransfer = ({ dataSource, targetKeys, ...restProps }) => {
     }));
   };
 
-  const generateTransferData = (list = [], transferDataSource = []) => {
+  const generateTransferData = (
+    list: any = [],
+    transferDataSource: any = [],
+  ) => {
     list.forEach((item) => {
       transferDataSource.push(item);
       generateTransferData(item.children, transferDataSource);
@@ -362,7 +350,9 @@ const TreeTransfer = ({ dataSource, targetKeys, ...restProps }) => {
     <Transfer
       targetKeys={targetKeys}
       dataSource={transferDataSource}
-      render={(item) => item.title}
+      render={(item: any) => {
+        return item.title;
+      }}
       {...restProps}
     >
       {({ listType, onItemSelect, selectedKeys }) => {
@@ -376,14 +366,15 @@ const TreeTransfer = ({ dataSource, targetKeys, ...restProps }) => {
               blockNode
               checkable
               checkStrictly
-              defaultExpandAll
               treeData={treeData}
               checkedKeys={checkedKeys}
               onCheck={(_, { node: { key } }) => {
-                onItemSelect(key, checkedKeys.indexOf(key) === -1);
+                if (!key) return;
+                onItemSelect('' + key, checkedKeys.indexOf(key) === -1);
               }}
               onSelect={(_, { node: { key } }) => {
-                onItemSelect(key, checkedKeys.indexOf(key) === -1);
+                if (!key) return;
+                onItemSelect('' + key, checkedKeys.indexOf(key) === -1);
               }}
             />
           );
@@ -466,8 +457,6 @@ export default App;
 
 指定 `simple` 来开启简单模式，点击选项即可移动。额外配置 `simple = { retainSelectedItems: true }`，将选中的条目保留在左侧。
 
-`simple` to turn on simple mode, click the option to move. Additional configuration `simple = { retainSelectedItems: true }` to keep selected items on the left.
-
 ```tsx
 import React, { useState, useMemo } from 'react';
 import { Transfer, Switch, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -512,8 +501,6 @@ export default App;
 
 指定 `draggable` 属性为 `true`，可拖拽排序左右面板。
 
-`draggable` as `true`, and the left and right panels can be sorted by dragging.
-
 ```tsx
 import { useState } from 'react';
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
@@ -554,11 +541,9 @@ export default App;
 
 `titleTexts` 允许传入 render 函数以完全自定义 Transfer 的标题栏，函数接收的参数为 `{ countTotal: number; countSelected: number; checkbox: ReactNode; clear: () => void }`。
 
-`titleTexts` to completely customize the title bar of the Transfer. The parameter received by the function is `{ countTotal: number; countSelected: number; checkbox: ReactNode; clear: () => void }`.
-
 ```tsx
 import { Transfer } from '@xiaoyaoliu/x-arco-design';
-import { IconDelete } from '@arco-design/web-react/icon';
+import { DeleteOutlined } from '@easyv/react-icons';
 
 function App() {
   const dataSource = new Array(8).fill(null).map((_, index) => ({
@@ -588,7 +573,7 @@ function App() {
           return (
             <div style={styleHeader}>
               {`RIGHT ${countSelected}-${countTotal}`}
-              <IconDelete style={{ cursor: 'pointer' }} onClick={clear} />
+              <DeleteOutlined style={{ cursor: 'pointer' }} onClick={clear} />
             </div>
           );
         },

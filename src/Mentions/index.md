@@ -26,8 +26,6 @@ export default App;
 
 指定 `prefix` 来自定义触发字符。默认为 `@`，可以自定义为任意字符。
 
-`prefix` to customize the trigger character. The default is `@`, which can be customized to any character.
-
 ```tsx
 import { Mentions, Space } from '@xiaoyaoliu/x-arco-design';
 
@@ -61,8 +59,6 @@ export default App;
 ## 受控模式
 
 `Mentions` 在 `Form` 中的使用。
-
-`Mentions` is used with `Form`,
 
 ```tsx
 import { Form, Input, Button, Mentions } from '@xiaoyaoliu/x-arco-design';
@@ -114,8 +110,6 @@ export default App;
 ## 无效或只读
 
 通过 `disabled` 设置是否禁用，通过 `readOnly` 属性设置是否只读。
-
-`disabled`, and set whether to be readonly via `readOnly` property.
 
 ```tsx
 import { Mentions, Space } from '@xiaoyaoliu/x-arco-design';

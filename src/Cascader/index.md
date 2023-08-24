@@ -7,8 +7,6 @@
 最基础的用法。
 默认通过点击展开下一级，可以设置`expandTrigger='hover'`来控制`hover`展开下一级
 
-`expandTrigger` is `'hover'`, next level menu will be expanded when current option is hovered.
-
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
 const options = [
@@ -162,8 +160,6 @@ export default App;
 
 通过 `addBefore` 设置前置标签 (`2.41.0`)
 
-`addBefore` to add elements before the select box. (`2.41.0`)
-
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
 const options = [
@@ -298,8 +294,6 @@ export default App;
 
 `children` 会覆盖默认的选择框。
 
-`children` will override the default select box node.
-
 ```tsx
 import React from 'react';
 import {
@@ -309,6 +303,7 @@ import {
   Input,
   Divider,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const options = [
   {
@@ -420,22 +415,9 @@ class App extends React.Component {
 export default App;
 ```
 
-```css
-.trigger-element {
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.trigger-element:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-primary-light-3);
-}
-```
-
 ## 选择即改变
 
 设置属性 `changeOnSelect`，点击任何一级都可以选择。多选时将会解除父子节点的关联。
-
-`mode=multiple`, child node and parent node will not affect each other.
 
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
@@ -510,8 +492,6 @@ export default App;
 ## 支持多选
 
 指定`mode=multiple`，即可使用多选。设置 `checkedStrategy` 属性设置数据回显方式（`2.31.0`）。
-
-`2.31.0`).
 
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
@@ -598,8 +578,6 @@ export default App;
 ## 允许搜索
 
 指定`showSearch=true`，可以输入文本对选项进行搜索。
-
-`showSearch=true`, you can enter text to search for options.
 
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
@@ -849,17 +827,11 @@ export default App;
 **1.选项必须设置 `isLeaf` 来标示是否需要继续加载**
 **2. 如果使用搜索功能，将只对已加载选项执行搜索逻辑。**
 
-`loadMore`.
-
-**Please note when you use `loadMore`:**
-**1. Option should have the `isLeaf` property to indicate whether to continue loading options when clicked**
-**2. If `showSearch=true`, only the loaded options will be applied search logic.**
-
 如果使用搜索功能，将只从已加载数据的`label`属性进行关键字匹配。
 
 ```tsx
-import React from 'react';
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
+import type { CascaderProps } from '@xiaoyaoliu/x-arco-design';
 
 const options = [
   {
@@ -878,8 +850,8 @@ const options = [
   },
 ];
 
-class App extends React.Component {
-  loadMore = (pathValue, level) =>
+function App() {
+  const loadMore: CascaderProps['loadMore'] = (pathValue, level) =>
     new Promise((resolve) => {
       setTimeout(() => {
         const nodes = pathValue.map((x, i) => ({
@@ -891,29 +863,27 @@ class App extends React.Component {
       }, 500);
     });
 
-  render() {
-    return (
-      <Space size="large">
-        <Cascader
-          placeholder="Please select ..."
-          style={{ width: 300, marginBottom: 20 }}
-          options={options}
-          loadMore={this.loadMore}
-          showSearch
-          allowClear
-        />
-        <Cascader
-          placeholder="Please select ..."
-          style={{ width: 300, marginBottom: 20 }}
-          options={options}
-          loadMore={this.loadMore}
-          showSearch
-          allowClear
-          mode="multiple"
-        />
-      </Space>
-    );
-  }
+  return (
+    <Space size="large">
+      <Cascader
+        placeholder="Please select ..."
+        style={{ width: 300, marginBottom: 20 }}
+        options={options}
+        loadMore={loadMore}
+        showSearch
+        allowClear
+      />
+      <Cascader
+        placeholder="Please select ..."
+        style={{ width: 300, marginBottom: 20 }}
+        options={options}
+        loadMore={loadMore}
+        showSearch
+        allowClear
+        mode="multiple"
+      />
+    </Space>
+  );
 }
 
 export default App;
@@ -922,8 +892,6 @@ export default App;
 ## 选项禁用
 
 指定 `option` 的 `disabled` 为 `true`，可以禁用该选项
-
-`disabled` field of an `option` as `true` to disable the option.
 
 ```tsx
 import { Cascader, Space } from '@xiaoyaoliu/x-arco-design';
@@ -1138,11 +1106,10 @@ export default App;
 
 设置 `size` 可以使用四种尺寸（`mini`, `small`, `default`, `large`）的选择器。高度分别对应`24px`、`28px`、`32px`、`36px`
 
-`mini`, `small`, `default` and `large`. Their heights are `24px`, `28px`, `32px`, `36px`.
-
 ```tsx
-import React from 'react';
+import { useState } from 'react';
 import { Cascader, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { CascaderProps } from '@xiaoyaoliu/x-arco-design';
 
 const RadioGroup = Radio.Group;
 const options = [
@@ -1198,51 +1165,43 @@ const options = [
   },
 ];
 
-class App extends React.Component {
-  state = {
-    value: 'default',
-  };
+function App() {
+  const [size, setSize] = useState<CascaderProps['size']>('default');
 
-  render() {
-    return (
+  return (
+    <div>
+      <RadioGroup
+        type="button"
+        name="size"
+        value={size}
+        onChange={setSize}
+        style={{ marginBottom: 20 }}
+      >
+        <Radio value="mini">mini</Radio>
+        <Radio value="small">small</Radio>
+        <Radio value="default">default</Radio>
+        <Radio value="large">large</Radio>
+      </RadioGroup>
       <div>
-        <RadioGroup
-          type="button"
-          name="size"
-          value={this.state.value}
-          onChange={(value) => {
-            this.setState({
-              value,
-            });
-          }}
-          style={{ marginBottom: 20 }}
-        >
-          <Radio value="mini">mini</Radio>
-          <Radio value="small">small</Radio>
-          <Radio value="default">default</Radio>
-          <Radio value="large">large</Radio>
-        </RadioGroup>
-        <div>
-          <Cascader
-            placeholder="Please select ..."
-            style={{ width: 300, marginBottom: 20 }}
-            options={options}
-            size={this.state.value}
-            allowClear
-          />
-          <br />
-          <Cascader
-            placeholder="Please select ..."
-            style={{ width: 300 }}
-            options={options}
-            mode="multiple"
-            size={this.state.value}
-            allowClear
-          />
-        </div>
+        <Cascader
+          placeholder="Please select ..."
+          style={{ width: 300, marginBottom: 20 }}
+          options={options}
+          size={size}
+          allowClear
+        />
+        <br />
+        <Cascader
+          placeholder="Please select ..."
+          style={{ width: 300 }}
+          options={options}
+          mode="multiple"
+          size={size}
+          allowClear
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
@@ -1533,8 +1492,6 @@ export default App;
 
 `showEmptyChildren=true`时，当`children`为`[]`也会展示下一级空菜单。
 
-`[]`, please specify `showEmptyChildren=true`.
-
 ```tsx
 import React from 'react';
 import { Cascader, Checkbox } from '@xiaoyaoliu/x-arco-design';
@@ -1576,14 +1533,14 @@ const options = [
 
 function App() {
   const [checked, setChecked] = React.useState(false);
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState<(string | string[])[]>([]);
   return (
     <div>
       <div style={{ marginBottom: 20 }}>
         <Checkbox
           onChange={(v) => {
             setChecked(v);
-            setValue();
+            setValue([]);
           }}
         >
           showEmptyChildren
@@ -1610,10 +1567,6 @@ export default App;
 
 通过 popupVisible 和 onVisibleChange 控制下拉框的展开和收起。
 更多示例可查看[Trigger](/react/en-US/components/trigger)组件文档
-
-`popupVisible` and `onVisibleChange` to control the visibility of the dropdown.
-
-More examples can be found in [Trigger](/react/en-US/components/trigger).
 
 ```tsx
 import React from 'react';
@@ -1731,7 +1684,6 @@ function App() {
         triggerProps={{
           clickOutsideToClose: false,
         }}
-        style={{ width: 300 }}
         allowClear
         options={options}
         renderFooter={() => {
@@ -1756,8 +1708,6 @@ export default App;
 ## 自定义下拉菜单的展示
 
 使用 `dropdownRender` 对下拉菜单进行扩展。
-
-`dropdownRender`
 
 ```tsx
 import { Cascader, Divider, Space } from '@xiaoyaoliu/x-arco-design';
@@ -1959,19 +1909,12 @@ export default App;
 
 使用 `onSearch` 自定义搜索逻辑。可以通过 `showSearch.panelMode` 属性控制是否以搜索面板的形式展示所有可选项。
 
-`onSearch`. Whether to display all options in the search panel can be controlled via the `showSearch.panelMode` property.
-
 ```tsx
 import React from 'react';
-import {
-  Cascader,
-  Checkbox,
-  Divider,
-  Spin,
-  Space,
-} from '@xiaoyaoliu/x-arco-design';
+import { Cascader, Checkbox, Spin, Space } from '@xiaoyaoliu/x-arco-design';
+import type { CascaderProps } from '@xiaoyaoliu/x-arco-design';
 
-const genOptions = (keyword) => {
+const genOptions = (keyword): CascaderProps['options'] => {
   return !keyword
     ? []
     : [
@@ -1993,7 +1936,7 @@ const genOptions = (keyword) => {
 };
 
 function CascaderDemo(props) {
-  const [options, setOptions] = React.useState([]);
+  const [options, setOptions] = React.useState<CascaderProps['options']>([]);
   const [loading, setLoading] = React.useState(false);
 
   const handleSearch = (inputValue) => {
@@ -2065,8 +2008,6 @@ export default App;
 ## 拖拽排序
 
 多选时，指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
-
-`dragToSort` property to allow sort the entered values by dragging.
 
 ```tsx
 import { Cascader } from '@xiaoyaoliu/x-arco-design';

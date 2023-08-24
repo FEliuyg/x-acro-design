@@ -58,7 +58,7 @@ export default App;
 
 ```tsx
 import { InputTag, Grid } from '@xiaoyaoliu/x-arco-design';
-import { IconUser } from '@arco-design/web-react/icon';
+import { UserOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
@@ -68,11 +68,11 @@ const App = () => {
           <InputTag prefix="¥" allowClear />
         </Grid.GridItem>
         <Grid.GridItem>
-          <InputTag addBefore={<IconUser />} allowClear />
+          <InputTag addBefore={<UserOutlined />} allowClear />
         </Grid.GridItem>
 
         <Grid.GridItem>
-          <InputTag prefix="¥" addBefore={<IconUser />} allowClear />
+          <InputTag prefix="¥" addBefore={<UserOutlined />} allowClear />
         </Grid.GridItem>
 
         <Grid.GridItem>
@@ -98,7 +98,9 @@ import { useState } from 'react';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<'mini' | 'default' | 'small' | 'large'>(
+    'default',
+  );
   return (
     <div>
       <RadioGroup
@@ -132,8 +134,6 @@ export default App;
 
 可以通过设置 `labelInValue=true` 获取选项的 label 值
 
-`labelInValue=true` to get label of the selected option
-
 ```tsx
 import { InputTag } from '@xiaoyaoliu/x-arco-design';
 
@@ -163,8 +163,6 @@ export default App;
 ## 校验与格式化输入
 
 通过 `validate` 校验输入。此外，可以返回**非布尔类型**来将用户输入的字符串为特定的 `value` 格式。
-
-`validate` to enable custom validator for input value. Additionally, **non-boolean** can be returned to format user-entered strings in a specific `value` format.
 
 ```tsx
 import { InputTag, Message, Space } from '@xiaoyaoliu/x-arco-design';
@@ -207,8 +205,6 @@ export default App;
 
 设置 `saveOnBlur` 在失焦时自动将正在输入的文本保存为标签。
 
-`saveOnBlur` to automatically save the text being entered as a label when it loses focus.
-
 ```tsx
 import { InputTag } from '@xiaoyaoliu/x-arco-design';
 
@@ -228,8 +224,6 @@ export default App;
 ## 自定义标签节点
 
 指定 `renderTag` 来自定义标签节点。
-
-`renderTag` to customize tag rendering
 
 ```tsx
 import { InputTag, Tag } from '@xiaoyaoliu/x-arco-design';
@@ -268,8 +262,6 @@ export default App;
 
 指定 `dragToSort` 属性以允许对已输入的值进行拖拽排序。
 
-`dragToSort` property to allow sort the entered values by dragging.
-
 ```tsx
 import { InputTag } from '@xiaoyaoliu/x-arco-design';
 
@@ -290,8 +282,6 @@ export default App;
 ## 自动分词
 
 设置 `tokenSeparators` 可以使用自动分词功能。尝试复制下方文本到输入框里。
-
-`tokenSeparators` to use automatic word segmentation. Try copying text below into the input box.
 
 ```tsx
 import { InputTag, Typography } from '@xiaoyaoliu/x-arco-design';

@@ -162,9 +162,11 @@ const themes = {
 };
 
 function App() {
-  const [theme, setTheme] = useState(null);
+  const [theme, setTheme] = useState<
+    'blue' | 'red' | 'green' | 'orange' | null
+  >(null);
   return (
-    <ConfigProvider theme={theme && themes[theme]}>
+    <ConfigProvider theme={theme ? themes[theme] : undefined}>
       <Radio.Group
         name="theme"
         options={['blue', 'red', 'green', 'orange']}
@@ -187,8 +189,6 @@ export default App;
 ## 表格分页配置
 
 配置全局的表格分页参数，比如可以全局设置 `tablePagination.hideOnSinglePage`, 当表格数据小于等于一页的时候隐藏分页。
-
-`tablePagination.hideOnSinglePage` to hide the pagination when the table data is less than or equal to one page.
 
 ```tsx
 import { useState } from 'react';
@@ -268,8 +268,6 @@ export default App;
 
 通过 `renderEmpty` 可以定义组件内显示的空元素。
 
-`renderEmpty` to define the empty elements displayed in the component.
-
 ```tsx
 import { useState } from 'react';
 import {
@@ -341,7 +339,6 @@ export default App;
 全局设置各组件默认配置。
 
 ```tsx
-import { useState } from 'react';
 import {
   ConfigProvider,
   Button,
@@ -352,6 +349,7 @@ import {
   Table,
   Tag,
 } from '@xiaoyaoliu/x-arco-design';
+import type { ConfigProviderProps } from '@xiaoyaoliu/x-arco-design';
 const columns = [
   {
     title: 'Name',
@@ -372,7 +370,7 @@ const columns = [
 ];
 
 function App() {
-  const componentConfig = {
+  const componentConfig: ConfigProviderProps['componentConfig'] = {
     Button: {
       type: 'primary',
       shape: 'round',
@@ -516,14 +514,7 @@ export default App;
 
 **此功能在 2.40.0 支持**
 
-`prefixCls` and `rtl` set by `ConfigProvider` will be applied to all `Message` and `Notification` by default
-
-If you want to work only inside `ConfigProvider`, you need to use it in combination with `useMessage` or `useNotification`, and turn off `effectGlobalNotice`
-
-**This is supported in 2.40.0**
-
 ```tsx
-import React, { useState } from 'react';
 import {
   Button,
   Message,
@@ -532,6 +523,7 @@ import {
   Notification,
   Typography,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 function App() {
   const [message, messageHolder] = Message.useMessage();
@@ -598,12 +590,6 @@ function App() {
 }
 
 export default App;
-```
-
-```css
-.demo-holder-wrapper .arco-message-wrapper {
-  left: 0;
-}
 ```
 
 ## API

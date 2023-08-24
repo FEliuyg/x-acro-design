@@ -157,8 +157,6 @@ export default App;
 
 传入 `okButtonProps` 和 `cancelButtonProps` 可分别自定义确定按钮和取消按钮的 props。如果 `okButtonProps` 、 `cancelButtonProps` 仍然不能满足需要的话，可以直接传入`footer`来自定义页脚内容。
 
-`okButtonProps` and `cancelButtonProps` to customize the props of the OK button and the cancel button respectively. If `okButtonProps` and `cancelButtonProps` still cannot meet your needs, you can directly pass in `footer` to customize the footer content.
-
 ```tsx
 import React from 'react';
 import { Modal, Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -275,8 +273,6 @@ export default App;
 
 `title` 支持传入文字或者 react 节点，支持各种场景的标题栏展示。
 
-`title` parameter supports text or react nodes, which can support title bar display in various scenarios.
-
 ```tsx
 import React from 'react';
 import { Modal, Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -336,8 +332,6 @@ export default App;
 
 使用`Modal.confirm()`，可以快速弹出对话框。
 
-`Modal.confirm()` to quickly pop up a confirmation modal dialog.
-
 ```tsx
 import { Modal, Message, Button } from '@xiaoyaoliu/x-arco-design';
 
@@ -376,8 +370,6 @@ export default App;
 ## 消息提示
 
 有 `info`, `success`, `warning`, `error` 四种类型的消息提示，仅提供一个确认按钮用于关闭消息提示对话框。
-
-`info`, `success`, `warning`, and `error`. Only a button is provided to close message modal dialog.
 
 ```tsx
 import { Modal, Button, Space } from '@xiaoyaoliu/x-arco-design';
@@ -437,8 +429,6 @@ export default App;
 ## 定制按钮文字
 
 设置 `okText` 与 `cancelText` 以自定义按钮文字。
-
-`okText` and `cancelText` to customize the button text.
 
 ```tsx
 import React from 'react';
@@ -507,10 +497,7 @@ export default App;
 
 ```tsx
 import { Modal, Button, Spin } from '@xiaoyaoliu/x-arco-design';
-import {
-  IconCheckCircleFill,
-  IconInfoCircleFill,
-} from '@arco-design/web-react/icon';
+import { CheckCircleFilled, InfoCircleFilled } from '@easyv/react-icons';
 
 const sleep = async (time: number) => {
   return new Promise((resolve) => {
@@ -528,7 +515,7 @@ function App() {
         onClick={async () => {
           const modalIns = Modal.confirm({
             title: 'Submiting...',
-            icon: <IconInfoCircleFill />,
+            icon: <InfoCircleFilled />,
             content: (
               <span>
                 This modal will be successful after 1.5s. <Spin size={14} />
@@ -538,7 +525,7 @@ function App() {
           });
           await sleep(1500);
           modalIns.update({
-            icon: <IconCheckCircleFill />,
+            icon: <CheckCircleFilled />,
             title: 'Success',
             content: 'This modal will be closed after 1.5s.',
           });
@@ -558,8 +545,6 @@ export default App;
 ## 自定义位置
 
 使用 `alignCenter` 结合 `style` 来设置对话框位置。
-
-`alignCenter` combined with `style` to set the position of the dialog.
 
 ```tsx
 import React from 'react';
@@ -757,6 +742,7 @@ export default App;
 ```tsx
 import React from 'react';
 import { Modal, Button, Table, Alert } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 interface DataItem {
   id: string;
@@ -845,12 +831,6 @@ function App() {
 export default App;
 ```
 
-```css
-.modal-demo-without-content-spacing .arco-modal-content {
-  padding: 0;
-}
-```
-
 ## 带有步骤条对话框
 
 带有横向步骤条的对话框。
@@ -861,10 +841,10 @@ import {
   Modal,
   Button,
   Table,
-  Alert,
   Steps,
   Divider,
 } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 const Step = Steps.Step;
 
 interface DataItem {
@@ -981,17 +961,9 @@ function App() {
 export default App;
 ```
 
-```css:silent
-.modal-demo-without-content-spacing .arco-modal-content {
-  padding: 0;
-}
-```
-
 ## 自定义渲染对话框
 
 可以通过 `modalRender` 来自定义渲染对话框，实现拖拽功能。
-
-`modalRender` to realize the drag and drop function.
 
 ```tsx
 import React from 'react';

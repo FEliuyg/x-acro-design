@@ -85,8 +85,6 @@ export default App;
 
 指定 `offset` 可以对栅格进行平移操作。
 
-`offset` to justify the padding of Col.
-
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -134,8 +132,6 @@ export default App;
 
 指定 `push` 或者 `pull` 可以对栅格进行排序。
 
-`push` or `pull` to sort the grid.
-
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -165,8 +161,6 @@ export default App;
 ## 区块间隔
 
 通过在 `Row` 上指定 `gutter` 可以增加栅格的区域间隔。
-
-`gutter` on `Row`, the area interval of the grid can be changed.
 
 ```tsx
 import { Grid, Divider } from '@xiaoyaoliu/x-arco-design';
@@ -237,8 +231,6 @@ export default App;
 ## 水平布局
 
 通过 `justify` 来进行水平布局。
-
-`justify` to customize horizontal layout.
 
 ```tsx
 import { Grid, Typography } from '@xiaoyaoliu/x-arco-design';
@@ -352,8 +344,6 @@ export default App;
 
 通过 `align` 来进行垂直布局。
 
-`align` to customize vertical layout.
-
 ```tsx
 import { Grid, Typography } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -432,8 +422,6 @@ export default App;
 
 通过 `order` 来进行元素排序。
 
-`order`.
-
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -498,9 +486,6 @@ export default App;
 `span`, `offset`, `order`, `pull`, `push` 属性可以内嵌到 `xs`, `sm`, `md`, `lg`, `xl`, `xxl` 对象中使用。
 比如 `xs={8}` 相当于 `xs={{ span: 8 }}`。
 
-`span`, `offset`, `order`, , `pull`, `push` properties can be used in `xs`, `sm`, `md`, `lg`, `xl`, `xxl` objects.
-For example, `xs={8}` is equivalent to `xs={{ span: 8 }}`.
-
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';
 const Row = Grid.Row;
@@ -530,8 +515,6 @@ export default App;
 ## Flex
 
 通过设置 `Col` 组件的 `flex` 属性，可以任意配置 flex 布局。
-
-`flex` property of the `Col` component, you can configure the flex layout arbitrarily.
 
 ```tsx
 import { Grid } from '@xiaoyaoliu/x-arco-design';

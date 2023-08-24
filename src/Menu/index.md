@@ -11,7 +11,6 @@ import { Menu } from '@xiaoyaoliu/x-arco-design';
 import './demo.css';
 
 const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
 
 function App() {
   return (

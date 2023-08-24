@@ -114,8 +114,6 @@ export default App;
 
 通过使用 `bordered=false` 来使用没有边框的简洁样式。
 
-`bordered=false` to use simple style without borders.
-
 ```tsx
 import { Collapse, Divider } from '@xiaoyaoliu/x-arco-design';
 const CollapseItem = Collapse.Item;
@@ -160,8 +158,6 @@ export default App;
 ## 自定义面板样式
 
 通过指定 `style` 实现自定义的面板样式。
-
-`style` to customize style of panel.
 
 ```tsx
 import { Collapse, Divider } from '@xiaoyaoliu/x-arco-design';
@@ -222,11 +218,9 @@ export default App;
 
 通过 `extra` 可以设置额外节点。
 
-`extra`.
-
 ```tsx
 import { Collapse } from '@xiaoyaoliu/x-arco-design';
-import { IconMoreVertical } from '@arco-design/web-react/icon';
+import { MoreOutlined } from '@easyv/react-icons';
 const CollapseItem = Collapse.Item;
 
 const App = () => {
@@ -239,7 +233,7 @@ const App = () => {
       <CollapseItem
         header="Beijing Toutiao Technology Co., Ltd."
         name="1"
-        extra={<IconMoreVertical />}
+        extra={<MoreOutlined />}
       >
         Beijing Toutiao Technology Co., Ltd.
       </CollapseItem>
@@ -247,7 +241,7 @@ const App = () => {
       <CollapseItem
         header="Beijing Toutiao Technology Co., Ltd."
         name="2"
-        extra={<IconMoreVertical />}
+        extra={<MoreOutlined />}
       >
         ByteDance's core product, Toutiao ("Headlines"), is a content platform
         in China and around the world. Toutiao started out as a news
@@ -259,7 +253,7 @@ const App = () => {
       <CollapseItem
         header="Beijing Toutiao Technology Co., Ltd."
         name="3"
-        extra={<IconMoreVertical />}
+        extra={<MoreOutlined />}
       >
         In 2016, ByteDance's AI Lab and Peking University co-developed
         Xiaomingbot (张小明), an artificial intelligence bot that writes news
@@ -278,17 +272,17 @@ export default App;
 
 可以通过`expandIconPosition`属性设置展开 Icon 的位置。
 
-`expandIcon` can be set through `expandIconPosition`.
-
 ```tsx
 import React from 'react';
 import { Collapse, Radio, Grid, Typography } from '@xiaoyaoliu/x-arco-design';
-import { IconInfoCircle, IconSettings } from '@arco-design/web-react/icon';
+import type { CollapseProps } from '@xiaoyaoliu/x-arco-design';
+import { InfoCircleOutlined, SettingOutlined } from '@easyv/react-icons';
 
 const CollapseItem = Collapse.Item;
 
 function App() {
-  const [position, setPosition] = React.useState('left');
+  const [position, setPosition] =
+    React.useState<CollapseProps['expandIconPosition']>('left');
   return (
     <div>
       <Grid.Row align="center" style={{ marginBottom: 24 }}>
@@ -327,12 +321,12 @@ function App() {
         <CollapseItem
           header="Beijing Toutiao Technology Co., Ltd."
           name="1"
-          extra={<IconInfoCircle />}
+          extra={<InfoCircleOutlined />}
         >
           Beijing Toutiao Technology Co., Ltd.
         </CollapseItem>
 
-        <CollapseItem header="Introduce" name="2" extra={<IconSettings />}>
+        <CollapseItem header="Introduce" name="2" extra={<SettingOutlined />}>
           ByteDance's core product, Toutiao ("Headlines"), is a content platform
           in China and around the world. Toutiao started out as a news
           recommendation engine and gradually evolved into a platform delivering
@@ -358,8 +352,6 @@ export default App;
 ## Lazyload
 
 是否直到 `Collapse.Item` 首次展开时才渲染 `children`。
-
-`children` until the first expansion of `Collapse.Item`.
 
 ```tsx
 import { Collapse } from '@xiaoyaoliu/x-arco-design';
@@ -397,8 +389,6 @@ export default App;
 ## 隐藏时销毁
 
 通过`destroyOnHide`属性可以设置销毁被折叠的面板。
-
-`destroyOnHide` property.
 
 ```tsx
 import { Collapse } from '@xiaoyaoliu/x-arco-design';
@@ -440,8 +430,6 @@ export default App;
 ## 指定折叠触发区域
 
 通过 `triggerRegion` 属性，设置面板可以触发折叠的区域。
-
-`triggerRegion`, set the region that can trigger collapsing.
 
 ```tsx
 import { Collapse, Divider } from '@xiaoyaoliu/x-arco-design';

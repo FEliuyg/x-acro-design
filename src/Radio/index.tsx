@@ -1,20 +1,17 @@
-import { Radio, RadioGroupProps, RadioProps } from '@arco-design/web-react';
+import React from 'react';
+import { Radio } from '@arco-design/web-react';
 import classNames from 'classnames';
-import React, { PropsWithChildren } from 'react';
+import { RadioProps, RadioGroupProps } from './interface';
 import './index.less';
 
 export default function XRadio(props: RadioProps) {
   return <Radio {...props} />;
 }
 
-interface XRadioGroupProps extends PropsWithChildren<RadioGroupProps> {
-  buttonStyle?: 'solid' | 'semi' | 'transparent';
-}
-
 function XRadioGroup({
   buttonStyle = 'transparent',
   ...props
-}: XRadioGroupProps) {
+}: RadioGroupProps) {
   return (
     <Radio.Group
       className={classNames(
@@ -27,3 +24,5 @@ function XRadioGroup({
 }
 
 XRadio.Group = XRadioGroup;
+
+export type * from './interface';

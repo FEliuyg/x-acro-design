@@ -326,6 +326,7 @@ export default App;
 ```tsx
 import React, { createContext } from 'react';
 import { Message, Button, Space } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const App = () => {
   const [message, contextHolder] = Message.useMessage();
@@ -379,12 +380,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css
-.demo-holder-wrapper .arco-message-wrapper {
-  left: 0px;
-}
 ```
 
 ## 自定义动画效果

@@ -29,10 +29,9 @@ export default App;
 
 指定 `hoverable` 来为卡片添加鼠标悬浮样式，同时你可以通过样式覆盖来自定义悬浮样式。
 
-`hoverable` to add a hover style to the card. The hover style can also be customized through style override.
-
 ```tsx
 import { Card, Link, Space } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
 
 const App = () => {
   return (
@@ -63,21 +62,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.card-custom-hover-style {
-  transition-property: all;
-}
-
-.card-custom-hover-style:hover {
-  transform: translateY(-4px);
-}
-```
-
 ## 无边框卡片
 
 设置 `bordered` 为 `false` 来使用无边框卡片。
-
-`bordered` to `false` to use borderless cards.
 
 ```tsx
 import { Card, Link, Space } from '@xiaoyaoliu/x-arco-design';
@@ -131,7 +118,8 @@ import {
   Typography,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
-import { IconArrowRight } from '@arco-design/web-react/icon';
+import { ArrowRightOutlined } from '@easyv/react-icons';
+import './demo.css';
 
 const Content = ({ children }) => {
   return (
@@ -169,7 +157,7 @@ const App = () => {
       <Card className="card-with-icon-hover" hoverable style={{ width: 360 }}>
         <Content>
           <span className="icon-hover">
-            <IconArrowRight
+            <ArrowRightOutlined
               style={{
                 cursor: 'pointer',
               }}
@@ -184,27 +172,9 @@ const App = () => {
 export default App;
 ```
 
-```css
-.card-with-icon-hover .icon-hover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transition: all 0.1s;
-}
-
-.card-with-icon-hover .icon-hover:hover {
-  background-color: rgb(var(--gray-2));
-}
-```
-
 ## 更灵活的内容展示
 
 使用 `Card.Meta` 支持更加灵活的内容（封面、头像、 标题、描述信息）
-
-`Card.Meta` to support more flexible content (cover, avatar, title, description)
 
 ```tsx
 import { Card } from '@xiaoyaoliu/x-arco-design';
@@ -243,8 +213,6 @@ export default App;
 ## 栅格卡片
 
 在系统概览页面常常和栅格进行配合。
-
-`Grid` on the overview page of systems.
 
 ```tsx
 import { Card, Grid, Link } from '@xiaoyaoliu/x-arco-design';
@@ -327,8 +295,6 @@ export default App;
 ## 预加载的卡片
 
 结合 `Skeleton` 来在数据读入前显示文本骨架。
-
-`Skeleton` to display the text skeleton before the data is loaded.
 
 ```tsx
 import { useState } from 'react';
@@ -489,10 +455,10 @@ export default App;
 
 通过 `Card.Grid` 来使用卡片内容区隔模式。
 
-`Card.Grid` to enable the card content segmentation mode.
-
 ```tsx
 import { Card, Link } from '@xiaoyaoliu/x-arco-design';
+import './demo.css';
+
 const { Grid } = Card;
 
 const App = () => {
@@ -531,12 +497,6 @@ const App = () => {
 export default App;
 ```
 
-```css
-.card-demo-in-grid .arco-card-header {
-  border: none;
-}
-```
-
 ## 内部卡片
 
 卡片中可以嵌套其他卡片组件。
@@ -567,8 +527,6 @@ export default App;
 ## 带页签的卡片
 
 举例来说，可以在卡片组件里面使用 `Tabs` 标签页组件。
-
-`Tabs` component can be used in card.
 
 ```tsx
 import { Card, Tabs, Link } from '@xiaoyaoliu/x-arco-design';
@@ -618,15 +576,15 @@ export default App;
 
 `actions` 字段接收一个 `ReactNode` 数组，用于展示底部按钮组。
 
-`actions` field receives an array of `ReactNode`, which will be displayed at the bottom as button group.
-
 ```tsx
 import { Card, Avatar, Typography, Space } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconThumbUp,
-  IconShareInternal,
-  IconMore,
-} from '@arco-design/web-react/icon';
+  LikeOutlined,
+  ShareAltOutlined,
+  MoreOutlined,
+} from '@easyv/react-icons';
+import './demo.css';
+
 const { Meta } = Card;
 
 const App = () => {
@@ -645,13 +603,13 @@ const App = () => {
       }
       actions={[
         <span className="icon-hover">
-          <IconThumbUp />
+          <LikeOutlined />
         </span>,
         <span className="icon-hover">
-          <IconShareInternal />
+          <ShareAltOutlined />
         </span>,
         <span className="icon-hover">
-          <IconMore />
+          <MoreOutlined />
         </span>,
       ]}
     >
@@ -670,22 +628,6 @@ const App = () => {
 };
 
 export default App;
-```
-
-```css:silent
-.card-with-icon-hover .icon-hover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transition: all 0.1s;
-}
-
-.card-with-icon-hover .icon-hover:hover {
-  background-color: rgb(var(--gray-2));
-}
 ```
 
 ## API

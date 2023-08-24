@@ -34,7 +34,7 @@ const App = () => {
         />
         <TimePicker.RangePicker
           status="error"
-          placeholder="warning status"
+          placeholder={['error status', 'error status']}
           style={{ width: 250 }}
         />
       </Space>
@@ -47,7 +47,7 @@ const App = () => {
         />
         <TimePicker.RangePicker
           status="warning"
-          placeholder="warning status"
+          placeholder={['warning status', 'warning status']}
           style={{ width: 250 }}
         />
       </Space>
@@ -62,14 +62,12 @@ export default App;
 
 `value` 和 `onChange` 需要配合使用。
 
-`value` and `onChange` need to be used together.
-
 ```tsx
 import { useState } from 'react';
 import { TimePicker } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<string>();
   return (
     <TimePicker
       style={{ width: 194 }}
@@ -86,18 +84,16 @@ export default App;
 
 通过 `prefix` 属性设置前缀
 
-`prefix` property
-
 ```tsx
 import { TimePicker, Space } from '@xiaoyaoliu/x-arco-design';
-import { IconInfoCircle } from '@arco-design/web-react/icon';
+import { InfoCircleOutlined } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <Space>
-      <TimePicker prefix={<IconInfoCircle />} style={{ width: 200 }} />
+      <TimePicker prefix={<InfoCircleOutlined />} style={{ width: 200 }} />
       <TimePicker.RangePicker
-        prefix={<IconInfoCircle />}
+        prefix={<InfoCircleOutlined />}
         style={{ width: 250 }}
       />
     </Space>
@@ -114,10 +110,11 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { TimePicker, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { TimePickerProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<TimePickerProps['size']>('default');
   return (
     <div>
       <RadioGroup
@@ -162,8 +159,6 @@ export default App;
 
 通过设置 `format`，可以定制需要显示的时、分、秒。
 
-`format`, you can customize the hour, minute, and second.
-
 ```tsx
 import { TimePicker } from '@xiaoyaoliu/x-arco-design';
 import dayjs from 'dayjs';
@@ -184,8 +179,6 @@ export default App;
 ## 定制步长
 
 通过设置 `step`，可以定制需要显示的时、分、秒的步长。
-
-`step`, you can customize the step length of the hour, minute, and second.
 
 ```tsx
 import { TimePicker } from '@xiaoyaoliu/x-arco-design';
@@ -255,8 +248,6 @@ export default App;
 
 通过设置 `disabledHours` `disabledMinutes` `disabledSeconds`，可以禁用 时 / 分 / 秒的部分选项。
 
-`disabledHours` `disabledMinutes` `disabledSeconds`, you can disable some options of hour/minute/second.
-
 ```tsx
 import { TimePicker } from '@xiaoyaoliu/x-arco-design';
 const style = {
@@ -289,8 +280,6 @@ export default App;
 ## 十二小时制
 
 通过设置 `use12Hours`，可以定制需要显示的时、分、秒。
-
-`use12Hours`, you can customize the hours, minutes, and seconds.
 
 ```tsx
 import { TimePicker } from '@xiaoyaoliu/x-arco-design';
@@ -331,7 +320,6 @@ const App = () => {
           dayjs('12:20:20 AM', 'hh:mm:ss A'),
           dayjs('08:30:30 PM', 'hh:mm:ss A'),
         ]}
-        placeholder="请选择时间"
         style={{ ...style, width: 300 }}
       />
     </div>
@@ -412,10 +400,6 @@ export default App;
 
 **注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
 
-`utcOffset` to set the UTC time.
-
-**Note: When using UTC or time zonetime, use timestamp or Date object when passing value. Strings cannot represent unique time, which will cause trouble.**
-
 ```tsx
 import { useState } from 'react';
 import {
@@ -425,7 +409,7 @@ import {
   Typography,
   Alert,
 } from '@xiaoyaoliu/x-arco-design';
-const utcList = [];
+const utcList: { label: string; value: number }[] = [];
 const utcLength = 25;
 let uo = -12;
 
@@ -452,7 +436,6 @@ function App() {
           }}
         />
         <TimePicker
-          showTime
           utcOffset={utcOffset}
           value={value}
           onChange={(v, vd) => setValue(vd && vd.toDate())}
@@ -490,10 +473,6 @@ export default App;
 
 **注意：使用 UTC 或者时区时间，传值的时候要用 timestamp 或者 Date 对象，使用字符串不能表示唯一时间，会造成困扰。**
 
-`timezone` to set timezone, if set the `utcOffset`, `utcOffset` takes effect.
-
-**Note: When using UTC or time zonetime, use timestamp or Date object when passing value. Strings cannot represent unique time, which will cause trouble.**
-
 ```tsx
 import { useState } from 'react';
 import {
@@ -527,7 +506,6 @@ function App() {
           }}
         />
         <TimePicker
-          showTime
           timezone={timezone}
           defaultValue={defaultValue}
           onChange={(v, vd) => setValue(vd && vd.toDate())}

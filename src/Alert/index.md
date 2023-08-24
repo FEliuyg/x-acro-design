@@ -108,7 +108,7 @@ export default App;
 
 ```tsx
 import { Alert, Grid } from '@xiaoyaoliu/x-arco-design';
-import { IconCheck } from '@arco-design/web-react/icon';
+import { CheckOutlined } from '@easyv/react-icons';
 const { Row, Col } = Grid;
 
 const App = () => {
@@ -120,7 +120,7 @@ const App = () => {
           style={{ marginBottom: 20 }}
           type="success"
           content="Here is a success text"
-          closeElement={<IconCheck />}
+          closeElement={<CheckOutlined />}
         />
       </Col>
       <Col span={12}>

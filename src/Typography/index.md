@@ -110,7 +110,7 @@ export default App;
 
 ```tsx
 import React from 'react';
-import { Typography, Divider } from '@xiaoyaoliu/x-arco-design';
+import { Typography } from '@xiaoyaoliu/x-arco-design';
 
 function Layout(props) {
   return React.Children.map(props.children, (child) => {
@@ -202,7 +202,7 @@ export default App;
 
 ```tsx
 import { useState } from 'react';
-import { Typography, Divider } from '@xiaoyaoliu/x-arco-design';
+import { Typography } from '@xiaoyaoliu/x-arco-design';
 
 function App() {
   const [str, setStr] = useState('Click the icon to edit this text.');
@@ -284,10 +284,17 @@ import {
   Descriptions,
   Space,
 } from '@xiaoyaoliu/x-arco-design';
+interface Config {
+  ellipsisStr: string;
+  ellipsis?: string;
+  suffix?: string;
+  expandable?: boolean;
+}
+
 const defaultText = `A design is a plan or specification for the construction of an object or system or for the
 implementation of an activity or process. A design is a plan or specification for the
 construction of an object or system or for the implementation of an activity or process. `;
-const defaultConfig = {
+const defaultConfig: Config = {
   ellipsisStr: '...',
 };
 
@@ -296,11 +303,12 @@ const App = () => {
   const [rows, setRows] = useState(1);
   const [text, setText] = useState(defaultText);
   const { ellipsis, ellipsisStr, expandable, suffix } = config;
+
   return (
     <div>
       <Space align="start" size={120}>
         <Form
-          onValuesChange={(_, values) => setConfig(values)}
+          onValuesChange={(_, values) => setConfig(values as Config)}
           style={{ width: '400px' }}
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
@@ -331,7 +339,7 @@ const App = () => {
             <Input />
           </Form.Item>
           <Form.Item label="省略展示">
-            <Space size="middle">
+            <Space size="medium">
               <Button onClick={() => setRows(Math.max(1, rows - 1))}>
                 {' '}
                 row-{' '}

@@ -184,14 +184,14 @@ export default App;
 
 ```tsx
 import { Result, Button } from '@xiaoyaoliu/x-arco-design';
-import { IconFaceSmileFill } from '@arco-design/web-react/icon';
+import { SmileFilled } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <div>
       <Result
         status={null}
-        icon={<IconFaceSmileFill style={{ color: 'rgb(var(--arcoblue-6))' }} />}
+        icon={<SmileFilled style={{ color: 'rgb(var(--arcoblue-6))' }} />}
         title="Your operation has been performed."
         extra={<Button type="primary">Back</Button>}
       ></Result>
@@ -208,14 +208,14 @@ export default App;
 
 ```tsx
 import { Result, Button, Typography } from '@xiaoyaoliu/x-arco-design';
-import { IconFaceFrownFill } from '@arco-design/web-react/icon';
+import { FrownFilled } from '@easyv/react-icons';
 
 const App = () => {
   return (
     <div>
       <Result
         status="error"
-        icon={<IconFaceFrownFill />}
+        icon={<FrownFilled />}
         title="No internet"
         subTitle="DNS_PROBE_FINISHED_NO_INTERNET"
         extra={<Button type="primary">Refresh</Button>}

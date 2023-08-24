@@ -72,11 +72,11 @@ import {
   Message,
 } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHome,
-  IconCalendar,
-  IconCaretRight,
-  IconCaretLeft,
-} from '@arco-design/web-react/icon';
+  HomeOutlined,
+  CalendarOutlined,
+  CaretRightOutlined,
+  CaretLeftOutlined,
+} from '@easyv/react-icons';
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -103,7 +103,11 @@ class App extends React.Component {
           onCollapse={this.handleCollapsed}
           collapsible
           trigger={
-            this.state.collapsed ? <IconCaretRight /> : <IconCaretLeft />
+            this.state.collapsed ? (
+              <CaretRightOutlined />
+            ) : (
+              <CaretLeftOutlined />
+            )
           }
           breakpoint="xl"
         >
@@ -120,22 +124,22 @@ class App extends React.Component {
             style={{ width: '100%' }}
           >
             <MenuItem key="0_1" disabled>
-              <IconHome />
+              <HomeOutlined />
               Menu 1
             </MenuItem>
             <MenuItem key="0_2">
-              <IconCalendar />
+              <CalendarOutlined />
               Menu 2
             </MenuItem>
             <MenuItem key="0_3">
-              <IconCalendar />
+              <CalendarOutlined />
               Menu 3
             </MenuItem>
             <SubMenu
               key="1"
               title={
                 <span>
-                  <IconCalendar />
+                  <CalendarOutlined />
                   Navigation 1
                 </span>
               }
@@ -156,7 +160,7 @@ class App extends React.Component {
               key="4"
               title={
                 <span>
-                  <IconCalendar />
+                  <CalendarOutlined />
                   Navigation 4
                 </span>
               }
@@ -201,11 +205,11 @@ import {
   Message,
 } from '@xiaoyaoliu/x-arco-design';
 import {
-  IconHome,
-  IconCalendar,
-  IconCaretRight,
-  IconCaretLeft,
-} from '@arco-design/web-react/icon';
+  HomeOutlined,
+  CalendarOutlined,
+  CaretRightOutlined,
+  CaretLeftOutlined,
+} from '@easyv/react-icons';
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -246,22 +250,22 @@ class App extends React.Component {
             style={{ width: '100%' }}
           >
             <MenuItem key="0_1" disabled>
-              <IconHome />
+              <HomeOutlined />
               Menu 1
             </MenuItem>
             <MenuItem key="0_2">
-              <IconCalendar />
+              <CalendarOutlined />
               Menu 2
             </MenuItem>
             <MenuItem key="0_3">
-              <IconCalendar />
+              <CalendarOutlined />
               Menu 3
             </MenuItem>
             <SubMenu
               key="1"
               title={
                 <span>
-                  <IconCalendar />
+                  <CalendarOutlined />
                   Navigation 1
                 </span>
               }
@@ -282,7 +286,7 @@ class App extends React.Component {
               key="4"
               title={
                 <span>
-                  <IconCalendar />
+                  <CalendarOutlined />
                   Navigation 4
                 </span>
               }
@@ -300,7 +304,11 @@ class App extends React.Component {
               className="trigger"
               onClick={this.handleCollapsed}
             >
-              {this.state.collapsed ? <IconCaretRight /> : <IconCaretLeft />}
+              {this.state.collapsed ? (
+                <CaretRightOutlined />
+              ) : (
+                <CaretLeftOutlined />
+              )}
             </Button>
           </Header>
           <Layout style={{ padding: '0 24px' }}>
@@ -334,7 +342,7 @@ import {
   Message,
   MenuProps,
 } from '@xiaoyaoliu/x-arco-design';
-import { IconHome, IconCalendar } from '@arco-design/web-react/icon';
+import { HomeOutlined, CalendarOutlined } from '@easyv/react-icons';
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -347,18 +355,18 @@ function BaseMenu(props: MenuProps) {
   return (
     <Menu defaultOpenKeys={['1']} defaultSelectedKeys={['0_2']} {...props}>
       <MenuItem key="0_1" disabled>
-        <IconHome />
+        <HomeOutlined />
         Menu 1
       </MenuItem>
       <MenuItem key="0_2">
-        <IconCalendar />
+        <CalendarOutlined />
         Menu 2
       </MenuItem>
       <SubMenu
         key="1"
         title={
           <span>
-            <IconCalendar />
+            <CalendarOutlined />
             Navigation 1
           </span>
         }
@@ -379,7 +387,7 @@ function BaseMenu(props: MenuProps) {
         key="4"
         title={
           <span>
-            <IconCalendar />
+            <CalendarOutlined />
             Navigation 4
           </span>
         }
@@ -499,7 +507,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Layout, Menu } from '@xiaoyaoliu/x-arco-design';
-import { IconHome, IconCalendar } from '@arco-design/web-react/icon';
+import { HomeOutlined, CalendarOutlined } from '@easyv/react-icons';
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const Sider = Layout.Sider;
@@ -550,22 +558,22 @@ function App() {
         <div className="logo" />
         <Menu theme="dark" autoOpen style={{ width: '100%' }}>
           <MenuItem key="1" disabled>
-            <IconHome />
+            <HomeOutlined />
             设计指南
           </MenuItem>
           <MenuItem key="2">
-            <IconCalendar />
+            <CalendarOutlined />
             区块
           </MenuItem>
           <MenuItem key="3">
-            <IconCalendar />
+            <CalendarOutlined />
             模块
           </MenuItem>
           <SubMenu
             key="layout"
             title={
               <span>
-                <IconCalendar /> 布局组件
+                <CalendarOutlined /> 布局组件
               </span>
             }
           >

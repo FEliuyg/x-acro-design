@@ -299,6 +299,7 @@ export default App;
 ```tsx
 import { useState } from 'react';
 import { Descriptions, Radio } from '@xiaoyaoliu/x-arco-design';
+import type { DescriptionsProps } from '@xiaoyaoliu/x-arco-design';
 const RadioGroup = Radio.Group;
 const data = [
   {
@@ -329,7 +330,7 @@ const data = [
 ];
 
 function App() {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<DescriptionsProps['size']>('default');
   return (
     <div>
       <RadioGroup

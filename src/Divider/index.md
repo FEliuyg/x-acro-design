@@ -8,7 +8,11 @@
 
 ```tsx
 import { Divider, Typography } from '@xiaoyaoliu/x-arco-design';
-import { IconFileImage, IconUser, IconPen } from '@arco-design/web-react/icon';
+import {
+  FileImageOutlined,
+  UserOutlined,
+  PenOutlined,
+} from '@easyv/react-icons';
 const { Paragraph, Title } = Typography;
 
 const App = () => {
@@ -43,7 +47,7 @@ const App = () => {
       <div className="divider-demo" style={{ marginTop: 48 }}>
         <div className="divider-demo-flex-content">
           <span className="avatar">
-            <IconFileImage />
+            <FileImageOutlined />
           </span>
           <div className="content">
             <Title heading={6}>Image</Title>May 4, 2010
@@ -52,7 +56,7 @@ const App = () => {
         <Divider className="half-divider" />
         <div className="divider-demo-flex-content">
           <span className="avatar">
-            <IconUser />
+            <UserOutlined />
           </span>
           <div className="content">
             <Title heading={6}>Avatar</Title>May 4, 2010
@@ -61,7 +65,7 @@ const App = () => {
         <Divider className="half-divider" />
         <div className="divider-demo-flex-content">
           <span className="avatar">
-            <IconPen />
+            <PenOutlined />
           </span>
           <div className="content">
             <Title heading={6}>Icon</Title>May 4, 2010

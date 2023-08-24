@@ -125,7 +125,7 @@ export default App;
 
 ```tsx
 import { Rate } from '@xiaoyaoliu/x-arco-design';
-import { IconHeartFill } from '@arco-design/web-react/icon';
+import { HeartFilled } from '@easyv/react-icons';
 
 function TextWrapper(props) {
   return (
@@ -169,7 +169,7 @@ const App = () => {
         character={
           <TextWrapper
             text={
-              <IconHeartFill
+              <HeartFilled
                 style={{
                   fontSize: 18,
                 }}
